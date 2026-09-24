@@ -1,1 +1,1157 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>reztroid® — Your Everyday Digital Store</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            neon: '#d8ff2b',
+            'neon-hover': '#c4eb22',
+            lavender: '#d8d4fd',
+            'lavender-light': '#eeebff',
+            cardBg: '#faf9f6',
+            darkSlate: '#111216',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-10px) rotate(2deg)' },
+            },
+            spinSlow: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' },
+            }
+          },
+          animation: {
+            float: 'float 5s ease-in-out infinite',
+            spinSlow: 'spinSlow 20s linear infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      background-color: #fbfbfd;
+      color: #121316;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .hero-glass-card {
+      background: linear-gradient(135deg, #c7beff 0%, #dbd5fe 50%, #b8aeff 100%);
+      box-shadow: 0 20px 40px -15px rgba(139, 92, 246, 0.25);
+    }
+    .neon-shadow {
+      box-shadow: 0 4px 14px rgba(216, 255, 43, 0.45);
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen flex flex-col selection:bg-neon selection:text-black">
+
+  <div class="bg-black text-white text-[11px] sm:text-xs tracking-wider uppercase font-semibold py-2 px-4 flex items-center justify-between overflow-hidden">
+    <div class="flex items-center gap-2 mx-auto sm:mx-0 whitespace-nowrap">
+      <span>GOOD TOOLS, GOOD MOOD.</span>
+      <span class="text-neon">✦</span>
+      <span class="text-slate-200">PREMIUM BUAT KESEHARIANMU.</span>
+    </div>
+    <div class="hidden sm:flex items-center gap-1.5 text-slate-400 font-mono text-[11px]">
+      <span>EST. 2021</span>
+      <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-neon"></i>
+    </div>
+  </div>
+
+  <header class="sticky top-0 z-30 bg-[#fbfbfd]/90 backdrop-blur-md border-b border-slate-200/80">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-1 group">
+        <span class="text-2xl sm:text-3xl font-extrabold tracking-tight text-black">reztroid</span>
+        <span class="text-xs font-bold -mt-3 text-slate-500">®</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-700">
+        <a href="#katalog" class="hover:text-black transition">Explore apps</a>
+        <a href="#cara-order" class="hover:text-black transition">Cara order</a>
+        <a href="#testimoni" class="hover:text-black transition">Testimoni</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button id="openCartBtn" class="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border-2 border-black bg-white hover:bg-slate-50 text-black font-bold text-sm shadow-sm transition active:scale-95">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          <span>Keranjang</span>
+          <span id="cartCountBadge" class="w-5 h-5 rounded-full bg-neon text-black text-xs flex items-center justify-center font-extrabold border border-black/30">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14 pb-14">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2 text-xs font-extrabold tracking-widest uppercase text-slate-500">
+          <span class="text-neon-hover text-base">✦</span>
+          <span>YOUR EVERYDAY DIGITAL STORE</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-950 leading-[1.08]">
+          Biar harimu <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-700 via-purple-700 to-indigo-900">makin premium.</span>
+        </h1>
+
+        <p class="text-slate-600 text-base sm:text-lg max-w-lg leading-relaxed font-medium">
+          Nonton, ngedit, dengerin musik. Aplikasi favorit buat semua versi dirimu, dengan proses instan & garansi penuh, ada di sini.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-5 pt-2">
+          <a href="#katalog" class="inline-flex items-center gap-3 bg-neon hover:bg-neon-hover text-black px-7 py-3.5 rounded-2xl font-extrabold text-sm sm:text-base border-2 border-black transition neon-shadow active:scale-95">
+            <span>Temukan favoritmu</span>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 stroke-[2.5]"></i>
+          </a>
+
+          <div class="text-xs font-semibold text-slate-500 border-l-2 border-slate-200 pl-4 py-1 leading-snug">
+            <span class="text-slate-800 font-bold block">Less hassle.</span>
+            <span>More good days.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 relative">
+        <div class="relative w-full aspect-[4/3] sm:aspect-[1.25/1] rounded-[32px] border-2 border-black p-6 sm:p-8 hero-glass-card overflow-hidden flex flex-col justify-between">
+          <div class="relative z-10">
+            <span class="text-[11px] font-mono font-bold tracking-wider text-purple-950 uppercase block">A LITTLE UPGRADE.</span>
+            <span class="text-[11px] font-mono font-bold tracking-wider text-purple-900 uppercase block">A WHOLE LOT OF POSSIBILITIES.</span>
+          </div>
+
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="relative animate-float">
+              <div class="absolute -inset-6 rounded-full bg-gradient-to-r from-white/60 via-purple-300/40 to-indigo-300/50 blur-2xl"></div>
+              <div class="absolute -inset-4 w-44 h-44 rounded-full border-[3px] border-white/60 rotate-45 animate-spinSlow" style="transform-style: preserve-3d; perspective: 400px; transform: rotateX(65deg) rotateY(15deg);"></div>
+              
+              <svg class="w-36 h-36 sm:w-44 sm:h-44 drop-shadow-[0_20px_25px_rgba(79,70,229,0.35)]" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="starGrad1" x1="20" y1="20" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="35%" stop-color="#e9d5ff"/>
+                    <stop offset="70%" stop-color="#a855f7"/>
+                    <stop offset="100%" stop-color="#4338ca"/>
+                  </linearGradient>
+                  <linearGradient id="specular" x1="70" y1="30" x2="130" y2="170" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                    <stop offset="50%" stop-color="#d8ff2b" stop-opacity="0.4"/>
+                    <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M100 10 C100 70 120 90 190 100 C120 110 100 130 100 190 C100 130 80 110 10 100 C80 90 100 70 100 10 Z" fill="url(#starGrad1)" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+                <path d="M100 25 C100 75 115 88 175 100 C115 112 100 125 100 175 C100 125 85 112 25 100 C85 88 100 75 100 25 Z" fill="url(#specular)"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="relative z-10 flex items-end justify-between">
+            <span class="text-[10px] font-mono font-bold tracking-widest text-purple-950 uppercase">REZT / DIGITAL ACCESS</span>
+            <div class="bg-neon border-2 border-black px-4 py-2 rounded-2xl shadow-md flex items-center gap-1.5 transform hover:scale-105 transition cursor-default">
+              <span class="font-extrabold text-xs text-black">make it premium</span>
+              <span class="text-black text-sm">✦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-14 pt-8 border-t border-slate-200 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 border border-purple-200 flex items-center justify-center text-purple-800">
+          <i data-lucide="shield-check" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-slate-900">Detail & ketentuan jelas</h4>
+          <p class="text-xs text-slate-500 font-medium">Garansi ganti baru selama aktif</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-lime-100 border border-lime-200 flex items-center justify-center text-lime-800">
+          <i data-lucide="message-square" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-slate-900">Dibantu langsung admin</h4>
+          <p class="text-xs text-slate-500 font-medium">Fast respon dan panduan setup</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-blue-100 border border-blue-200 flex items-center justify-center text-blue-800">
+          <i data-lucide="layout-grid" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-slate-900">Pilihan paket sesuai kebutuhan</h4>
+          <p class="text-xs text-slate-500 font-medium">Sharing akun ataupun Private</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="katalog" class="bg-white border-y border-slate-200 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-bold text-indigo-600 uppercase tracking-widest mb-1.5">
+            <span>KATALOG RESMI</span>
+            <span>✦</span>
+          </div>
+          <h2 class="text-3xl font-extrabold text-slate-950">Aplikasi Pilihan Hari Ini</h2>
+          <p class="text-sm text-slate-500 font-medium mt-1">Pilih durasi dan jenis akun sesuai kebutuhanmu.</p>
+        </div>
+
+        <div class="relative w-full md:w-80">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Cari Netflix, Spotify, Canva..." 
+            class="w-full bg-slate-50 border-2 border-slate-200 focus:border-black rounded-2xl pl-11 pr-4 py-2.5 text-sm font-semibold outline-none transition"
+          >
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 overflow-x-auto pb-4 hide-scrollbar" id="categoryTabs">
+        <button data-cat="all" class="cat-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-black bg-black text-white transition whitespace-nowrap active:scale-95">
+          Semua Apps
+        </button>
+        <button data-cat="streaming" class="cat-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-slate-200 bg-white text-slate-700 hover:border-slate-400 transition whitespace-nowrap active:scale-95">
+          🎬 Streaming & Film
+        </button>
+        <button data-cat="music" class="cat-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-slate-200 bg-white text-slate-700 hover:border-slate-400 transition whitespace-nowrap active:scale-95">
+          🎵 Musik & Audio
+        </button>
+        <button data-cat="work" class="cat-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-slate-200 bg-white text-slate-700 hover:border-slate-400 transition whitespace-nowrap active:scale-95">
+          💼 Desain & Produktivitas
+        </button>
+        <button data-cat="ai" class="cat-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-slate-200 bg-white text-slate-700 hover:border-slate-400 transition whitespace-nowrap active:scale-95">
+          ⚡ AI & Tech
+        </button>
+      </div>
+
+      <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-6"></div>
+
+      <div id="emptyCatalog" class="hidden py-16 text-center">
+        <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400">
+          <i data-lucide="package-search" class="w-7 h-7"></i>
+        </div>
+        <h4 class="font-bold text-slate-800">Aplikasi tidak ditemukan</h4>
+        <p class="text-sm text-slate-400 mt-1">Coba gunakan kata kunci pencarian yang lain.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="cara-order" class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+    <div class="text-center max-w-xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-1.5 text-xs font-extrabold text-purple-700 bg-purple-100 border border-purple-200 px-3 py-1 rounded-full uppercase tracking-wider mb-3">
+        <span>SIMPLE STEP</span>
+      </div>
+      <h2 class="text-3xl font-extrabold text-slate-950">Cara Order yang Nggak Bikin Pusing</h2>
+      <p class="text-sm text-slate-500 font-medium mt-2">Tanpa verifikasi kartu kredit berbelit-belit. Semuanya diproses cepat oleh admin.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="p-6 rounded-3xl border-2 border-black bg-white hover:-translate-y-1 transition duration-200 shadow-[4px_4px_0px_0px_#000]">
+        <div class="w-12 h-12 rounded-2xl bg-neon border-2 border-black flex items-center justify-center font-extrabold text-lg mb-5">
+          01
+        </div>
+        <h3 class="text-lg font-extrabold text-slate-900 mb-2">Pilih Aplikasi & Durasi</h3>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Tentukan aplikasi yang kamu butuhkan, durasi langganan, lalu masukkan ke keranjang.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-3xl border-2 border-black bg-white hover:-translate-y-1 transition duration-200 shadow-[4px_4px_0px_0px_#000]">
+        <div class="w-12 h-12 rounded-2xl bg-lavender border-2 border-black flex items-center justify-center font-extrabold text-lg mb-5">
+          02
+        </div>
+        <h3 class="text-lg font-extrabold text-slate-900 mb-2">Konfirmasi ke WhatsApp</h3>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Klik Checkout, format order rapi akan langsung dibuat dan terkirim otomatis ke WhatsApp admin.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-3xl border-2 border-black bg-white hover:-translate-y-1 transition duration-200 shadow-[4px_4px_0px_0px_#000]">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-300 border-2 border-black flex items-center justify-center font-extrabold text-lg mb-5">
+          03
+        </div>
+        <h3 class="text-lg font-extrabold text-slate-900 mb-2">Akun Siap Digunakan</h3>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Bayar via QRIS/BCA/Dana/GoPay. Admin langsung memproses akun premiummu lengkap dengan panduan login.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimoni" class="bg-slate-100/70 border-t border-slate-200 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10">
+        <div>
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">FEEDBACK PEMBELI</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">Kata Mereka yang Sudah Langganan</h2>
+        </div>
+        <div class="flex items-center gap-1.5 mt-3 sm:mt-0 font-bold text-sm bg-white px-3.5 py-1.5 rounded-full border border-slate-200">
+          <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+          <span>4.9 / 5.0 dari 2.400+ pelanggan</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white">
+          <div class="flex items-center gap-1 text-amber-400 mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4">"Netflix 4K nya lancar banget nggak pernah kena screen limit. Adminnya juga ramah dan tanggap pas ditanya-tanya."</p>
+          <div class="text-xs font-bold text-slate-900">— Dimas Pratama <span class="font-normal text-slate-400">· Netflix 1 Bulan</span></div>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white">
+          <div class="flex items-center gap-1 text-amber-400 mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4">"Canva Pro dan ChatGPT Plus di sini paling hemat buat kebutuhan skripsi dan kerja freelance. Worth it banget!"</p>
+          <div class="text-xs font-bold text-slate-900">— Nabila Syifa <span class="font-normal text-slate-400">· Canva & ChatGPT</span></div>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white">
+          <div class="flex items-center gap-1 text-amber-400 mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4">"Prosesnya cuma 5 menitan setelah kirim bukti QRIS, langsung dikasih login Spotify Individual. Recommended!"</p>
+          <div class="text-xs font-bold text-slate-900">— Kevin Anggara <span class="font-normal text-slate-400">· Spotify 3 Bulan</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="cartBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden transition-opacity"></div>
+
+  <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-white z-50 flex flex-col border-l-2 border-black transform translate-x-full transition-transform duration-300 shadow-2xl">
+    <div class="p-5 border-b-2 border-slate-100 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-neon border border-black/20 flex items-center justify-center font-black">
+          <i data-lucide="shopping-bag" class="w-4 h-4 text-black"></i>
+        </div>
+        <h3 class="font-extrabold text-base text-slate-900">Keranjang Belanja</h3>
+      </div>
+      <button id="closeCartBtn" class="w-8 h-8 rounded-xl hover:bg-slate-100 flex items-center justify-center text-slate-500 hover:text-black transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <div id="cartItemList" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+
+    <div id="emptyCartState" class="hidden flex-1 flex flex-col items-center justify-center p-6 text-center">
+      <div class="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 mb-3">
+        <i data-lucide="shopping-cart" class="w-8 h-8"></i>
+      </div>
+      <h4 class="font-extrabold text-slate-900">Keranjangmu masih kosong</h4>
+      <p class="text-xs text-slate-500 max-w-xs mt-1">Cari aplikasi favoritmu di katalog dan tambahkan ke sini.</p>
+    </div>
+
+    <div class="p-5 border-t-2 border-slate-100 bg-slate-50/80 space-y-4">
+      <div class="flex items-center justify-between text-sm">
+        <span class="font-bold text-slate-600">Total Pembayaran</span>
+        <span id="cartSubtotal" class="font-extrabold text-lg text-slate-950">Rp 0</span>
+      </div>
+
+      <button id="checkoutBtn" class="w-full bg-neon hover:bg-neon-hover text-black py-3.5 px-4 rounded-2xl font-extrabold text-sm border-2 border-black flex items-center justify-center gap-2 shadow-sm transition active:scale-95 disabled:opacity-40 disabled:pointer-events-none">
+        <i data-lucide="send" class="w-4 h-4 stroke-[2.5]"></i>
+        <span>Pesan via WhatsApp Langsung</span>
+      </button>
+      <p class="text-[11px] text-center text-slate-400">
+        Format order otomatis terisi saat berpindah ke chat WhatsApp admin.
+      </p>
+    </div>
+  </aside>
+
+  <footer class="bg-black text-white pt-16 pb-12 border-t border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-slate-800">
+        <div class="md:col-span-5 space-y-4">
+          <!-- KLIK 3X DISINI UNTUK ADMIN -->
+          <div id="secretAdminTrigger" class="inline-flex items-center gap-1 cursor-pointer select-none group" title="">
+            <span class="text-3xl font-extrabold text-white group-hover:text-slate-200 transition">reztroid</span>
+            <span class="text-xs font-bold -mt-3 text-neon">®</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm">
+            Toko lisensi digital dan langganan aplikasi harian terpercaya sejak 2021. Nikmati kemudahan akses akun premium legal dengan garansi terlindungi.
+          </p>
+        </div>
+
+        <div class="md:col-span-3 space-y-2 text-xs">
+          <p class="font-bold text-slate-200 uppercase tracking-wider mb-2">Layanan Favorit</p>
+          <p><a href="#katalog" class="text-slate-400 hover:text-white transition">Netflix Premium 4K</a></p>
+          <p><a href="#katalog" class="text-slate-400 hover:text-white transition">Spotify Premium Family</a></p>
+          <p><a href="#katalog" class="text-slate-400 hover:text-white transition">Canva Pro Lifetime / Garansi</a></p>
+          <p><a href="#katalog" class="text-slate-400 hover:text-white transition">ChatGPT Plus Original</a></p>
+        </div>
+
+        <div class="md:col-span-4 space-y-3">
+          <p class="font-bold text-slate-200 text-xs uppercase tracking-wider">Jam Operasional & Bantuan</p>
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs space-y-1">
+            <div class="flex items-center justify-between text-slate-300">
+              <span>Senin — Minggu:</span>
+              <span class="font-bold text-neon">08:00 - 23:00 WIB</span>
+            </div>
+            <p class="text-slate-500">Order di luar jam operasional diproses pagi hari berikutnya.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <p>© 2026 reztroid digital store. All rights reserved.</p>
+        <p class="flex items-center gap-2">
+          <span>Dibuat untuk kemudahan hiburan & kerja</span>
+          <span class="text-neon">✦</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="adminAuthModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl border-2 border-black max-w-sm w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-black text-neon flex items-center justify-center">
+          <i data-lucide="lock" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-extrabold text-slate-900">Admin Control</h3>
+          <p class="text-xs text-slate-400">Masukkan kata sandi admin</p>
+        </div>
+      </div>
+
+      <form id="adminAuthForm" class="space-y-3">
+        <div>
+          <input 
+            type="password" 
+            id="adminPasswordInput" 
+            placeholder="••••••••••••" 
+            class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl px-4 py-2.5 text-sm font-bold focus:border-black outline-none transition"
+            autocomplete="current-password"
+            required
+          >
+          <p id="adminAuthError" class="text-xs text-rose-500 font-bold mt-1.5 hidden">Password salah! Silakan coba lagi.</p>
+        </div>
+
+        <div class="flex gap-2 pt-1">
+          <button type="button" id="closeAuthModalBtn" class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-100 transition">
+            Batal
+          </button>
+          <button type="submit" class="flex-1 bg-black text-white px-4 py-2.5 rounded-xl text-xs font-extrabold hover:bg-slate-800 transition">
+            Buka Panel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="adminPanelDrawer" class="fixed inset-y-0 right-0 max-w-2xl w-full bg-white z-[110] border-l-2 border-black transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+    <div class="p-5 border-b-2 border-slate-100 bg-slate-950 text-white flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="px-2.5 py-1 rounded-md bg-neon text-black font-mono text-[10px] font-extrabold uppercase">ROOT ACCESS</span>
+        <h2 class="font-extrabold text-base text-white">Panel Kelola Toko</h2>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="adminResetDataBtn" class="text-xs bg-slate-800 hover:bg-rose-900/60 hover:text-rose-200 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-700 transition" title="Kembalikan produk default">
+          Reset Default
+        </button>
+        <button id="closeAdminPanelBtn" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-6 space-y-6">
+      <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Nomor WhatsApp Admin (Checkout Target):</label>
+        <div class="flex gap-2">
+          <input 
+            type="text" 
+            id="adminWaInput" 
+            placeholder="6281234567890" 
+            class="flex-1 bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold focus:border-black outline-none"
+          >
+          <button id="adminSaveWaBtn" class="bg-black text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-800 transition">
+            Simpan Nomor
+          </button>
+        </div>
+        <p class="text-[11px] text-slate-400">Gunakan format kode negara tanpa simbol + (contoh: 628xxxxxxxxxx).</p>
+      </div>
+
+      <div class="p-4 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/50 space-y-3">
+        <h4 class="font-extrabold text-xs uppercase tracking-wider text-slate-800">+ Tambah Produk Baru</h4>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div>
+            <label class="font-semibold text-slate-500 block mb-1">Nama Aplikasi:</label>
+            <input type="text" id="newProdName" placeholder="Contoh: Disney+ 4K Private" class="w-full bg-white border border-slate-200 rounded-lg p-2 font-bold focus:border-black outline-none">
+          </div>
+          <div>
+            <label class="font-semibold text-slate-500 block mb-1">Kategori:</label>
+            <select id="newProdCategory" class="w-full bg-white border border-slate-200 rounded-lg p-2 font-bold focus:border-black outline-none">
+              <option value="streaming">Streaming & Film</option>
+              <option value="music">Musik & Audio</option>
+              <option value="work">Desain & Produktivitas</option>
+              <option value="ai">AI & Tech</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label class="font-semibold text-slate-500 block mb-1">Deskripsi Singkat:</label>
+            <input type="text" id="newProdDesc" placeholder="Garansi penuh, login akun pribadi..." class="w-full bg-white border border-slate-200 rounded-lg p-2 font-bold focus:border-black outline-none">
+          </div>
+          <div>
+            <label class="font-semibold text-slate-500 block mb-1">Durasi Paket (Opsi 1):</label>
+            <input type="text" id="newProdDuration" placeholder="1 Bulan" class="w-full bg-white border border-slate-200 rounded-lg p-2 font-bold focus:border-black outline-none">
+          </div>
+          <div>
+            <label class="font-semibold text-slate-500 block mb-1">Harga (Rupiah Angka Saja):</label>
+            <input type="number" id="newProdPrice" placeholder="30000" class="w-full bg-white border border-slate-200 rounded-lg p-2 font-bold focus:border-black outline-none">
+          </div>
+        </div>
+
+        <button id="adminAddProductBtn" class="w-full bg-neon text-black border border-black py-2 rounded-xl text-xs font-extrabold hover:bg-neon-hover transition shadow-sm">
+          Tambahkan ke Katalog
+        </button>
+      </div>
+
+      <div>
+        <h4 class="font-extrabold text-xs uppercase tracking-wider text-slate-800 mb-3">Daftar & Edit Produk Aktif (<span id="adminProdTotal">0</span>)</h4>
+        <div id="adminProductList" class="space-y-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const DEFAULT_PRODUCTS = [
+      {
+        id: "netflix-4k",
+        name: "Netflix Premium Ultra HD 4K",
+        category: "streaming",
+        tag: "Private Profile",
+        desc: "Resolusi 4K UHD, anti on-hold, profil dikunci PIN pribadi.",
+        color: "bg-red-500",
+        icon: "film",
+        isReady: true,
+        options: [
+          { duration: "1 Bulan (1 Device)", price: 29000 },
+          { duration: "3 Bulan (1 Device)", price: 82000 }
+        ]
+      },
+      {
+        id: "spotify-indiv",
+        name: "Spotify Premium Individual",
+        category: "music",
+        tag: "Bisa Akun Sendiri",
+        desc: "Dengar lagu offline tanpa iklan, download lagu, kualitas audio tertinggi.",
+        color: "bg-emerald-500",
+        icon: "music",
+        isReady: true,
+        options: [
+          { duration: "1 Bulan", price: 18000 },
+          { duration: "3 Bulan", price: 49000 }
+        ]
+      },
+      {
+        id: "chatgpt-plus",
+        name: "ChatGPT Plus & GPT-4o",
+        category: "ai",
+        tag: "Paling Populer",
+        desc: "Akses OpenAI o1 & GPT-4o, DALL-E 3 image generation, kecepatan tinggi.",
+        color: "bg-purple-600",
+        icon: "sparkles",
+        isReady: true,
+        options: [
+          { duration: "1 Bulan (Sharing Private Slot)", price: 65000 },
+          { duration: "1 Bulan (Akun Full Private)", price: 299000 }
+        ]
+      },
+      {
+        id: "youtube-prem",
+        name: "YouTube Premium & Music",
+        category: "streaming",
+        tag: "Bisa Akun Sendiri",
+        desc: "Bebas iklan di Smart TV, HP, Laptop + langganan YouTube Music.",
+        color: "bg-rose-600",
+        icon: "play-square",
+        isReady: true,
+        options: [
+          { duration: "1 Bulan", price: 15000 },
+          { duration: "3 Bulan", price: 38000 }
+        ]
+      },
+      {
+        id: "canva-pro",
+        name: "Canva Pro Invite Edu / Tim",
+        category: "work",
+        tag: "Garansi Penuh",
+        desc: "Unlock jutaan elemen premium, Brand Kit, magic resize, background remover.",
+        color: "bg-cyan-500",
+        icon: "palette",
+        isReady: true,
+        options: [
+          { duration: "1 Bulan Garansi", price: 12000 },
+          { duration: "1 Tahun Garansi", price: 35000 }
+        ]
+      },
+      {
+        id: "disney-hotstar",
+        name: "Disney+ Hotstar Premium",
+        category: "streaming",
+        tag: "Resmi Legal",
+        desc: "Nonton film Marvel, Star Wars, Pixar dan bioskop lokal favorit.",
+        color: "bg-blue-600",
+        icon: "tv",
+        isReady: true,
+        options: [
+          { duration: "1 Bulan", price: 32000 },
+          { duration: "3 Bulan", price: 89000 }
+        ]
+      },
+      {
+        id: "capcut-pro",
+        name: "CapCut Pro Video Editor",
+        category: "work",
+        tag: "PC & Mobile",
+        desc: "Hapus watermark, filter pro, efek auto-caption dan tracking pintar.",
+        color: "bg-slate-900",
+        icon: "video",
+        isReady: true,
+        options: [
+          { duration: "1 Bulan", price: 22000 },
+          { duration: "1 Tahun", price: 79000 }
+        ]
+      },
+      {
+        id: "claude-pro",
+        name: "Claude Pro (Anthropic)",
+        category: "ai",
+        tag: "Coder Favorite",
+        desc: "Akses model Claude 3.5 Sonnet kapasitas token besar untuk koding & riset.",
+        color: "bg-amber-600",
+        icon: "bot",
+        isReady: true,
+        options: [
+          { duration: "1 Bulan (Shared Slot)", price: 75000 }
+        ]
+      }
+    ];
+
+    function loadProducts() {
+      const stored = localStorage.getItem('reztroid_products');
+      if (stored) {
+        try { return JSON.parse(stored); } catch (e) { return DEFAULT_PRODUCTS; }
+      }
+      return DEFAULT_PRODUCTS;
+    }
+
+    function saveProducts(prods) {
+      localStorage.setItem('reztroid_products', JSON.stringify(prods));
+    }
+
+    function loadAdminWa() {
+      return localStorage.getItem('reztroid_admin_wa') || "6281234567890";
+    }
+
+    function saveAdminWa(number) {
+      localStorage.setItem('reztroid_admin_wa', number);
+    }
+
+    let PRODUCTS = loadProducts();
+    let currentAdminWa = loadAdminWa();
+    let cart = [];
+    let selectedCategory = 'all';
+    let searchQuery = '';
+
+    const productGrid = document.getElementById('productGrid');
+    const emptyCatalog = document.getElementById('emptyCatalog');
+    const searchInput = document.getElementById('searchInput');
+    const categoryTabs = document.getElementById('categoryTabs');
+    const openCartBtn = document.getElementById('openCartBtn');
+    const closeCartBtn = document.getElementById('closeCartBtn');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartBackdrop = document.getElementById('cartBackdrop');
+    const cartItemList = document.getElementById('cartItemList');
+    const emptyCartState = document.getElementById('emptyCartState');
+    const cartSubtotal = document.getElementById('cartSubtotal');
+    const cartCountBadge = document.getElementById('cartCountBadge');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    const secretAdminTrigger = document.getElementById('secretAdminTrigger');
+    const adminAuthModal = document.getElementById('adminAuthModal');
+    const adminAuthForm = document.getElementById('adminAuthForm');
+    const adminPasswordInput = document.getElementById('adminPasswordInput');
+    const adminAuthError = document.getElementById('adminAuthError');
+    const closeAuthModalBtn = document.getElementById('closeAuthModalBtn');
+    const adminPanelDrawer = document.getElementById('adminPanelDrawer');
+    const closeAdminPanelBtn = document.getElementById('closeAdminPanelBtn');
+    const adminResetDataBtn = document.getElementById('adminResetDataBtn');
+    const adminWaInput = document.getElementById('adminWaInput');
+    const adminSaveWaBtn = document.getElementById('adminSaveWaBtn');
+    const adminProductList = document.getElementById('adminProductList');
+    const adminProdTotal = document.getElementById('adminProdTotal');
+    const adminAddProductBtn = document.getElementById('adminAddProductBtn');
+
+    function formatRupiah(num) {
+      return "Rp " + Number(num).toLocaleString('id-ID');
+    }
+
+    function renderCatalog() {
+      productGrid.innerHTML = '';
+
+      const filtered = PRODUCTS.filter(prod => {
+        const matchCategory = (selectedCategory === 'all') || (prod.category === selectedCategory);
+        const matchSearch = prod.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                            prod.desc.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchCategory && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        emptyCatalog.classList.remove('hidden');
+      } else {
+        emptyCatalog.classList.add('hidden');
+        filtered.forEach(p => {
+          const defaultOpt = p.options[0] || { duration: "Reguler", price: 0 };
+          const isOut = p.isReady === false;
+          const card = document.createElement('div');
+          card.className = `bg-white border-2 ${isOut ? 'border-slate-200 opacity-60' : 'border-slate-200 hover:border-black'} rounded-3xl p-6 flex flex-col justify-between transition-all duration-200 ${isOut ? '' : 'hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#000]'}`;
+          
+          card.innerHTML = `
+            <div>
+              <div class="flex items-start justify-between gap-3 mb-4">
+                <div class="w-12 h-12 rounded-2xl ${p.color || 'bg-slate-900'} text-white flex items-center justify-center font-bold shadow-sm">
+                  <i data-lucide="${p.icon || 'box'}" class="w-6 h-6"></i>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  ${isOut ? '<span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-rose-100 text-rose-700 border border-rose-200">Habis</span>' : ''}
+                  <span class="text-[11px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                    ${p.tag || 'Resmi'}
+                  </span>
+                </div>
+              </div>
+
+              <h3 class="font-extrabold text-lg text-slate-950 mb-1 leading-snug">${p.name}</h3>
+              <p class="text-xs text-slate-500 font-medium leading-relaxed mb-4">${p.desc}</p>
+
+              <div class="space-y-1.5 mb-5">
+                <label class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Pilihan Paket:</label>
+                <select id="select-${p.id}" ${isOut ? 'disabled' : ''} class="w-full bg-slate-50 border border-slate-200 font-bold text-xs rounded-xl p-2.5 outline-none focus:border-black transition">
+                  ${p.options.map((opt, i) => `
+                    <option value="${i}">${opt.duration} —${formatRupiah(opt.price)}</option>
+                  `).join('')}
+                </select>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+              <div>
+                <span class="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Mulai dari</span>
+                <span id="priceDisplay-${p.id}" class="text-base font-black text-slate-900">${formatRupiah(defaultOpt.price)}</span>
+              </div>
+
+              <button 
+                onclick="addToCart('${p.id}')" 
+                ${isOut ? 'disabled' : ''} 
+                class="${isOut ? 'bg-slate-300 text-slate-500 cursor-not-allowed' : 'bg-black hover:bg-slate-800 text-white active:scale-95'} px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 transition"
+              >
+                <i data-lucide="plus" class="w-4 h-4"></i>
+                <span>${isOut ? 'Habis' : '+ Keranjang'}</span>
+              </button>
+            </div>
+          `;
+
+          const selectElement = card.querySelector(`#select-${p.id}`);
+          const priceDisplay = card.querySelector(`#priceDisplay-${p.id}`);
+          if (selectElement) {
+            selectElement.addEventListener('change', (e) => {
+              const chosen = p.options[e.target.value];
+              if (chosen) priceDisplay.textContent = formatRupiah(chosen.price);
+            });
+          }
+
+          productGrid.appendChild(card);
+        });
+      }
+      lucide.createIcons();
+    }
+
+    window.addToCart = function(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product || product.isReady === false) return;
+
+      const selectEl = document.getElementById(`select-${product.id}`);
+      const selectedIndex = parseInt(selectEl.value, 10);
+      const chosenOption = product.options[selectedIndex];
+
+      const existing = cart.find(item => item.id === product.id && item.duration === chosenOption.duration);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          duration: chosenOption.duration,
+          price: chosenOption.price,
+          quantity: 1
+        });
+      }
+
+      updateCartUI();
+      openCart();
+    };
+
+    function updateCartUI() {
+      const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+      cartCountBadge.textContent = totalItems;
+
+      if (cart.length === 0) {
+        cartItemList.innerHTML = '';
+        emptyCartState.classList.remove('hidden');
+        cartSubtotal.textContent = 'Rp 0';
+        checkoutBtn.disabled = true;
+        return;
+      }
+
+      emptyCartState.classList.add('hidden');
+      checkoutBtn.disabled = false;
+      cartItemList.innerHTML = '';
+
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        const itemEl = document.createElement('div');
+        itemEl.className = "p-3.5 rounded-2xl border border-slate-200 bg-white flex items-center justify-between gap-3 shadow-sm";
+        itemEl.innerHTML = `
+          <div class="flex-1 min-w-0">
+            <h4 class="font-extrabold text-xs text-slate-900 truncate">${item.name}</h4>
+            <p class="text-[11px] text-slate-500 font-semibold">${item.duration}</p>
+            <p class="text-xs font-bold text-indigo-600 mt-1">${formatRupiah(item.price)}</p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <div class="flex items-center border border-slate-200 rounded-lg overflow-hidden bg-slate-50">
+              <button onclick="changeQty(${index}, -1)" class="px-2 py-1 text-slate-600 hover:bg-slate-200 text-xs font-bold transition">−</button>
+              <span class="px-2 py-1 text-xs font-extrabold text-slate-900">${item.quantity}</span>
+              <button onclick="changeQty(${index}, 1)" class="px-2 py-1 text-slate-600 hover:bg-slate-200 text-xs font-bold transition">+</button>
+            </div>
+
+            <button onclick="removeFromCart(${index})" class="text-slate-400 hover:text-red-500 p-1 rounded transition">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        `;
+        cartItemList.appendChild(itemEl);
+      });
+
+      cartSubtotal.textContent = formatRupiah(total);
+      lucide.createIcons();
+    }
+
+    window.changeQty = function(index, delta) {
+      if (!cart[index]) return;
+      cart[index].quantity += delta;
+      if (cart[index].quantity <= 0) cart.splice(index, 1);
+      updateCartUI();
+    };
+
+    window.removeFromCart = function(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    };
+
+    function openCart() {
+      cartBackdrop.classList.remove('hidden');
+      cartDrawer.classList.remove('translate-x-full');
+    }
+
+    function closeCart() {
+      cartDrawer.classList.add('translate-x-full');
+      cartBackdrop.classList.add('hidden');
+    }
+
+    function handleWhatsAppCheckout() {
+      if (cart.length === 0) return;
+
+      let subtotal = 0;
+      let orderLines = "";
+
+      cart.forEach((item, i) => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+        orderLines += `${i + 1}. *${item.name}*\n   - Paket: ${item.duration}\n   - Qty: ${item.quantity}x\n   - Harga: ${formatRupiah(itemTotal)}\n`;
+      });
+
+      const message = 
+`Halo Admin reztroid®, saya mau order aplikasi:
+
+${orderLines}
+---------------------------------
+*TOTAL:* ${formatRupiah(subtotal)}
+---------------------------------
+
+Mohon info instruksi pembayaran (QRIS / Bank) ya. Terima kasih!`;
+
+      const encodedMessage = encodeURIComponent(message);
+      const waUrl = `https://wa.me/${currentAdminWa}?text=${encodedMessage}`;
+      window.open(waUrl, '_blank');
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderCatalog();
+    });
+
+    categoryTabs.addEventListener('click', (e) => {
+      const btn = e.target.closest('.cat-btn');
+      if (!btn) return;
+
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        b.className = "cat-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-slate-200 bg-white text-slate-700 hover:border-slate-400 transition whitespace-nowrap active:scale-95";
+      });
+
+      btn.className = "cat-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold border-2 border-black bg-black text-white transition whitespace-nowrap active:scale-95";
+      selectedCategory = btn.getAttribute('data-cat');
+      renderCatalog();
+    });
+
+    openCartBtn.addEventListener('click', openCart);
+    closeCartBtn.addEventListener('click', closeCart);
+    cartBackdrop.addEventListener('click', () => {
+      closeCart();
+      closeAdminPanel();
+    });
+    checkoutBtn.addEventListener('click', handleWhatsAppCheckout);
+
+    // TRIGGER KLIK 3X & VERIFIKASI SANDI LANGSUNG
+    let secretClickCount = 0;
+    let secretClickTimer = null;
+
+    secretAdminTrigger.addEventListener('click', () => {
+      secretClickCount++;
+      clearTimeout(secretClickTimer);
+
+      if (secretClickCount === 3) {
+        secretClickCount = 0;
+        openAuthModal();
+      } else {
+        secretClickTimer = setTimeout(() => {
+          secretClickCount = 0;
+        }, 800);
+      }
+    });
+
+    function openAuthModal() {
+      adminAuthModal.classList.remove('hidden');
+      adminAuthModal.classList.add('flex');
+      adminPasswordInput.value = '';
+      adminAuthError.classList.add('hidden');
+      adminPasswordInput.focus();
+      lucide.createIcons();
+    }
+
+    function closeAuthModal() {
+      adminAuthModal.classList.add('hidden');
+      adminAuthModal.classList.remove('flex');
+    }
+
+    closeAuthModalBtn.addEventListener('click', closeAuthModal);
+
+    // Password check langsung presisi
+    adminAuthForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const enteredPass = adminPasswordInput.value.trim();
+
+      if (enteredPass === "Helter#2026!") {
+        closeAuthModal();
+        openAdminPanel();
+      } else {
+        adminAuthError.classList.remove('hidden');
+      }
+    });
+
+    function openAdminPanel() {
+      adminWaInput.value = currentAdminWa;
+      renderAdminProducts();
+      cartBackdrop.classList.remove('hidden');
+      adminPanelDrawer.classList.remove('translate-x-full');
+      lucide.createIcons();
+    }
+
+    function closeAdminPanel() {
+      adminPanelDrawer.classList.add('translate-x-full');
+      cartBackdrop.classList.add('hidden');
+    }
+
+    closeAdminPanelBtn.addEventListener('click', closeAdminPanel);
+
+    adminSaveWaBtn.addEventListener('click', () => {
+      const cleanWa = adminWaInput.value.replace(/[^0-9]/g, '');
+      if (cleanWa) {
+        currentAdminWa = cleanWa;
+        saveAdminWa(cleanWa);
+        alert('Nomor WhatsApp admin berhasil disimpan: ' + cleanWa);
+      }
+    });
+
+    adminResetDataBtn.addEventListener('click', () => {
+      if (confirm('Yakin ingin mereset semua produk ke data awal?')) {
+        PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+        saveProducts(PRODUCTS);
+        renderCatalog();
+        renderAdminProducts();
+      }
+    });
+
+    function renderAdminProducts() {
+      adminProdTotal.textContent = PRODUCTS.length;
+      adminProductList.innerHTML = '';
+
+      PRODUCTS.forEach((prod, idx) => {
+        const item = document.createElement('div');
+        item.className = "p-4 rounded-xl border border-slate-200 bg-white space-y-3";
+        item.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-extrabold text-xs text-slate-900">${prod.name}</span>
+            <div class="flex items-center gap-2">
+              <button onclick="toggleProductStock(${idx})" class="text-[10px] font-bold px-2.5 py-1 rounded-md border ${prod.isReady !== false ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                ${prod.isReady !== false ? 'Status: READY' : 'Status: HABIS'}
+              </button>
+              <button onclick="deleteProduct(${idx})" class="text-rose-500 hover:text-rose-700 p-1">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+            <div>
+              <label class="text-[10px] font-bold text-slate-400 uppercase">Tag Promo:</label>
+              <input type="text" value="${prod.tag || ''}" onchange="updateProductTag(${idx}, this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 font-bold text-slate-700">
+            </div>
+            <div>
+              <label class="text-[10px] font-bold text-slate-400 uppercase">Harga Utama (${prod.options[0]?.duration || 'Default'}):</label>
+              <input type="number" value="${prod.options[0]?.price || 0}" onchange="updateProductPrice(${idx}, 0, this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 font-bold text-slate-700">
+            </div>
+          </div>
+        `;
+        adminProductList.appendChild(item);
+      });
+      lucide.createIcons();
+    }
+
+    window.toggleProductStock = function(index) {
+      PRODUCTS[index].isReady = (PRODUCTS[index].isReady === false) ? true : false;
+      saveProducts(PRODUCTS);
+      renderCatalog();
+      renderAdminProducts();
+    };
+
+    window.updateProductTag = function(index, newTag) {
+      PRODUCTS[index].tag = newTag;
+      saveProducts(PRODUCTS);
+      renderCatalog();
+    };
+
+    window.updateProductPrice = function(index, optionIndex, newPrice) {
+      if (PRODUCTS[index].options[optionIndex]) {
+        PRODUCTS[index].options[optionIndex].price = Number(newPrice);
+        saveProducts(PRODUCTS);
+        renderCatalog();
+      }
+    };
+
+    window.deleteProduct = function(index) {
+      if (confirm(`Hapus "${PRODUCTS[index].name}" dari katalog?`)) {
+        PRODUCTS.splice(index, 1);
+        saveProducts(PRODUCTS);
+        renderCatalog();
+        renderAdminProducts();
+      }
+    };
+
+    adminAddProductBtn.addEventListener('click', () => {
+      const name = document.getElementById('newProdName').value.trim();
+      const category = document.getElementById('newProdCategory').value;
+      const desc = document.getElementById('newProdDesc').value.trim();
+      const duration = document.getElementById('newProdDuration').value.trim() || '1 Bulan';
+      const price = Number(document.getElementById('newProdPrice').value) || 25000;
+
+      if (!name) {
+        alert('Nama aplikasi wajib diisi!');
+        return;
+      }
+
+      const newId = name.toLowerCase().replace(/[^a-z0-9]/g, '-') + '-' + Date.now().toString().slice(-4);
+
+      PRODUCTS.unshift({
+        id: newId,
+        name: name,
+        category: category,
+        tag: "Terbaru",
+        desc: desc || "Aplikasi premium bergaransi resmi.",
+        color: "bg-indigo-600",
+        icon: "sparkles",
+        isReady: true,
+        options: [
+          { duration: duration, price: price }
+        ]
+      });
+
+      saveProducts(PRODUCTS);
+      renderCatalog();
+      renderAdminProducts();
+
+      document.getElementById('newProdName').value = '';
+      document.getElementById('newProdDesc').value = '';
+      document.getElementById('newProdPrice').value = '';
+      alert('Produk berhasil ditambahkan ke katalog!');
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCatalog();
+      updateCartUI();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
 

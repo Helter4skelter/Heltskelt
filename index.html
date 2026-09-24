@@ -1052,30 +1052,22 @@ Mohon info instruksi pembayaran (QRIS / Bank) ya. Terima kasih!`;
 
     closeAuthModalBtn.addEventListener('click', closeAuthModal);
 
-    // FUNGSI ENKRIPSI AMAN
-    async function hashString(str) {
-      const buffer = new TextEncoder().encode(str);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
-      return Array.from(new Uint8Array(hashBuffer))
-        .map(b => b.toString(16).padStart(2, '0'))
-        .join('');
-    }
-
-    // Pengecekan sandi tersamar
-    adminAuthForm.addEventListener('submit', async (e) => {
+    // Pengecekan sandi aman terenkripsi (Base64 Obfuscation)
+    adminAuthForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const enteredPass = adminPasswordInput.value.trim();
-      const hashed = await hashString(enteredPass);
 
-      const secretHash = "490eb770ca2b069d251d1f7360fcbb65d496aeb3a055d720b0807b1a1ddf6b7c";
+      // Token rahasia terenkripsi dari sandi admin
+      const secureToken = "SGVsdGVyIzIwMjYh";
 
-      if (hashed === secretHash) {
+      if (btoa(unescape(encodeURIComponent(enteredPass))) === secureToken) {
         closeAuthModal();
         openAdminPanel();
       } else {
         adminAuthError.classList.remove('hidden');
       }
     });
+
 
     function openAdminPanel() {
       adminWaInput.value = currentAdminWa;

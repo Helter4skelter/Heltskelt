@@ -68,22 +68,56 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+
+    /* Animasi Teks Marquee Berjalan */
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: marqueeScroll 22s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
   </style>
 </head>
 <body class="relative min-h-screen flex flex-col selection:bg-neon selection:text-black">
 
-  <div class="bg-black text-white text-[11px] sm:text-xs tracking-wider uppercase font-semibold py-2 px-4 flex items-center justify-between overflow-hidden">
-    <div class="flex items-center gap-2 mx-auto sm:mx-0 whitespace-nowrap">
-      <span>GOOD TOOLS, GOOD MOOD.</span>
-      <span class="text-neon">✦</span>
-      <span class="text-slate-200">PREMIUM BUAT KESEHARIANMU.</span>
-    </div>
-    <div class="hidden sm:flex items-center gap-1.5 text-slate-400 font-mono text-[11px]">
-      <span>EST. 2021</span>
-      <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-neon"></i>
+  <!-- TOP MARQUEE BANNER ANIMASI BERJALAN -->
+  <div class="bg-black text-white text-[11px] sm:text-xs tracking-wider uppercase font-semibold py-2.5 overflow-hidden flex select-none border-b border-white/10">
+    <div class="marquee-track flex items-center gap-6 shrink-0">
+      <div class="flex items-center gap-3">
+        <span>GOOD TOOLS, GOOD MOOD.</span>
+        <span class="text-neon">✦</span>
+        <span class="text-slate-300">PREMIUM BUAT KESEHARIANMU.</span>
+        <span class="text-neon">✦</span>
+        <span>GARANSI REPLACE RESMI</span>
+        <span class="text-neon">✦</span>
+        <span class="text-slate-300">PROSES CEPAT VIA WHATSAPP</span>
+        <span class="text-neon">✦</span>
+        <span>EST. 2021 DIGITAL STORE</span>
+        <span class="text-neon">✦</span>
+      </div>
+      <!-- Loop Duplikat Banner -->
+      <div class="flex items-center gap-3">
+        <span>GOOD TOOLS, GOOD MOOD.</span>
+        <span class="text-neon">✦</span>
+        <span class="text-slate-300">PREMIUM BUAT KESEHARIANMU.</span>
+        <span class="text-neon">✦</span>
+        <span>GARANSI REPLACE RESMI</span>
+        <span class="text-neon">✦</span>
+        <span class="text-slate-300">PROSES CEPAT VIA WHATSAPP</span>
+        <span class="text-neon">✦</span>
+        <span>EST. 2021 DIGITAL STORE</span>
+        <span class="text-neon">✦</span>
+      </div>
     </div>
   </div>
 
+  <!-- Header -->
   <header class="sticky top-0 z-30 bg-[#fbfbfd]/90 backdrop-blur-md border-b border-slate-200/80">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
       <a href="#" class="flex items-center gap-1 group">
@@ -107,6 +141,7 @@
     </div>
   </header>
 
+  <!-- Hero Section -->
   <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14 pb-14">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
       <div class="lg:col-span-7 space-y-6">
@@ -180,6 +215,7 @@
       </div>
     </div>
 
+    <!-- Trust Features -->
     <div class="mt-14 pt-8 border-t border-slate-200 grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="flex items-center gap-3.5">
         <div class="w-10 h-10 rounded-xl bg-purple-100 border border-purple-200 flex items-center justify-center text-purple-800">
@@ -213,6 +249,7 @@
     </div>
   </section>
 
+  <!-- Katalog Section -->
   <section id="katalog" class="bg-white border-y border-slate-200 py-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       
@@ -268,6 +305,7 @@
     </div>
   </section>
 
+  <!-- Cara Order -->
   <section id="cara-order" class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
     <div class="text-center max-w-xl mx-auto mb-14">
       <div class="inline-flex items-center gap-1.5 text-xs font-extrabold text-purple-700 bg-purple-100 border border-purple-200 px-3 py-1 rounded-full uppercase tracking-wider mb-3">
@@ -310,6 +348,7 @@
     </div>
   </section>
 
+  <!-- Testimoni -->
   <section id="testimoni" class="bg-slate-100/70 border-t border-slate-200 py-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10">
@@ -363,6 +402,7 @@
     </div>
   </section>
 
+  <!-- Cart Drawer -->
   <div id="cartBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden transition-opacity"></div>
 
   <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-white z-50 flex flex-col border-l-2 border-black transform translate-x-full transition-transform duration-300 shadow-2xl">
@@ -404,11 +444,12 @@
     </div>
   </aside>
 
+  <!-- Footer -->
   <footer class="bg-black text-white pt-16 pb-12 border-t border-slate-800">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-slate-800">
         <div class="md:col-span-5 space-y-4">
-          <!-- KLIK 3X DISINI UNTUK ADMIN -->
+          <!-- TITIK RAHASIA PANEL ADMIN: KLIK 3X DISINI -->
           <div id="secretAdminTrigger" class="inline-flex items-center gap-1 cursor-pointer select-none group" title="">
             <span class="text-3xl font-extrabold text-white group-hover:text-slate-200 transition">reztroid</span>
             <span class="text-xs font-bold -mt-3 text-neon">®</span>
@@ -448,6 +489,20 @@
     </div>
   </footer>
 
+  <!-- FLOATING SALES NOTIFICATION POPUP (SOCIAL PROOF) -->
+  <div id="salesToast" class="fixed bottom-5 left-5 z-40 max-w-xs sm:max-w-sm bg-white/95 backdrop-blur-md border-2 border-black rounded-2xl p-3.5 shadow-[4px_4px_0px_0px_#000] flex items-center gap-3.5 transform -translate-x-[150%] transition-transform duration-500 pointer-events-none select-none">
+    <div class="w-10 h-10 rounded-xl bg-neon border border-black/30 flex items-center justify-center shrink-0">
+      <i data-lucide="check-circle" class="w-5 h-5 text-black stroke-[2.5]"></i>
+    </div>
+    <div class="min-w-0 pr-2">
+      <p class="text-xs font-bold text-slate-900 leading-snug">
+        <span id="toastUser" class="text-purple-700">Seseorang</span> baru saja membeli <span id="toastProduct" class="font-extrabold text-black">Aplikasi</span>
+      </p>
+      <p id="toastTime" class="text-[10px] text-slate-400 font-semibold mt-0.5">Beberapa menit yang lalu</p>
+    </div>
+  </div>
+
+  <!-- MODAL LOGIN ADMIN -->
   <div id="adminAuthModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
     <div class="bg-white rounded-3xl border-2 border-black max-w-sm w-full p-6 shadow-2xl space-y-4">
       <div class="flex items-center gap-3">
@@ -485,6 +540,7 @@
     </div>
   </div>
 
+  <!-- PANEL ADMIN DRAWER -->
   <div id="adminPanelDrawer" class="fixed inset-y-0 right-0 max-w-2xl w-full bg-white z-[110] border-l-2 border-black transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
     <div class="p-5 border-b-2 border-slate-100 bg-slate-950 text-white flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -515,7 +571,7 @@
             Simpan Nomor
           </button>
         </div>
-        <p class="text-[11px] text-slate-400">Gunakan format kode negara tanpa simbol + (contoh: 628xxxxxxxxxx).</p>
+        <p class="text-[11px] text-slate-400">Gunakan format angka tanpa tanda + (contoh: 628xxxxxxxxxx).</p>
       </div>
 
       <div class="p-4 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/50 space-y-3">
@@ -962,7 +1018,7 @@ Mohon info instruksi pembayaran (QRIS / Bank) ya. Terima kasih!`;
     });
     checkoutBtn.addEventListener('click', handleWhatsAppCheckout);
 
-    // TRIGGER KLIK 3X & VERIFIKASI SANDI LANGSUNG
+    // LOGIKA KLIK 3X & VERIFIKASI SANDI ADMIN
     let secretClickCount = 0;
     let secretClickTimer = null;
 
@@ -996,7 +1052,7 @@ Mohon info instruksi pembayaran (QRIS / Bank) ya. Terima kasih!`;
 
     closeAuthModalBtn.addEventListener('click', closeAuthModal);
 
-    // Password check langsung presisi
+    // Cek password langsung presisi
     adminAuthForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const enteredPass = adminPasswordInput.value.trim();
@@ -1146,12 +1202,60 @@ Mohon info instruksi pembayaran (QRIS / Bank) ya. Terima kasih!`;
       alert('Produk berhasil ditambahkan ke katalog!');
     });
 
+    // --- FITUR AUTO POPUP PENJUALAN (SOCIAL PROOF) ---
+    const buyers = [
+      "Yola", "Dimas", "Rian", "Nabila", "Kevin A.", "Siti R.", 
+      "Budi S.", "Tasya", "Arif W.", "Farhan", "Jessica", "Alif M."
+    ];
+
+    const fakePurchases = [
+      "Netflix Ultra HD 4K",
+      "Spotify Individual",
+      "ChatGPT Plus",
+      "Canva Pro Garansi",
+      "YouTube Premium",
+      "Disney+ Hotstar",
+      "CapCut Pro"
+    ];
+
+    const salesToast = document.getElementById('salesToast');
+    const toastUser = document.getElementById('toastUser');
+    const toastProduct = document.getElementById('toastProduct');
+    const toastTime = document.getElementById('toastTime');
+
+    function showRandomOrderToast() {
+      if (!salesToast) return;
+
+      const randomBuyer = buyers[Math.floor(Math.random() * buyers.length)];
+      const randomItem = fakePurchases[Math.floor(Math.random() * fakePurchases.length)];
+      const randomMinutes = Math.floor(Math.random() * 14) + 2;
+
+      toastUser.textContent = randomBuyer;
+      toastProduct.textContent = randomItem;
+      toastTime.textContent = `${randomMinutes} menit yang lalu`;
+
+      salesToast.classList.remove('-translate-x-[150%]');
+      salesToast.classList.add('translate-x-0');
+
+      setTimeout(() => {
+        salesToast.classList.remove('translate-x-0');
+        salesToast.classList.add('-translate-x-[150%]');
+      }, 5000);
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       renderCatalog();
       updateCartUI();
       lucide.createIcons();
+
+      // Trigger popup pertama setelah 3 detik, lalu berkala tiap 16 detik
+      setTimeout(() => {
+        showRandomOrderToast();
+        setInterval(() => {
+          showRandomOrderToast();
+        }, 16000);
+      }, 3000);
     });
   </script>
 </body>
 </html>
-

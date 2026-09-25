@@ -45,7 +45,7 @@
       z-index: 0;
     }
 
-    /* 1. Animasi Muter-Muter Running Text / Infinite Marquee */
+    /* Animasi Running Text Muter-Muter */
     @keyframes marqueeScroll {
       0% { transform: translateX(0%); }
       100% { transform: translateX(-50%); }
@@ -59,7 +59,7 @@
       animation-play-state: paused;
     }
 
-    /* 2. Scroll Reveal: Efek Muncul & Transparan Saat Diswipe / Masuk Viewport */
+    /* Scroll Reveal: Efek Muncul & Transparan Saat Diswipe */
     .reveal-on-scroll {
       opacity: 0;
       transform: translateY(28px) scale(0.98);
@@ -71,7 +71,7 @@
       transform: translateY(0) scale(1);
     }
 
-    /* 3. Animasi Pop-up Modal */
+    /* Animasi Pop-up Modal */
     .modal-enter { 
       animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
     }
@@ -80,7 +80,6 @@
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-    /* Floating Bouncing Pill */
     @keyframes subtleFloat {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-4px); }
@@ -99,17 +98,15 @@
   <div class="relative z-10 max-w-[430px] mx-auto min-h-screen bg-white/95 backdrop-blur-md border-x border-slate-200/70 shadow-sm flex flex-col justify-between">
 
     <div>
-      <!-- 1. Running Marquee Muter-Muter Tanpa Batas -->
-      <div onclick="openModal('promo')" class="cursor-pointer bg-black text-white text-[11px] font-bold py-2 overflow-hidden border-b border-black select-none">
+      <!-- 1. Running Marquee Muter-Muter -->
+      <div onclick="openPromoModal()" class="cursor-pointer bg-black text-white text-[11px] font-bold py-2 overflow-hidden border-b border-black select-none">
         <div class="marquee-track flex items-center space-x-6">
-          <!-- Track 1 -->
           <div class="flex items-center space-x-6 shrink-0">
             <span class="flex items-center gap-1.5"><span class="text-brandLime animate-pulse">✦</span> PROGRAM REFERRAL RESMI REZTROID</span>
             <span class="text-slate-400 font-mono">✦ AJAK TEMAN = +25 POIN</span>
             <span class="text-brandLime font-mono">✦ DAPATKAN CANVA & CAPCUT GRATIS</span>
             <span class="text-slate-400 font-mono">✦ 100% FREE REPLACE</span>
           </div>
-          <!-- Track 2 (Clone untuk sambungan mulus) -->
           <div class="flex items-center space-x-6 shrink-0">
             <span class="flex items-center gap-1.5"><span class="text-brandLime animate-pulse">✦</span> PROGRAM REFERRAL RESMI REZTROID</span>
             <span class="text-slate-400 font-mono">✦ AJAK TEMAN = +25 POIN</span>
@@ -119,7 +116,7 @@
         </div>
       </div>
 
-      <!-- 2. Clean Header Interaktif -->
+      <!-- 2. Header Interaktif -->
       <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-100 px-4 py-3 flex items-center justify-between">
         <div class="flex items-center gap-2 cursor-pointer active:scale-95 transition" onclick="showToast('Reztroid Member Hub v2.0')">
           <div class="w-7 h-7 bg-brandPurple text-white font-extrabold text-xs rounded-lg flex items-center justify-center shadow-sm">
@@ -135,10 +132,10 @@
         </button>
       </header>
 
-      <!-- Main Body: Setiap Section Dibungkus Kelas `reveal-on-scroll` -->
+      <!-- Main Body Container -->
       <div class="p-4 space-y-4">
 
-        <!-- 3. Hero Card Utama (Interactive Ripple/Scale) -->
+        <!-- 3. Hero Card Utama -->
         <div class="reveal-on-scroll bg-gradient-to-br from-[#5338FF] via-[#654AFF] to-[#7B58FF] rounded-3xl p-5 text-white shadow-lg shadow-brandPurple/20 relative overflow-hidden group">
           <div class="inline-flex items-center gap-1 bg-white/20 backdrop-blur-sm text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-2.5 animate-float">
             <span>🎁</span> REZTROID MEMBER REWARD
@@ -159,31 +156,31 @@
           </div>
         </div>
 
-        <!-- 4. Section: Input Cek Poin & Simulator Progres -->
+        <!-- 4. Section: Input Cek Poin Real-Time Database -->
         <section id="checkPointSection" class="reveal-on-scroll bg-slate-50 border border-slate-200/80 rounded-2xl p-4 space-y-3 transition duration-300">
           <div class="flex justify-between items-center">
             <div>
               <h2 class="text-xs font-black uppercase tracking-wider text-slate-400">Status Poin Member</h2>
-              <p class="text-sm font-bold text-darkText">Ketik Nomor / Kode Referral</p>
+              <p class="text-sm font-bold text-darkText">Ketik Nomor WA / Kode Referral</p>
             </div>
             <span class="text-xl animate-bounce">🎯</span>
           </div>
 
           <div class="flex gap-2">
-            <input id="pointInput" type="text" placeholder="Contoh: 50 atau RZT-8821" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-brandPurple/30 shadow-sm transition">
-            <button onclick="checkPointHandler()" class="bg-brandPurple hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2 rounded-xl shrink-0 transition active:scale-90 shadow-sm">
-              Cek 🚀
+            <input id="pointInput" type="text" placeholder="Contoh: RZT01 atau 0812..." class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-brandPurple/30 shadow-sm transition">
+            <button id="btnCheckPoint" onclick="checkPointHandler()" class="bg-brandPurple hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2 rounded-xl shrink-0 transition active:scale-90 shadow-sm flex items-center gap-1">
+              <span>Cek</span> <span>🚀</span>
             </button>
           </div>
           <div class="flex items-center justify-between text-[10px] text-slate-400">
-            <span>💡 Coba ketik angka: <strong>25</strong>, <strong>50</strong>, atau <strong>100</strong></span>
+            <span>💡 Coba tes ketik angka poin: <strong>25</strong>, <strong>50</strong>, <strong>100</strong></span>
             <button onclick="document.getElementById('pointInput').value='50'; checkPointHandler()" class="text-brandPurple font-bold underline hover:text-indigo-800">
               Isi Cepat 50 Pts
             </button>
           </div>
         </section>
 
-        <!-- 5. Section: Pilihan Hadiah Reward (Dinamis & Interaktif) -->
+        <!-- 5. Section: Pilihan Hadiah Reward -->
         <section id="rewardSection" class="reveal-on-scroll space-y-2.5">
           <div class="flex items-center justify-between">
             <div>
@@ -193,13 +190,12 @@
             <span class="text-[10px] font-bold text-brandPurple bg-brandPurpleLight px-2 py-0.5 rounded-md">Real Reward</span>
           </div>
 
-          <!-- Grid Hadiah -->
           <div id="rewardGrid" class="grid grid-cols-2 gap-2.5">
             <!-- Otomatis di-render dari script -->
           </div>
         </section>
 
-        <!-- 6. Section: Tata Cara Pendaftaran (3 Langkah Interaktif) -->
+        <!-- 6. Section: Tata Cara Pendaftaran -->
         <section class="reveal-on-scroll bg-white border border-slate-200/90 rounded-2xl p-4 space-y-3">
           <div class="flex justify-between items-center">
             <h2 class="font-extrabold text-xs uppercase tracking-wider text-slate-400">Tata Cara Pendaftaran</h2>
@@ -246,7 +242,7 @@
           </ul>
         </section>
 
-        <!-- 8. Section: Form Pendaftaran Member (Langsung Kirim ke WhatsApp) -->
+        <!-- 8. Section: Form Pendaftaran Member -->
         <section id="registerSection" class="reveal-on-scroll bg-white border-2 border-brandPurple/30 rounded-3xl p-4 space-y-3 shadow-md shadow-brandPurple/5">
           <div class="text-center">
             <span class="inline-block bg-brandLime text-black font-extrabold text-[9px] px-2 py-0.5 rounded-full mb-1">FREE REGISTRATION</span>
@@ -268,7 +264,7 @@
             <div>
               <label class="text-[10px] font-bold text-slate-500 uppercase">Target Hadiah Pertama Kamu</label>
               <select id="regTargetReward" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none transition">
-                <!-- Terisi otomatis oleh script -->
+                <!-- Terisi otomatis -->
               </select>
             </div>
           </div>
@@ -281,7 +277,7 @@
       </div>
     </div>
 
-    <!-- 9. Footer Bersih -->
+    <!-- 9. Footer -->
     <footer class="mt-6 border-t border-slate-200 p-4 bg-slate-50 text-center space-y-2">
       <p class="text-[11px] text-slate-500 font-medium">
         Made with <span class="text-rose-500">❤️</span> by <span class="font-bold text-darkText">reztroid</span>
@@ -293,12 +289,11 @@
 
   </div>
 
-  <!-- ==================== POPUP INTERAKTIF: PROGRES POIN ==================== -->
+  <!-- POPUP INTERAKTIF: PROGRES POIN -->
   <div id="pointModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-all">
     <div class="bg-white rounded-3xl max-w-xs w-full p-4 modal-enter shadow-2xl space-y-3.5 text-center relative border border-slate-100">
       <button onclick="closePointModal()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-700 text-sm font-bold w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition">✕</button>
 
-      <!-- Badge Icon -->
       <div class="w-14 h-14 mx-auto rounded-2xl bg-brandPurpleLight flex items-center justify-center text-2xl shadow-inner animate-float">
         ⭐
       </div>
@@ -309,14 +304,12 @@
         <p id="modalReferralId" class="text-[10px] font-mono text-slate-400">ID: RZT-MEMBER</p>
       </div>
 
-      <!-- Kotak Progress Bar Menuju Reward Berikutnya -->
       <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 text-left space-y-1.5">
         <div class="flex justify-between items-center text-[11px] font-bold">
           <span id="modalTargetName" class="text-slate-700">Target: Canva Pro</span>
           <span id="modalTargetPts" class="text-brandPurple font-extrabold">50 / 100 Pts</span>
         </div>
         
-        <!-- Progress Bar Dinamis -->
         <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
           <div id="modalProgressBar" class="bg-brandPurple h-full rounded-full transition-all duration-700 ease-out" style="width: 0%;"></div>
         </div>
@@ -337,7 +330,7 @@
     </div>
   </div>
 
-  <!-- Modal Promo / Marquee Tap -->
+  <!-- Modal Promo Marquee -->
   <div id="promoModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-xs w-full p-4 modal-enter shadow-2xl space-y-3 text-center relative">
       <button onclick="closePromoModal()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-700 text-sm font-bold w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center">✕</button>
@@ -359,22 +352,28 @@
     Pesan Toast
   </div>
 
-  <!-- ==================== SCRIPT CONFIGURASI & INTERAKSI ==================== -->
+  <!-- ==================== SCRIPT & LOGIC REAL-TIME ==================== -->
   <script>
     /*
       ===============================================================
-      PENGATURAN ADMIN (SESUAIKAN REWARD & POIN DI SINI)
+      PENGATURAN ADMIN (BISA DIATUR SENDIRI)
       ===============================================================
     */
     const MEMBER_CONFIG = {
-      adminWA: "6281299961001", // Ganti dengan nomor WhatsApp kamu (format 62...)
+      adminWA: "6281234567890", // Ganti dengan nomor WhatsApp kamu (format 62...)
       pointsPerInvite: 25,       // 1 teman sukses order = 25 poin
       
+      // Jika punya Google Sheet: Masukkan ID Spreadsheet-nya di sini
+      // Contoh: "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms"
+      // Jika dikosongkan (""), web otomatis beralih ke mode simulasi cerdas
+      googleSheetId: "", 
+      sheetName: "Sheet1",
+
       rewards: [
         {
           id: "rwd-canva",
           name: "Canva Pro Edu 1 Thn",
-          pointsNeeded: 50,       // 50 poin = butuh 2 orang
+          pointsNeeded: 50,
           icon: "🎨",
           desc: "Full Garansi Lifetime / 1 Tahun",
           badge: "FAVORIT"
@@ -382,7 +381,7 @@
         {
           id: "rwd-capcut",
           name: "CapCut Pro 1 Bulan",
-          pointsNeeded: 75,       // 75 poin = butuh 3 orang
+          pointsNeeded: 75,
           icon: "🎬",
           desc: "Privat Bebas Limitasi Fitur",
           badge: "HOT"
@@ -390,7 +389,7 @@
         {
           id: "rwd-spotify",
           name: "Spotify Premium 1 Bulan",
-          pointsNeeded: 100,      // 100 poin = butuh 4 orang
+          pointsNeeded: 100,
           icon: "🎵",
           desc: "Akun Pribadi Anti Hold",
           badge: "BEST"
@@ -398,7 +397,7 @@
         {
           id: "rwd-netflix",
           name: "Netflix 4K UHD 1 Bulan",
-          pointsNeeded: 150,      // 150 poin = butuh 6 orang
+          pointsNeeded: 150,
           icon: "🍿",
           desc: "1 Profil 1 User Anti Screen Limit",
           badge: "SPECIAL"
@@ -406,7 +405,7 @@
         {
           id: "rwd-cash",
           name: "Saldo E-Wallet Rp 50.000",
-          pointsNeeded: 200,      // 200 poin = butuh 8 orang
+          pointsNeeded: 200,
           icon: "💵",
           desc: "Transfer langsung DANA / GoPay / Shopee",
           badge: "TUNAI"
@@ -417,7 +416,7 @@
     let currentUserPoints = 0;
     let currentNextReward = null;
 
-    // Render Hadiah ke Layar
+    // Render Hadiah
     function renderRewards() {
       const grid = document.getElementById("rewardGrid");
       const select = document.getElementById("regTargetReward");
@@ -437,7 +436,7 @@
             <div class="pt-2 border-t border-slate-100 mt-2 flex items-center justify-between">
               <div>
                 <span class="text-xs font-black text-brandPurple block">${rwd.pointsNeeded} Pts</span>
-                <span class="text-[8px] text-slate-400">Cukup ajak ${friendCount} teman</span>
+                <span class="text-[8px] text-slate-400">Ajak ${friendCount} teman</span>
               </div>
               <button class="bg-slate-100 group-hover:bg-brandPurple group-hover:text-white text-slate-700 text-[10px] font-bold px-2 py-1 rounded-lg transition">
                 Pilih
@@ -450,20 +449,52 @@
       select.innerHTML = MEMBER_CONFIG.rewards.map(r => `<option value="${r.name}">${r.name} (${r.pointsNeeded} Pts)</option>`).join('');
     }
 
-    // Logic Cek Poin & Pop-Up Interaktif
-    function checkPointHandler() {
+    // Logic Cek Poin Real-Time (Google Sheets / Fallback)
+    async function checkPointHandler() {
       const val = document.getElementById("pointInput").value.trim();
       if (!val) {
-        showToast("Masukkan ID atau nominal poin untuk simulasi!");
+        showToast("Masukkan kode referral atau nomor WA kamu!");
         return;
       }
 
-      let points = parseInt(val);
-      if (isNaN(points)) {
-        points = 50; // default simulasi kalau memasukkan nama kode
-      }
+      const btn = document.getElementById("btnCheckPoint");
+      btn.classList.add("opacity-70", "pointer-events-none");
 
-      showPointInteractiveModal(points, val);
+      // 1. Jika terhubung ke Google Sheet ID
+      if (MEMBER_CONFIG.googleSheetId) {
+        showToast("Menghubungkan ke database...");
+        try {
+          const res = await fetch(`https://opensheet.elk.sh/${MEMBER_CONFIG.googleSheetId}/${MEMBER_CONFIG.sheetName}`);
+          const data = await res.json();
+          
+          // Cari baris yang kolom 'kode' atau 'wa' nya cocok
+          const member = data.find(m => 
+            String(m.kode || '').toLowerCase() === val.toLowerCase() ||
+            String(m.wa || '').toLowerCase() === val.toLowerCase()
+          );
+
+          if (member) {
+            const points = parseInt(member.poin || member.points || 0);
+            showPointInteractiveModal(points, member.kode || val);
+          } else {
+            showToast("Kode / No WA belum terdaftar di sistem!");
+          }
+        } catch (err) {
+          console.error(err);
+          showToast("Gagal mengambil data sheet, coba lagi!");
+        } finally {
+          btn.classList.remove("opacity-70", "pointer-events-none");
+        }
+      } 
+      // 2. Mode Simulasi Cepat (Jika belum punya Google Sheet)
+      else {
+        let points = parseInt(val);
+        if (isNaN(points)) {
+          points = 50; // default simulasi jika mengetik teks biasa
+        }
+        showPointInteractiveModal(points, val);
+        btn.classList.remove("opacity-70", "pointer-events-none");
+      }
     }
 
     function triggerQuickCheck(pts, name) {
@@ -475,13 +506,11 @@
       document.getElementById("modalPointsTotal").innerText = `${pts} Poin`;
       document.getElementById("modalReferralId").innerText = `ID: ${idRef.toUpperCase()}`;
 
-      // Cari target hadiah
       const nextReward = MEMBER_CONFIG.rewards.find(r => r.pointsNeeded > pts) || MEMBER_CONFIG.rewards[MEMBER_CONFIG.rewards.length - 1];
       currentNextReward = nextReward;
 
       const pct = Math.min(Math.round((pts / nextReward.pointsNeeded) * 100), 100);
       
-      // Reset width dulu baru animate
       const bar = document.getElementById("modalProgressBar");
       bar.style.width = "0%";
       setTimeout(() => {
@@ -506,17 +535,15 @@
       document.getElementById("pointModal").classList.add("hidden");
     }
 
-    function openModal(type) {
-      if (type === 'promo') {
-        document.getElementById("promoModal").classList.remove("hidden");
-      }
+    function openPromoModal() {
+      document.getElementById("promoModal").classList.remove("hidden");
     }
 
     function closePromoModal() {
       document.getElementById("promoModal").classList.add("hidden");
     }
 
-    // Pendaftaran Member via WhatsApp
+    // Pendaftaran WhatsApp
     function submitRegistration() {
       const name = document.getElementById("regName").value.trim();
       const phone = document.getElementById("regPhone").value.trim();
@@ -573,29 +600,27 @@
     // Inisialisasi Data
     renderRewards();
 
-    // ==================== INTERSECTION OBSERVER: SCROLL REVEAL VIEWPORT ANIMATION ====================
+    // ==================== INTERSECTION OBSERVER: SCROLL REVEAL VIEWPORT ====================
     const observerOptions = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.12 // Memicu animasi saat 12% bagian elemen masuk ke viewport layar
+      threshold: 0.12
     };
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
-          // Setelah animasi muncul sekali, observer dilepas agar ringan
           observer.unobserve(entry.target);
         }
       });
     }, observerOptions);
 
-    // Pasang observer ke semua elemen dengan class 'reveal-on-scroll'
     document.querySelectorAll('.reveal-on-scroll').forEach(el => {
       revealObserver.observe(el);
     });
 
-    // ==================== ANIMASI BINTANG JATUH (BACKGROUND) ====================
+    // ==================== ANIMASI BINTANG JATUH ====================
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;

@@ -771,6 +771,104 @@
         }, 300);
       }
     }
+  <!-- ==================== MINI LIVE CHAT WIDGET INTERAKTIF ==================== -->
+<div id="miniChatWidget" class="fixed bottom-5 right-5 z-[9997] flex flex-col items-end">
+  
+  <!-- Jendela Chat Mini (Pop-up mungil) -->
+  <div id="miniChatBox" class="hidden mb-3 w-[290px] sm:w-[310px] bg-white rounded-3xl shadow-2xl border border-slate-100 p-4 transition-all duration-300 transform origin-bottom-right space-y-3">
+    
+    <!-- Header Mini Box -->
+    <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+      <div class="flex items-center gap-2">
+        <div class="relative">
+          <div class="w-8 h-8 rounded-full bg-brandPurpleLight flex items-center justify-center text-base">
+            👾
+          </div>
+          <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full animate-ping"></span>
+          <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+        </div>
+        <div>
+          <h4 class="text-xs font-black text-darkText flex items-center gap-1">
+            Admin Reztroid <span class="text-[10px] text-brandPurple font-extrabold bg-indigo-50 px-1.5 py-0.2 rounded-full">Fast Resp</span>
+          </h4>
+          <p class="text-[10px] text-emerald-600 font-bold">Online • Siap bantu kamu ✨</p>
+        </div>
+      </div>
+      <button onclick="toggleMiniChat()" class="text-slate-400 hover:text-slate-600 text-xs w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center active:scale-90 transition">
+        ✕
+      </button>
+    </div>
+
+    <!-- Bubble Pesan Masuk Lucu -->
+    <div class="space-y-2">
+      <div class="bg-slate-50 rounded-2xl rounded-tl-sm p-2.5 text-[11px] text-slate-700 leading-relaxed border border-slate-100">
+        Halo kak! Mau tanya stok Canva/CapCut, cek poin referral, atau klaim reward? Boleh tanya di sini yaa 👇🥰
+      </div>
+
+      <!-- Quick Chips / Opsi Cepat Sekali Klik -->
+      <div class="flex flex-wrap gap-1.5">
+        <button onclick="sendQuickChat('Halo admin, cara tukar poin gimana ya?')" class="text-[10px] font-bold bg-indigo-50 hover:bg-indigo-100 text-brandPurple px-2.5 py-1 rounded-full transition active:scale-95">
+          🎁 Cara tukar poin?
+        </button>
+        <button onclick="sendQuickChat('Halo admin, mau tanya stok aplikasi yang ready')" class="text-[10px] font-bold bg-indigo-50 hover:bg-indigo-100 text-brandPurple px-2.5 py-1 rounded-full transition active:scale-95">
+          ⚡ List stok ready
+        </button>
+      </div>
+    </div>
+
+    <!-- Kolom Ketik Mini & Tombol Kirim -->
+    <div class="flex items-center gap-1.5 pt-1">
+      <input id="chatInputMini" type="text" placeholder="Ketik pesan kamu..." class="w-full bg-slate-100 border-none rounded-xl px-3 py-2 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brandPurple/30 transition">
+      <button onclick="submitMiniChat()" class="bg-brandPurple hover:bg-indigo-700 text-white p-2 rounded-xl shrink-0 active:scale-90 transition shadow-md shadow-brandPurple/20 flex items-center justify-center">
+        <svg class="w-3.5 h-3.5 rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Tombol Bulat Gelembung (Floating Trigger) -->
+  <button onclick="toggleMiniChat()" class="group relative flex items-center gap-2 bg-darkText hover:bg-black text-white p-3 sm:px-4 sm:py-3 rounded-full shadow-2xl border-2 border-white/20 active:scale-90 transition-all duration-300">
+    <span class="text-lg group-hover:rotate-12 transition transform">💬</span>
+    <span class="hidden sm:inline text-xs font-extrabold tracking-wide">Tanya Admin</span>
+    
+    <!-- Dot Online Hijau -->
+    <span class="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+  </button>
+
+</div>
+
+<script>
+  function toggleMiniChat() {
+    const box = document.getElementById("miniChatBox");
+    if (box.classList.contains("hidden")) {
+      box.classList.remove("hidden");
+      box.classList.add("modal-enter");
+      document.getElementById("chatInputMini").focus();
+    } else {
+      box.classList.add("hidden");
+    }
+  }
+
+  function submitMiniChat() {
+    const input = document.getElementById("chatInputMini");
+    const msg = input.value.trim();
+    if (!msg) return;
+    
+    const adminWA = "6281299961001";
+    const url = `https://wa.me/${adminWA}?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
+    input.value = "";
+    toggleMiniChat();
+  }
+
+  function sendQuickChat(presetText) {
+    const adminWA = "6281299961001";
+    const url = `https://wa.me/${adminWA}?text=${encodeURIComponent(presetText)}`;
+    window.open(url, "_blank");
+    toggleMiniChat();
+  }
   </script>
 </body>
 </html>

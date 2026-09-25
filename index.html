@@ -132,10 +132,12 @@
       </nav>
 
       <div class="flex items-center gap-3">        <!-- Tombol Buka Fitur Member -->
-        <button id="openMemberModalBtn" class="flex items-center gap-2 px-3 py-2 rounded-2xl border-2 border-black bg-neon text-black font-extrabold text-xs shadow-sm transition active:scale-95">
-          <i data-lucide="gift" class="w-4 h-4"></i>
-          <span>Member & Reward</span>
+         <!-- Tombol Member Rapi & Langsung Responsif -->
+        <button type="button" onclick="openMemberModal()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl border-2 border-black bg-neon hover:bg-neon-hover text-black font-extrabold text-xs shadow-sm whitespace-nowrap active:scale-95">
+          <i data-lucide="gift" class="w-3.5 h-3.5"></i>
+          <span>Member</span>
         </button>
+
 
         <button id="openCartBtn" class="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border-2 border-black bg-white hover:bg-slate-50 text-black font-bold text-sm shadow-sm transition active:scale-95">
           <i data-lucide="shopping-bag" class="w-4 h-4"></i>
@@ -1349,10 +1351,26 @@ Mohon info instruksi pembayaran (QRIS / Bank) ya. Terima kasih!`;
       lucide.createIcons();
     });
 
-    closeMemberModalBtn.addEventListener('click', () => {
-      memberModal.classList.add('hidden');
-      memberModal.classList.remove('flex');
-    });
+        // FUNGSI GLOBAL MODAL MEMBER
+    window.openMemberModal = function() {
+      const modal = document.getElementById('memberModal');
+      if (!modal) return;
+      if (typeof updateMemberUI === 'function') updateMemberUI();
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      if (window.lucide) lucide.createIcons();
+    };
+
+    window.closeMemberModal = function() {
+      const modal = document.getElementById('memberModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    };
+
+    const closeBtnEl = document.getElementById('closeMemberModalBtn');
+    if (closeBtnEl) closeBtnEl.onclick = window.closeMemberModal;
+
 
   </script>
     <!-- MODAL FITUR MEMBER (2 TAB TAMPILAN) -->

@@ -1373,79 +1373,187 @@ Mohon info instruksi pembayaran (QRIS / Bank) ya. Terima kasih!`;
 
 
   </script>
-    <!-- MODAL FITUR MEMBER (2 TAB TAMPILAN) -->
-  <div id="memberModal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-    <div class="bg-white rounded-3xl border-2 border-black max-w-md w-full overflow-hidden shadow-2xl flex flex-col">
-      <div class="p-5 bg-slate-950 text-white flex items-center justify-between">
+     // FUNGSI MODAL MEMBER
+    window.openMemberModal = function() {
+      const modal = document.getElementById('memberModal');
+      if (!modal) return;
+      modal.style.display = 'flex';
+      window.refreshMemberDisplay();
+    };
+
+    window.closeMemberModal = function() {
+      const modal = document.getElementById('memberModal');
+      if (modal) modal.style.display = 'none';
+    };
+
+    window.switchMemberTab = function(tab) {
+      const viewCreate = document.getElementById('viewCreateReferral');
+      const viewTrack = document.getElementById('viewTrackReferral');
+      const btnCreate = document.getElementById('tabCreateBtn');
+      const btnTrack = document.getElementById('tabTrackBtn');
+
+      if (tab === 'create') {
+        viewCreate.style.display = 'block';
+        viewTrack.style.display = 'none';
+        btnCreate.className = "py-2 rounded-xl bg-white border border-slate-300 text-black shadow-sm";
+        btnTrack.className = "py-2 rounded-xl text-slate-500 border border-transparent";
+      } else {
+        viewCreate.style.display = 'none';
+        viewTrack.style.display = 'block';
+        btnTrack.className = "py-2 rounded-xl bg-white border border-slate-300 text-black shadow-sm";
+        btnCreate.className = "py-2 rounded-xl text-slate-500 border border-transparent";
+        window.refreshMemberDisplay();
+      }
+    };
+
+    window.refreshMemberDisplay = function() {
+      const name = localStorage.getItem('reztroid_member_name') || '';
+      const code = localStorage.getItem('reztroid_member_code') || '';
+      const count = parseInt(localStorage.getItem('reztroid_invited_count') || '0', 10);
+
+      const resultBox = document.getElementById('referralResultBox');
+      const codeDisplay = document.getElementById('myReferralCode');
+      const shareInput = document.getElementById('shareLinkInput');
+      const nameInput = document.getElementById('memberNameInput');
+      const countDisplay = document.getElementById('invitedCountDisplay');
+      const rewardDisplay = document.getElementById('rewardTotalDisplay');
+
+      if (code) {
+        if (resultBox) resultBox.style.display = 'block';
+        if (codeDisplay) codeDisplay.textContent = code;
+        if (shareInput) shareInput.value = `${window.location.origin + window.location.pathname}?ref=${code}`;
+        if (nameInput) nameInput.value = name;
+      }
+
+      if (countDisplay) countDisplay.textContent = `${count} Orang`;
+      if (rewardDisplay) rewardDisplay.textContent = `Rp ${(count * 5000).toLocaleString('id-ID')}`;
+    };
+
+    window.handleGenerateCode = function() {
+      const nameInput = document.getElementById('memberNameInput');
+      const name = (nameInput?.value || '').trim().toUpperCase();
+      if (!name) return alert('Masukkan nama kamu dulu!');
+
+      const clean = name.replace(/[^A-Z0-9]/g, '').slice(0, 5) || 'USER';
+      const randomId = Math.floor(10 + Math.random() * 90);
+      const code = `REZT-${clean}-${randomId}`;
+
+      localStorage.setItem('reztroid_member_name', name);
+      localStorage.setItem('reztroid_member_code', code);
+
+      window.refreshMemberDisplay();
+      alert(`Kode referral berhasil dibuat: ${code}`);
+    };
+
+    window.copyReferralLink = function() {
+      const shareInput = document.getElementById('shareLinkInput');
+      const copyBtn = document.getElementById('copyShareLinkBtn');
+      if (!shareInput) return;
+
+      shareInput.select();
+      shareInput.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(shareInput.value).then(() => {
+        if (copyBtn) {
+          copyBtn.textContent = 'Tersalin!';
+          setTimeout(() => { copyBtn.textContent = 'Salin'; }, 2000);
+        }
+      });
+    };
+
+    window.claimRewardViaWa = function() {
+      const code = localStorage.getItem('reztroid_member_code');
+      const name = localStorage.getItem('reztroid_member_name');
+      const count = parseInt(localStorage.getItem('reztroid_invited_count') || '0', 10);
+      if (!code) return alert('Buat kode referral dulu!');
+
+      const adminWa = localStorage.getItem('reztroid_admin_wa') || "6281234567890";
+      const msg = encodeURIComponent(`Halo Admin reztroid®, saya mau klaim reward member:\nKode: *${code}*\nNama: ${name}\nTotal Reward: Rp ${(count * 5000).toLocaleString('id-ID')}`);
+      window.open(`https://wa.me/${adminWa}?text=${msg}`, '_blank');
+    };
+  </script>
+
+  <!-- MODAL FITUR MEMBER & REFERRAL -->
+  <div id="memberModal" style="display: none;" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-[150] items-center justify-center p-4">
+    <div class="bg-white rounded-3xl border-2 border-black max-w-md w-full overflow-hidden shadow-2xl flex flex-col relative z-[160]">
+      <!-- Header Modal -->
+      <div class="p-4 bg-slate-950 text-white flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-xl bg-neon text-black flex items-center justify-center font-extrabold">
-            <i data-lucide="award" class="w-4 h-4"></i>
+          <div class="w-8 h-8 rounded-xl bg-neon text-black flex items-center justify-center font-extrabold text-sm">
+            🎁
           </div>
           <div>
-            <h3 class="font-extrabold text-sm sm:text-base leading-tight">Member & Referral Hub</h3>
-            <p class="text-[11px] text-slate-400">Ajak teman langganan, dapatkan saldo gratis</p>
+            <h3 class="font-extrabold text-sm leading-tight text-white">Member & Referral Hub</h3>
+            <p class="text-[10px] text-slate-400">Ajak teman, dapatkan bonus saldo</p>
           </div>
         </div>
-        <button id="closeMemberModalBtn" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-300 flex items-center justify-center">
-          <i data-lucide="x" class="w-4 h-4"></i>
+        <button type="button" onclick="closeMemberModal()" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold flex items-center justify-center text-sm">
+          ✕
         </button>
       </div>
 
-      <!-- Dua Tab Navigasi -->
-      <div class="grid grid-cols-2 border-b-2 border-slate-100 bg-slate-50 p-1.5 gap-1.5 text-xs font-extrabold">
-        <button id="tabCreateBtn" class="py-2 rounded-xl bg-white border border-slate-300 text-black shadow-sm">
+      <!-- Tab Navigasi -->
+      <div class="grid grid-cols-2 border-b-2 border-slate-100 bg-slate-50 p-1.5 gap-1 text-xs font-bold">
+        <button type="button" id="tabCreateBtn" onclick="switchMemberTab('create')" class="py-2 rounded-xl bg-white border border-slate-300 text-black shadow-sm">
           1. Buat Kode
         </button>
-        <button id="tabTrackBtn" class="py-2 rounded-xl text-slate-500 hover:text-black border border-transparent">
-          2. Cek Undangan
+        <button type="button" id="tabTrackBtn" onclick="switchMemberTab('track')" class="py-2 rounded-xl text-slate-500 border border-transparent">
+          2. Cek Teman
         </button>
       </div>
 
       <!-- TAMPILAN 1: Buat Kode -->
       <div id="viewCreateReferral" class="p-5 space-y-4">
-        <p class="text-xs text-purple-900 bg-purple-50 p-3 rounded-xl border border-purple-200 font-semibold">
-          Dapatkan bonus <b>Rp 5.000 saldo</b> setiap temanmu checkout pakai kode referral kamu!
-        </p>
+        <div class="p-3 bg-purple-50 border border-purple-200 rounded-xl text-xs text-purple-900 font-semibold">
+          Dapatkan reward <b>Rp 5.000 saldo</b> setiap temanmu belanja menggunakan kode referral kamu!
+        </div>
 
-        <div class="space-y-2">
-          <label class="block text-xs font-bold text-slate-700">Nama Panggilan:</label>
+        <div class="space-y-1.5">
+          <label class="block text-[11px] font-extrabold text-slate-700 uppercase">Nama Panggilan Kamu:</label>
           <div class="flex gap-2">
-            <input type="text" id="memberNameInput" placeholder="Contoh: Rian" class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-xl px-3 py-2 text-xs font-bold uppercase outline-none">
-            <button id="generateRefBtn" class="bg-black text-white px-4 py-2 rounded-xl text-xs font-extrabold">Buat Kode</button>
+            <input type="text" id="memberNameInput" placeholder="CONTOH: RIAN" class="flex-1 bg-slate-50 border-2 border-slate-200 focus:border-black rounded-xl px-3 py-2 text-xs font-bold uppercase outline-none">
+            <button type="button" onclick="handleGenerateCode()" class="bg-black text-white px-4 py-2 rounded-xl text-xs font-extrabold active:scale-95">
+              Buat
+            </button>
           </div>
         </div>
 
-        <div id="referralResultBox" class="hidden space-y-3 pt-1">
-          <div class="p-3 rounded-2xl border-2 border-dashed border-black bg-neon/20 text-center">
-            <span class="text-[10px] font-bold text-slate-500 uppercase">Kode Kamu:</span>
-            <div id="myReferralCode" class="text-xl font-black font-mono">REZT-XXXX</div>
+        <div id="referralResultBox" style="display: none;" class="space-y-3 pt-2">
+          <div class="p-3.5 rounded-2xl border-2 border-dashed border-black bg-neon/20 text-center">
+            <span class="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider block">Kode Referral Kamu</span>
+            <div id="myReferralCode" class="text-xl font-black font-mono tracking-wider text-black mt-0.5">REZT-XXXX</div>
           </div>
-          <div class="flex gap-2">
-            <input type="text" id="shareLinkInput" readonly class="flex-1 bg-slate-100 border border-slate-200 text-slate-600 rounded-xl px-3 py-1.5 text-xs font-mono select-all">
-            <button id="copyShareLinkBtn" class="bg-black text-white px-3 py-1.5 rounded-xl text-xs font-bold">Salin</button>
+          <div class="space-y-1">
+            <span class="text-[10px] font-bold text-slate-500 uppercase block">Link Belanja Teman:</span>
+            <div class="flex gap-2">
+              <input type="text" id="shareLinkInput" readonly class="flex-1 bg-slate-100 border border-slate-200 text-slate-700 rounded-xl px-3 py-1.5 text-xs font-mono select-all outline-none">
+              <button type="button" onclick="copyReferralLink()" id="copyShareLinkBtn" class="bg-black text-white px-3 py-1.5 rounded-xl text-xs font-bold">
+                Salin
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- TAMPILAN 2: Cek Teman Diundang -->
-      <div id="viewTrackReferral" class="p-5 space-y-4 hidden">
+      <div id="viewTrackReferral" style="display: none;" class="p-5 space-y-4">
         <div class="grid grid-cols-2 gap-3 text-center">
-          <div class="p-3 rounded-xl border-2 border-slate-200 bg-slate-50">
-            <span class="text-[10px] font-bold text-slate-500 uppercase">Teman Terdaftar</span>
-            <p id="invitedCountDisplay" class="text-xl font-black mt-1">0 Orang</p>
+          <div class="p-3 rounded-2xl border-2 border-slate-200 bg-slate-50">
+            <span class="text-[10px] font-bold text-slate-500 uppercase block">Teman Terdaftar</span>
+            <p id="invitedCountDisplay" class="text-xl font-black text-slate-900 mt-1">0 Orang</p>
           </div>
-          <div class="p-3 rounded-xl border-2 border-black bg-neon">
-            <span class="text-[10px] font-bold text-black uppercase">Total Saldo</span>
-            <p id="rewardTotalDisplay" class="text-xl font-black mt-1">Rp 0</p>
+          <div class="p-3 rounded-2xl border-2 border-black bg-neon">
+            <span class="text-[10px] font-bold text-black uppercase block">Total Reward</span>
+            <p id="rewardTotalDisplay" class="text-xl font-black text-black mt-1">Rp 0</p>
           </div>
         </div>
 
-        <button id="claimRewardBtn" class="w-full bg-black text-white py-2.5 rounded-xl font-extrabold text-xs">
-          Klaim Saldo Reward via WhatsApp
+        <button type="button" onclick="claimRewardViaWa()" class="w-full bg-black text-white py-3 rounded-xl font-extrabold text-xs flex items-center justify-center gap-2 active:scale-95 shadow-sm">
+          <span>Klaim Saldo Reward ke Admin WhatsApp</span>
         </button>
       </div>
     </div>
   </div>
+
 
 </body>
 </html>

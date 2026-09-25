@@ -576,61 +576,68 @@
     }
 
     /* VALIDASI KETAT GOOGLE SHEETS — TIDAK ADA FALLBACK RANDOM */
-    async function checkPointHandler() {
-      const rawVal = document.getElementById("pointInput").value.trim();
-      if (!rawVal) {
+async function checkPointHandler() {
+      const val = document.getElementById("pointInput").value.trim().toLowerCase();
+      if (!val) {
         showToast("Masukkan kode referral atau nomor WA kamu!");
         return;
       }
-
-      // Bersihkan karakter spasi, strip, tanda tambah
-      const searchClean = rawVal.toLowerCase().replace(/[\s\-\+\.]/g, '');
 
       const btn = document.getElementById("btnCheckPoint");
       btn.classList.add("opacity-70", "pointer-events-none");
       btn.innerText = "Mengecek...";
 
       try {
-        // Query sheet pertama dengan cache buster
-        const apiUrl = `https://opensheet.elk.sh/${MEMBER_CONFIG.googleSheetId}/1?t=${Date.now()}`;
-        const res = await fetch(apiUrl);
+        const csvUrl = `https://docs.google.com/spreadsheets/d/${MEMBER_CONFIG.googleSheetId}/gviz/tq?tqx=out:csv&t=${Date.now()}`;
+        const res = await fetch(csvUrl);
         
         if (!res.ok) {
-          throw new Error("Gagal mengambil data dari Google Sheets");
+          throw new Error("Gagal mengakses spreadsheet Google");
         }
 
-        const data = await res.json();
+        const csvText = await res.text();
+        const rows = csvText.split('\n').filter(r => r.trim().length > 0);
 
-        if (!Array.isArray(data) || data.length === 0) {
-          showToast("Database member masih kosong atau belum terisi!");
+        if (rows.length <= 1) {
+          showToast("❌ Database member masih kosong!");
           return;
         }
 
-        // Cari data member yang valid dan cocok
-        const member = data.find(m => {
-          const mKode = String(m.kode || m.Kode || m.KODE || '').trim().toLowerCase().replace(/[\s\-\+\.]/g, '');
-          const mWa = String(m.wa || m.WA || m.telepon || m.hp || m.whatsapp || '').trim().toLowerCase().replace(/[\s\-\+\.]/g, '');
+        const cleanCell = cell => cell ? cell.replace(/^["']|["']$/g, '').trim() : '';
+        const headers = rows[0].split(',').map(h => cleanCell(h).toLowerCase());
 
-          const kodeMatch = mKode && (mKode === searchClean);
-          const waMatch = mWa && (mWa === searchClean || mWa.endsWith(searchClean) || searchClean.endsWith(mWa));
+        const idxKode = headers.findIndex(h => h.includes('kode'));
+        const idxWa = headers.findIndex(h => h.includes('wa') || h.includes('hp') || h.includes('telepon'));
+        const idxPoin = headers.findIndex(h => h.includes('poin') || h.includes('point'));
 
-          return kodeMatch || waMatch;
-        });
+        const cleanInput = val.replace(/[\s\-\+]/g, '');
+        let memberFound = null;
 
-        if (member) {
-          const rawPoin = member.poin || member.Poin || member.POIN || member.points || member.Points || 0;
-          const points = parseInt(rawPoin, 10) || 0;
-          const kodeDisplay = member.kode || member.Kode || rawVal.toUpperCase();
+        for (let i = 1; i < rows.length; i++) {
+          const cols = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(cleanCell);
           
-          showPointInteractiveModal(points, kodeDisplay);
+          const rawKode = (cols[idxKode] || '').toLowerCase();
+          const rawWa = (cols[idxWa] || '').replace(/[\s\-\+]/g, '').toLowerCase();
+
+          if ((rawKode && rawKode === cleanInput) || 
+              (rawWa && (rawWa === cleanInput || rawWa.endsWith(cleanInput) || cleanInput.endsWith(rawWa)))) {
+            memberFound = {
+              kode: cols[idxKode] || val.toUpperCase(),
+              poin: parseInt(cols[idxPoin]) || 0
+            };
+            break;
+          }
+        }
+
+        if (memberFound) {
+          showPointInteractiveModal(memberFound.poin, memberFound.kode);
         } else {
-          // JIKA TIDAK ADA DI DATABASE: TOLAK LANGSUNG DAN JANGAN BUKA MODAL APAPUN
-          showToast("❌ Kode Referral / No WA tidak terdaftar di sistem!");
+          showToast("❌ Kode / No WA tidak terdaftar di sistem!");
         }
 
       } catch (err) {
-        console.error("Gagal verifikasi Google Sheets:", err);
-        showToast("⚠️ Database sedang offline atau spreadsheet belum diset Public (Viewer)!");
+        console.error("Database Error:", err);
+        showToast("⚠️ Spreadsheet belum diset Public (Anyone with link)!");
       } finally {
         btn.classList.remove("opacity-70", "pointer-events-none");
         btn.innerHTML = `<span>Cek</span> <span>🚀</span>`;

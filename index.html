@@ -1315,64 +1315,7 @@ Mohon info instruksi pembayaran (QRIS / Bank) ya. Terima kasih!`;
       updateMemberUI();
     });
 
-    generateRefBtn.addEventListener('click', () => {
-      const name = memberNameInput.value.trim().toUpperCase();
-      if (!name) return alert('Ketik nama kamu dulu ya!');
-      
-      const clean = name.replace(/[^A-Z0-9]/g, '').slice(0, 5);
-      const code = `REZT-${clean}-${Math.floor(10 + Math.random() * 90)}`;
-      myMemberName = name;
-      myReferralCode = code;
 
-      localStorage.setItem('reztroid_member_name', myMemberName);
-      localStorage.setItem('reztroid_member_code', myReferralCode);
-      updateMemberUI();
-      alert(`Kode berhasil dibuat: ${code}`);
-    });
-
-    copyShareLinkBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText(shareLinkInput.value).then(() => {
-        copyShareLinkBtn.textContent = 'Tersalin!';
-        setTimeout(() => { copyShareLinkBtn.textContent = 'Salin'; }, 2000);
-      });
-    });
-
-    claimRewardBtn.addEventListener('click', () => {
-      const waNumber = localStorage.getItem('reztroid_admin_wa') || "6281299961001";
-      const msg = encodeURIComponent(`Halo Admin, saya mau klaim reward referral untuk kode: ${myReferralCode} (${myMemberName})`);
-      window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
-    });
-
-    openMemberModalBtn.addEventListener('click', () => {
-      updateMemberUI();
-      memberModal.classList.remove('hidden');
-      memberModal.classList.add('flex');
-
-      lucide.createIcons();
-    });
-
-        // FUNGSI GLOBAL MODAL MEMBER
-    window.openMemberModal = function() {
-      const modal = document.getElementById('memberModal');
-      if (!modal) return;
-      if (typeof updateMemberUI === 'function') updateMemberUI();
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      if (window.lucide) lucide.createIcons();
-    };
-
-    window.closeMemberModal = function() {
-      const modal = document.getElementById('memberModal');
-      if (!modal) return;
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    };
-
-    const closeBtnEl = document.getElementById('closeMemberModalBtn');
-    if (closeBtnEl) closeBtnEl.onclick = window.closeMemberModal;
-
-
-  </script>
      // FUNGSI MODAL MEMBER
     window.openMemberModal = function() {
       const modal = document.getElementById('memberModal');

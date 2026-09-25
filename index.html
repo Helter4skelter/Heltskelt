@@ -716,6 +716,62 @@
 
     animate();
   </script>
+<!-- ==================== POP-UP WELCOME / INFO SOSMED ==================== -->
+  <div id="welcomeModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-all duration-300">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 modal-enter shadow-2xl space-y-4 text-center relative border border-slate-100">
+      
+      <!-- Tombol Tutup (Silang) -->
+      <button onclick="closeWelcomeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-sm font-bold w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition">
+        ✕
+      </button>
 
+      <!-- Badge Icon / Gambar Promosi -->
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-brandPurpleLight flex items-center justify-center text-3xl shadow-inner animate-float">
+        📢
+      </div>
+
+      <!-- Judul & Teks Pengumuman -->
+      <div class="space-y-1.5">
+        <span class="text-[10px] uppercase tracking-wider font-extrabold text-brandPurple bg-indigo-50 px-2.5 py-0.5 rounded-full">
+          PENGUMUMAN RESMI
+        </span>
+        <h3 class="text-lg font-black text-darkText">Selamat Datang di Reztroid!</h3>
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Dapatkan update promo flash sale, diskon langganan aplikasi, dan info reward referral terbaru lewat media sosial kami.
+        </p>
+      </div>
+
+      <!-- Tombol Sosial Media & Channel -->
+      <div class="space-y-2 pt-1">
+        <!-- Tombol Instagram -->
+        <a href="https://instagram.com/heyreztroid" target="_blank" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-95 text-white font-extrabold text-xs py-2.5 rounded-xl shadow flex items-center justify-center gap-2 active:scale-95 transition">
+          <span>📸</span> Follow Instagram Kami
+        </a>
+
+        <!-- Tombol Saluran / Chat WhatsApp -->
+        <a href="https://wa.me/6281299961001" target="_blank" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs py-2.5 rounded-xl shadow flex items-center justify-center gap-2 active:scale-95 transition">
+          <span>💬</span> Chat Admin WhatsApp
+        </a>
+
+        <!-- Tombol Lanjut Masuk Web -->
+        <button onclick="closeWelcomeModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2.5 rounded-xl active:scale-95 transition mt-2">
+          Lanjut ke Member Hub ↗
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function closeWelcomeModal() {
+      const modal = document.getElementById("welcomeModal");
+      if (modal) {
+        modal.classList.add("opacity-0", "pointer-events-none");
+        setTimeout(() => {
+          modal.classList.add("hidden");
+        }, 300);
+      }
+    }
+  </script>
 </body>
 </html>

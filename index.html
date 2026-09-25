@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reztroid Member Hub — Ajak Teman & Dapatkan Reward</title>
   
   <!-- Tailwind CSS CDN -->
@@ -30,11 +30,9 @@
   </script>
 
   <style>
-    /* Hilangkan scrollbar */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Canvas bintang jatuh di latar belakang */
     #starCanvas {
       position: fixed;
       top: 0;
@@ -45,7 +43,6 @@
       z-index: 0;
     }
 
-    /* Animasi Running Text Muter-Muter */
     @keyframes marqueeScroll {
       0% { transform: translateX(0%); }
       100% { transform: translateX(-50%); }
@@ -53,16 +50,15 @@
     .marquee-track {
       display: flex;
       width: max-content;
-      animation: marqueeScroll 12s linear infinite;
+      animation: marqueeScroll 16s linear infinite;
     }
     .marquee-track:hover {
       animation-play-state: paused;
     }
 
-    /* Scroll Reveal: Efek Muncul & Transparan Saat Diswipe */
     .reveal-on-scroll {
       opacity: 0;
-      transform: translateY(28px) scale(0.98);
+      transform: translateY(24px) scale(0.99);
       transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
@@ -71,12 +67,11 @@
       transform: translateY(0) scale(1);
     }
 
-    /* Animasi Pop-up Modal */
     .modal-enter { 
-      animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+      animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
     }
     @keyframes modalFadeIn {
-      from { opacity: 0; transform: scale(0.92) translateY(16px); }
+      from { opacity: 0; transform: scale(0.94) translateY(12px); }
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
@@ -89,241 +84,272 @@
     }
   </style>
 </head>
-<body class="bg-softBg text-darkText font-sans antialiased relative min-h-screen">
+<body class="bg-softBg text-darkText font-sans antialiased relative min-h-screen flex flex-col justify-between selection:bg-brandPurple selection:text-white">
 
   <!-- Background Animasi Bintang Jatuh -->
   <canvas id="starCanvas"></canvas>
 
-  <!-- Container Mobile Utama -->
-  <div class="relative z-10 max-w-[430px] mx-auto min-h-screen bg-white/95 backdrop-blur-md border-x border-slate-200/70 shadow-sm flex flex-col justify-between">
+  <div class="relative z-10 w-full flex flex-col min-h-screen justify-between">
 
-    <div>
-      <!-- 1. Running Marquee Muter-Muter -->
-      <div onclick="openPromoModal()" class="cursor-pointer bg-black text-white text-[11px] font-bold py-2 overflow-hidden border-b border-black select-none">
-        <div class="marquee-track flex items-center space-x-6">
-          <div class="flex items-center space-x-6 shrink-0">
-            <span class="flex items-center gap-1.5"><span class="text-brandLime animate-pulse">✦</span> PROGRAM REFERRAL RESMI REZTROID</span>
-            <span class="text-slate-400 font-mono">✦ AJAK TEMAN = +25 POIN</span>
-            <span class="text-brandLime font-mono">✦ DAPATKAN CANVA & CAPCUT GRATIS</span>
-            <span class="text-slate-400 font-mono">✦ 100% FREE REPLACE</span>
-          </div>
-          <div class="flex items-center space-x-6 shrink-0">
-            <span class="flex items-center gap-1.5"><span class="text-brandLime animate-pulse">✦</span> PROGRAM REFERRAL RESMI REZTROID</span>
-            <span class="text-slate-400 font-mono">✦ AJAK TEMAN = +25 POIN</span>
-            <span class="text-brandLime font-mono">✦ DAPATKAN CANVA & CAPCUT GRATIS</span>
-            <span class="text-slate-400 font-mono">✦ 100% FREE REPLACE</span>
-          </div>
+    <!-- 1. Top Running Marquee -->
+    <div onclick="openPromoModal()" class="cursor-pointer bg-black text-white text-[11px] sm:text-xs font-bold py-2 overflow-hidden border-b border-black select-none">
+      <div class="marquee-track flex items-center space-x-8">
+        <div class="flex items-center space-x-8 shrink-0">
+          <span class="flex items-center gap-1.5"><span class="text-brandLime animate-pulse">✦</span> PROGRAM REFERRAL RESMI REZTROID</span>
+          <span class="text-slate-400 font-mono">✦ AJAK TEMAN = +25 POIN</span>
+          <span class="text-brandLime font-mono">✦ DAPATKAN CANVA & CAPCUT GRATIS</span>
+          <span class="text-slate-400 font-mono">✦ 100% FREE REPLACE</span>
+        </div>
+        <div class="flex items-center space-x-8 shrink-0">
+          <span class="flex items-center gap-1.5"><span class="text-brandLime animate-pulse">✦</span> PROGRAM REFERRAL RESMI REZTROID</span>
+          <span class="text-slate-400 font-mono">✦ AJAK TEMAN = +25 POIN</span>
+          <span class="text-brandLime font-mono">✦ DAPATKAN CANVA & CAPCUT GRATIS</span>
+          <span class="text-slate-400 font-mono">✦ 100% FREE REPLACE</span>
         </div>
       </div>
+    </div>
 
-      <!-- 2. Header Interaktif -->
-      <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-100 px-4 py-3 flex items-center justify-between">
-        <div class="flex items-center gap-2 cursor-pointer active:scale-95 transition" onclick="showToast('Reztroid Member Hub v2.0')">
-          <div class="w-7 h-7 bg-brandPurple text-white font-extrabold text-xs rounded-lg flex items-center justify-center shadow-sm">
+    <!-- 2. Navbar Header Responsif -->
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+        <div class="flex items-center gap-2 cursor-pointer active:scale-95 transition" onclick="showToast('Reztroid Member Hub v2.5')">
+          <div class="w-8 h-8 bg-brandPurple text-white font-black text-sm rounded-xl flex items-center justify-center shadow-md shadow-brandPurple/20">
             R
           </div>
-          <div>
-            <span class="font-extrabold text-base tracking-tight text-darkText">reztroid<span class="text-brandPurple">®</span></span>
-            <span class="text-[9px] bg-brandPurpleLight text-brandPurple font-extrabold px-1.5 py-0.2 rounded ml-1">MEMBER</span>
+          <div class="flex items-center gap-1.5">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-darkText">reztroid<span class="text-brandPurple">®</span></span>
+            <span class="text-[10px] bg-brandPurpleLight text-brandPurple font-extrabold px-2 py-0.5 rounded-full">MEMBER HUB</span>
           </div>
         </div>
-        <button onclick="scrollToSection('checkPointSection')" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-3 py-1.5 rounded-full transition active:scale-90 flex items-center gap-1">
-          <span>🔍</span> Cek Poin
-        </button>
-      </header>
+        
+        <div class="flex items-center gap-3">
+          <button onclick="scrollToSection('checkPointSection')" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs sm:text-sm font-bold px-3.5 py-1.5 sm:py-2 rounded-full transition active:scale-95 flex items-center gap-1.5 shadow-sm">
+            <span>🔍</span> Cek Poin
+          </button>
+          <button onclick="scrollToSection('registerSection')" class="hidden sm:flex bg-brandPurple hover:bg-indigo-700 text-white text-xs sm:text-sm font-extrabold px-4 py-2 rounded-full transition active:scale-95 shadow-md shadow-brandPurple/20">
+            Daftar Member ↗
+          </button>
+        </div>
+      </div>
+    </header>
 
-      <!-- Main Body Container -->
-      <div class="p-4 space-y-4">
+    <!-- Main Content Area: Otomatis Responsif -->
+    <main class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
 
-        <!-- 3. Hero Card Utama -->
-        <div class="reveal-on-scroll bg-gradient-to-br from-[#5338FF] via-[#654AFF] to-[#7B58FF] rounded-3xl p-5 text-white shadow-lg shadow-brandPurple/20 relative overflow-hidden group">
-          <div class="inline-flex items-center gap-1 bg-white/20 backdrop-blur-sm text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-2.5 animate-float">
-            <span>🎁</span> REZTROID MEMBER REWARD
+      <!-- TOP SECTION: GRID 2 KOLOM PADA DESKTOP -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
+        
+        <!-- 3. Hero Card Utama (7 Kolom di Desktop) -->
+        <div class="lg:col-span-7 reveal-on-scroll bg-gradient-to-br from-[#5338FF] via-[#654AFF] to-[#7B58FF] rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-brandPurple/20 relative overflow-hidden flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm text-[10px] sm:text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-3.5 animate-float">
+              <span>🎁</span> REZTROID MEMBER REWARD
+            </div>
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight mb-2.5">
+              Ajak Teman Langganan, Panen Aplikasi Gratis.
+            </h1>
+            <p class="text-xs sm:text-sm text-white/85 leading-relaxed max-w-xl mb-6">
+              Dapatkan 25 poin setiap kali temanmu order menggunakan kodemu. Tukar langsung dengan Canva Pro, CapCut, Spotify, hingga saldo tunai e-Wallet!
+            </p>
           </div>
-          <h1 class="text-xl font-black leading-tight tracking-tight mb-1.5">
-            Ajak Teman Langganan, Panen Aplikasi Gratis.
-          </h1>
-          <p class="text-xs text-white/80 leading-relaxed mb-4">
-            Dapatkan 25 poin setiap kali temanmu order menggunakan kodemu. Tukar langsung dengan Canva Pro, CapCut, hingga saldo tunai.
-          </p>
-          <div class="flex gap-2">
-            <button onclick="scrollToSection('registerSection')" class="bg-brandLime text-black font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-sm hover:brightness-95 active:scale-90 transition">
+          
+          <div class="flex flex-wrap gap-2.5 pt-2">
+            <button onclick="scrollToSection('registerSection')" class="bg-brandLime text-black font-extrabold text-xs sm:text-sm px-5 py-2.5 sm:py-3 rounded-2xl shadow-md hover:brightness-95 active:scale-95 transition">
               Daftar Sekarang ↗
             </button>
-            <button onclick="scrollToSection('rewardSection')" class="bg-white/15 hover:bg-white/25 text-white font-bold text-xs px-3 py-2.5 rounded-xl active:scale-90 transition">
+            <button onclick="scrollToSection('rewardSection')" class="bg-white/15 hover:bg-white/25 text-white font-bold text-xs sm:text-sm px-4 py-2.5 sm:py-3 rounded-2xl active:scale-95 transition backdrop-blur-sm">
               Katalog Hadiah
             </button>
           </div>
         </div>
 
-        <!-- 4. Section: Input Cek Poin Real-Time Database -->
-        <section id="checkPointSection" class="reveal-on-scroll bg-slate-50 border border-slate-200/80 rounded-2xl p-4 space-y-3 transition duration-300">
-          <div class="flex justify-between items-center">
-            <div>
-              <h2 class="text-xs font-black uppercase tracking-wider text-slate-400">Status Poin Member</h2>
-              <p class="text-sm font-bold text-darkText">Ketik Nomor WA / Kode Referral</p>
+        <!-- 4. Section: Input Cek Poin Real-Time (5 Kolom di Desktop) -->
+        <section id="checkPointSection" class="lg:col-span-5 reveal-on-scroll bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-7 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <div>
+                <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">STATUS POIN REAL-TIME</span>
+                <h2 class="text-base sm:text-lg font-black text-darkText">Ketik No WA / Kode Referral</h2>
+              </div>
+              <span class="text-2xl animate-bounce">🎯</span>
             </div>
-            <span class="text-xl animate-bounce">🎯</span>
+            <p class="text-xs text-slate-500 mb-4">Cek saldo poin referral kamu dan lihat berapa teman lagi yang perlu diajak untuk klaim reward berikutnya.</p>
+
+            <div class="flex gap-2">
+              <input id="pointInput" type="text" placeholder="Contoh: RZT01 atau 0812..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold focus:outline-none focus:bg-white focus:ring-2 focus:ring-brandPurple/30 transition shadow-inner">
+              <button id="btnCheckPoint" onclick="checkPointHandler()" class="bg-brandPurple hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl shrink-0 transition active:scale-95 shadow-md shadow-brandPurple/20 flex items-center gap-1.5">
+                <span>Cek</span> <span>🚀</span>
+              </button>
+            </div>
           </div>
 
-          <div class="flex gap-2">
-            <input id="pointInput" type="text" placeholder="Contoh: RZT01 atau 0812..." class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-brandPurple/30 shadow-sm transition">
-            <button id="btnCheckPoint" onclick="checkPointHandler()" class="bg-brandPurple hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2 rounded-xl shrink-0 transition active:scale-90 shadow-sm flex items-center gap-1">
-              <span>Cek</span> <span>🚀</span>
-            </button>
-          </div>
-          <div class="flex items-center justify-between text-[10px] text-slate-400">
-            <span>💡 Coba tes ketik angka poin: <strong>25</strong>, <strong>50</strong>, <strong>100</strong></span>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+            <span>💡 Coba tes: <strong>25</strong>, <strong>50</strong>, <strong>100</strong></span>
             <button onclick="document.getElementById('pointInput').value='50'; checkPointHandler()" class="text-brandPurple font-bold underline hover:text-indigo-800">
               Isi Cepat 50 Pts
             </button>
           </div>
         </section>
 
-        <!-- 5. Section: Pilihan Hadiah Reward -->
-        <section id="rewardSection" class="reveal-on-scroll space-y-2.5">
-          <div class="flex items-center justify-between">
-            <div>
-              <h2 class="font-extrabold text-sm text-darkText">Pilihan Hadiah Tukar Poin</h2>
-              <p class="text-[10px] text-slate-400">Klik salah satu kartu untuk simulasi progres</p>
-            </div>
-            <span class="text-[10px] font-bold text-brandPurple bg-brandPurpleLight px-2 py-0.5 rounded-md">Real Reward</span>
-          </div>
+      </div>
 
-          <div id="rewardGrid" class="grid grid-cols-2 gap-2.5">
-            <!-- Otomatis di-render dari script -->
+      <!-- 5. Section: Pilihan Hadiah Reward (2 Kolom Mobile, 3 Kolom Tablet, 5 Kolom Desktop) -->
+      <section id="rewardSection" class="reveal-on-scroll space-y-3 pt-2">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+          <div>
+            <h2 class="font-black text-base sm:text-xl text-darkText">Pilihan Hadiah Tukar Poin</h2>
+            <p class="text-xs text-slate-400">Poin cukup? Klik salah satu kartu untuk simulasi progres & klaim reward</p>
           </div>
-        </section>
+          <span class="self-start sm:self-auto text-xs font-bold text-brandPurple bg-brandPurpleLight px-2.5 py-1 rounded-lg">Real Reward 100% Free</span>
+        </div>
 
+        <div id="rewardGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+          <!-- Otomatis di-render dari script -->
+        </div>
+      </section>
+
+      <!-- MIDDLE SECTION: 2 KOLOM PADA TABLET & DESKTOP -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+        
         <!-- 6. Section: Tata Cara Pendaftaran -->
-        <section class="reveal-on-scroll bg-white border border-slate-200/90 rounded-2xl p-4 space-y-3">
-          <div class="flex justify-between items-center">
-            <h2 class="font-extrabold text-xs uppercase tracking-wider text-slate-400">Tata Cara Pendaftaran</h2>
-            <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Mudah & Cepat</span>
+        <section class="reveal-on-scroll bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-6 space-y-3.5 shadow-sm">
+          <div class="flex justify-between items-center border-b border-slate-100 pb-2.5">
+            <h2 class="font-extrabold text-xs sm:text-sm uppercase tracking-wider text-slate-400">Tata Cara Pendaftaran</h2>
+            <span class="text-[10px] sm:text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full">Mudah & Cepat</span>
           </div>
 
-          <div class="space-y-2">
-            <div onclick="showToast('Langkah 1: Cukup lengkapi form pendaftaran di bawah.')" class="cursor-pointer active:scale-95 transition flex items-start gap-3 bg-slate-50 hover:bg-slate-100 p-2.5 rounded-xl border border-slate-100">
-              <span class="w-6 h-6 rounded-full bg-brandPurple text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+          <div class="space-y-2.5">
+            <div onclick="showToast('Langkah 1: Cukup lengkapi form pendaftaran di bawah.')" class="cursor-pointer active:scale-95 transition flex items-start gap-3.5 bg-slate-50 hover:bg-slate-100 p-3 rounded-2xl border border-slate-100">
+              <span class="w-7 h-7 rounded-xl bg-brandPurple text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5 shadow-sm">1</span>
               <div>
-                <h3 class="text-xs font-bold text-darkText">Isi Formulir Singkat</h3>
-                <p class="text-[11px] text-slate-500 leading-tight mt-0.5">Lengkapi nama dan nomor WhatsApp aktifmu pada form di bawah.</p>
+                <h3 class="text-xs sm:text-sm font-bold text-darkText">Isi Formulir Singkat</h3>
+                <p class="text-[11px] sm:text-xs text-slate-500 leading-tight mt-0.5">Lengkapi nama dan nomor WhatsApp aktifmu pada form di bawah.</p>
               </div>
             </div>
 
-            <div onclick="showToast('Langkah 2: Format promosi siap share otomatis dikirim admin.')" class="cursor-pointer active:scale-95 transition flex items-start gap-3 bg-slate-50 hover:bg-slate-100 p-2.5 rounded-xl border border-slate-100">
-              <span class="w-6 h-6 rounded-full bg-brandPurple text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+            <div onclick="showToast('Langkah 2: Format promosi siap share otomatis dikirim admin.')" class="cursor-pointer active:scale-95 transition flex items-start gap-3.5 bg-slate-50 hover:bg-slate-100 p-3 rounded-2xl border border-slate-100">
+              <span class="w-7 h-7 rounded-xl bg-brandPurple text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5 shadow-sm">2</span>
               <div>
-                <h3 class="text-xs font-bold text-darkText">Terima Kode Referral Unik</h3>
-                <p class="text-[11px] text-slate-500 leading-tight mt-0.5">Admin akan mengirimkan format promosi dan ID referral khusus milikmu.</p>
+                <h3 class="text-xs sm:text-sm font-bold text-darkText">Terima Kode Referral Unik</h3>
+                <p class="text-[11px] sm:text-xs text-slate-500 leading-tight mt-0.5">Admin akan mengirimkan format promosi dan ID referral khusus milikmu.</p>
               </div>
             </div>
 
-            <div onclick="showToast('Langkah 3: Poin langsung masuk saat temanmu sukses bertransaksi!')" class="cursor-pointer active:scale-95 transition flex items-start gap-3 bg-slate-50 hover:bg-slate-100 p-2.5 rounded-xl border border-slate-100">
-              <span class="w-6 h-6 rounded-full bg-brandPurple text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
+            <div onclick="showToast('Langkah 3: Poin langsung masuk saat temanmu sukses bertransaksi!')" class="cursor-pointer active:scale-95 transition flex items-start gap-3.5 bg-slate-50 hover:bg-slate-100 p-3 rounded-2xl border border-slate-100">
+              <span class="w-7 h-7 rounded-xl bg-brandPurple text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5 shadow-sm">3</span>
               <div>
-                <h3 class="text-xs font-bold text-darkText">Bagikan & Kumpulkan Poin</h3>
-                <p class="text-[11px] text-slate-500 leading-tight mt-0.5">Setiap ada teman yang order via kodemu, kamu otomatis dapat +25 poin.</p>
+                <h3 class="text-xs sm:text-sm font-bold text-darkText">Bagikan & Kumpulkan Poin</h3>
+                <p class="text-[11px] sm:text-xs text-slate-500 leading-tight mt-0.5">Setiap ada teman yang order via kodemu, kamu otomatis dapat +25 poin.</p>
               </div>
             </div>
           </div>
         </section>
 
         <!-- 7. Section: Syarat & Validasi Order -->
-        <section class="reveal-on-scroll bg-slate-50 border border-slate-200/80 rounded-2xl p-4 space-y-2">
-          <div class="flex items-center gap-2">
-            <span class="text-base">🛡️</span>
-            <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-600">Syarat Validasi Poin Berhasil</h2>
-          </div>
-          <ul class="text-[11px] text-slate-500 space-y-1.5 list-disc list-inside leading-relaxed pl-1">
-            <li>Teman yang diundang wajib melampirkan <strong>Kode Referral</strong> kamu saat transaksi.</li>
-            <li>Poin dihitung per transaksi yang <strong>sudah lunas & akun terkirim</strong>.</li>
-            <li>Poin berlaku aktif selamanya tanpa batas kedaluwarsa.</li>
-          </ul>
-        </section>
-
-        <!-- 8. Section: Form Pendaftaran Member -->
-        <section id="registerSection" class="reveal-on-scroll bg-white border-2 border-brandPurple/30 rounded-3xl p-4 space-y-3 shadow-md shadow-brandPurple/5">
-          <div class="text-center">
-            <span class="inline-block bg-brandLime text-black font-extrabold text-[9px] px-2 py-0.5 rounded-full mb-1">FREE REGISTRATION</span>
-            <h2 class="text-sm font-black text-darkText">Formulir Daftar Member</h2>
-            <p class="text-[11px] text-slate-400">Gratis tanpa biaya pendaftaran apapun</p>
-          </div>
-
-          <div class="space-y-2.5">
-            <div>
-              <label class="text-[10px] font-bold text-slate-500 uppercase">Nama Lengkap / Panggilan</label>
-              <input id="regName" type="text" placeholder="Misal: Dimas Anggara" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium focus:outline-none focus:bg-white focus:ring-2 focus:ring-brandPurple/20 transition">
+        <section class="reveal-on-scroll bg-slate-50 border border-slate-200/80 rounded-3xl p-5 sm:p-6 space-y-3.5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 border-b border-slate-200/60 pb-2.5 mb-2.5">
+              <span class="text-lg">🛡️</span>
+              <h2 class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-700">Syarat Validasi Poin Berhasil</h2>
             </div>
-
-            <div>
-              <label class="text-[10px] font-bold text-slate-500 uppercase">Nomor WhatsApp Aktif</label>
-              <input id="regPhone" type="tel" placeholder="08xxxxxxxxxx" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium focus:outline-none focus:bg-white focus:ring-2 focus:ring-brandPurple/20 transition">
-            </div>
-
-            <div>
-              <label class="text-[10px] font-bold text-slate-500 uppercase">Target Hadiah Pertama Kamu</label>
-              <select id="regTargetReward" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none transition">
-                <!-- Terisi otomatis -->
-              </select>
-            </div>
+            <ul class="text-xs sm:text-sm text-slate-600 space-y-2.5 list-disc list-inside leading-relaxed pl-1">
+              <li>Teman yang diundang wajib melampirkan <strong>Kode Referral</strong> kamu saat transaksi ke admin.</li>
+              <li>Poin dihitung per transaksi yang <strong>sudah lunas & akun terkirim</strong>.</li>
+              <li>Tidak ada batas minimal atau maksimal poin yang bisa kamu kumpulkan.</li>
+              <li>Poin berlaku aktif selamanya tanpa masa kedaluwarsa.</li>
+            </ul>
           </div>
-
-          <button onclick="submitRegistration()" class="w-full bg-brandPurple hover:bg-indigo-700 text-white font-extrabold text-xs py-3 rounded-xl shadow-md shadow-brandPurple/25 active:scale-95 transition flex items-center justify-center gap-1.5">
-            <span>✨</span> Kirim Pendaftaran via WhatsApp
-          </button>
+          
+          <div class="bg-white p-3 rounded-2xl border border-slate-200/80 text-[11px] sm:text-xs text-slate-500 flex items-center gap-2">
+            <span>💬</span> Butuh bantuan atau mau tanya-tanya? Hubungi admin WhatsApp kapan saja.
+          </div>
         </section>
 
       </div>
-    </div>
+
+      <!-- 8. Section: Form Pendaftaran Member -->
+      <section id="registerSection" class="reveal-on-scroll bg-white border-2 border-brandPurple/25 rounded-3xl p-6 sm:p-8 space-y-5 shadow-lg shadow-brandPurple/5 max-w-2xl mx-auto">
+        <div class="text-center space-y-1">
+          <span class="inline-block bg-brandLime text-black font-extrabold text-[10px] sm:text-xs px-3 py-1 rounded-full mb-1">FREE REGISTRATION</span>
+          <h2 class="text-lg sm:text-2xl font-black text-darkText">Formulir Daftar Member</h2>
+          <p class="text-xs sm:text-sm text-slate-400">Gratis tanpa biaya pendaftaran apapun. Langsung aktif!</p>
+        </div>
+
+        <div class="space-y-3.5">
+          <div>
+            <label class="text-[11px] sm:text-xs font-bold text-slate-600 uppercase">Nama Lengkap / Panggilan</label>
+            <input id="regName" type="text" placeholder="Misal: Dimas Anggara" class="w-full mt-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-medium focus:outline-none focus:bg-white focus:ring-2 focus:ring-brandPurple/30 transition">
+          </div>
+
+          <div>
+            <label class="text-[11px] sm:text-xs font-bold text-slate-600 uppercase">Nomor WhatsApp Aktif</label>
+            <input id="regPhone" type="tel" placeholder="08xxxxxxxxxx" class="w-full mt-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-medium focus:outline-none focus:bg-white focus:ring-2 focus:ring-brandPurple/30 transition">
+          </div>
+
+          <div>
+            <label class="text-[11px] sm:text-xs font-bold text-slate-600 uppercase">Target Hadiah Pertama Kamu</label>
+            <select id="regTargetReward" class="w-full mt-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold text-slate-700 focus:outline-none transition">
+              <!-- Terisi otomatis -->
+            </select>
+          </div>
+        </div>
+
+        <button onclick="submitRegistration()" class="w-full bg-brandPurple hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm py-3.5 rounded-2xl shadow-lg shadow-brandPurple/30 active:scale-95 transition flex items-center justify-center gap-2">
+          <span>✨</span> Kirim Pendaftaran via WhatsApp
+        </button>
+      </section>
+
+    </main>
 
     <!-- 9. Footer -->
-    <footer class="mt-6 border-t border-slate-200 p-4 bg-slate-50 text-center space-y-2">
-      <p class="text-[11px] text-slate-500 font-medium">
-        Made with <span class="text-rose-500">❤️</span> by <span class="font-bold text-darkText">reztroid</span>
-      </p>
-      <span class="text-[10px] text-slate-400 block font-mono">
-        © 2026 reztroid. Official Referral Hub.
-      </span>
+    <footer class="mt-8 border-t border-slate-200 p-6 bg-white/80 backdrop-blur-sm text-center space-y-2">
+      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+        <p class="font-medium">
+          Made with <span class="text-rose-500 animate-pulse">❤️</span> by <span class="font-extrabold text-darkText">reztroid</span>
+        </p>
+        <span class="font-mono text-[11px] text-slate-400">
+          © 2026 reztroid. Official Member & Affiliate Platform.
+        </span>
+      </div>
     </footer>
 
   </div>
 
   <!-- POPUP INTERAKTIF: PROGRES POIN -->
   <div id="pointModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-all">
-    <div class="bg-white rounded-3xl max-w-xs w-full p-4 modal-enter shadow-2xl space-y-3.5 text-center relative border border-slate-100">
-      <button onclick="closePointModal()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-700 text-sm font-bold w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition">✕</button>
+    <div class="bg-white rounded-3xl max-w-sm w-full p-5 sm:p-6 modal-enter shadow-2xl space-y-4 text-center relative border border-slate-100">
+      <button onclick="closePointModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-sm font-bold w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition">✕</button>
 
-      <div class="w-14 h-14 mx-auto rounded-2xl bg-brandPurpleLight flex items-center justify-center text-2xl shadow-inner animate-float">
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-brandPurpleLight flex items-center justify-center text-3xl shadow-inner animate-float">
         ⭐
       </div>
 
       <div>
-        <span class="text-[10px] uppercase tracking-wider font-extrabold text-brandPurple bg-indigo-50 px-2 py-0.5 rounded-full">STATUS POIN KAMU</span>
-        <h3 id="modalPointsTotal" class="text-2xl font-black text-darkText mt-1">50 Poin</h3>
-        <p id="modalReferralId" class="text-[10px] font-mono text-slate-400">ID: RZT-MEMBER</p>
+        <span class="text-[10px] uppercase tracking-wider font-extrabold text-brandPurple bg-indigo-50 px-2.5 py-0.5 rounded-full">STATUS POIN REAL-TIME</span>
+        <h3 id="modalPointsTotal" class="text-3xl font-black text-darkText mt-1.5">50 Poin</h3>
+        <p id="modalReferralId" class="text-xs font-mono text-slate-400 mt-0.5">ID: RZT-MEMBER</p>
       </div>
 
-      <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 text-left space-y-1.5">
-        <div class="flex justify-between items-center text-[11px] font-bold">
+      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-left space-y-2">
+        <div class="flex justify-between items-center text-xs font-bold">
           <span id="modalTargetName" class="text-slate-700">Target: Canva Pro</span>
           <span id="modalTargetPts" class="text-brandPurple font-extrabold">50 / 100 Pts</span>
         </div>
         
-        <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
           <div id="modalProgressBar" class="bg-brandPurple h-full rounded-full transition-all duration-700 ease-out" style="width: 0%;"></div>
         </div>
 
-        <p id="modalNextGoalText" class="text-[10px] text-slate-500 leading-snug pt-0.5">
+        <p id="modalNextGoalText" class="text-xs text-slate-500 leading-snug pt-1">
           Undang <strong>2 orang lagi</strong> untuk klaim Canva Pro 1 Tahun!
         </p>
       </div>
 
-      <div class="space-y-1.5">
-        <button onclick="claimRewardViaWA()" class="w-full bg-brandLime hover:brightness-95 text-black font-extrabold text-xs py-2.5 rounded-xl shadow active:scale-95 transition">
+      <div class="space-y-2 pt-1">
+        <button onclick="claimRewardViaWA()" class="w-full bg-brandLime hover:brightness-95 text-black font-extrabold text-xs sm:text-sm py-3 rounded-xl shadow active:scale-95 transition">
           🎁 Klaim Hadiah Sekarang
         </button>
-        <button onclick="shareReferralLink()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2 rounded-xl active:scale-95 transition">
+        <button onclick="shareReferralLink()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 rounded-xl active:scale-95 transition">
           Bagikan Format Promo
         </button>
       </div>
@@ -332,40 +358,32 @@
 
   <!-- Modal Promo Marquee -->
   <div id="promoModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-xs w-full p-4 modal-enter shadow-2xl space-y-3 text-center relative">
-      <button onclick="closePromoModal()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-700 text-sm font-bold w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center">✕</button>
-      <div class="w-12 h-12 bg-yellow-100 text-yellow-700 rounded-2xl flex items-center justify-center text-2xl mx-auto">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-5 sm:p-6 modal-enter shadow-2xl space-y-3.5 text-center relative">
+      <button onclick="closePromoModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-sm font-bold w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center">✕</button>
+      <div class="w-14 h-14 bg-yellow-100 text-yellow-700 rounded-2xl flex items-center justify-center text-3xl mx-auto">
         ✨
       </div>
-      <h3 class="text-sm font-black text-slate-900">Program Referral Reztroid</h3>
-      <p class="text-xs text-slate-600 leading-relaxed">
-        Setiap kali temanmu order menggunakan kodemu, kamu mendapatkan <strong>25 Poin</strong>. Kumpulkan poinnya dan tukarkan langsung dengan berbagai aplikasi premium!
+      <h3 class="text-base font-black text-slate-900">Program Referral Reztroid</h3>
+      <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+        Setiap kali temanmu order menggunakan kodemu, kamu mendapatkan <strong>25 Poin</strong>. Kumpulkan poinnya dan tukarkan langsung dengan berbagai aplikasi premium favoritmu!
       </p>
-      <button onclick="closePromoModal(); scrollToSection('registerSection')" class="w-full bg-brandPurple text-white font-bold text-xs py-2.5 rounded-xl active:scale-95 transition">
+      <button onclick="closePromoModal(); scrollToSection('registerSection')" class="w-full bg-brandPurple text-white font-extrabold text-xs sm:text-sm py-3 rounded-xl active:scale-95 transition shadow-md shadow-brandPurple/20">
         Daftar Sekarang
       </button>
     </div>
   </div>
 
   <!-- Toast Notification -->
-  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-darkText text-white text-[11px] font-bold px-4 py-2 rounded-full shadow-lg z-50 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2">
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-darkText text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-xl z-50 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2">
     Pesan Toast
   </div>
 
-  <!-- ==================== SCRIPT & LOGIC REAL-TIME ==================== -->
+  <!-- ==================== SCRIPT CONFIGURASI & DATA ==================== -->
   <script>
-    /*
-      ===============================================================
-      PENGATURAN ADMIN (BISA DIATUR SENDIRI)
-      ===============================================================
-    */
     const MEMBER_CONFIG = {
-      adminWA: "6281234567890", // Ganti dengan nomor WhatsApp kamu (format 62...)
-      pointsPerInvite: 25,       // 1 teman sukses order = 25 poin
+      adminWA: "6281234567890", // Ganti dengan nomor WhatsApp kamu (awali 62)
+      pointsPerInvite: 25,       
       
-      // Jika punya Google Sheet: Masukkan ID Spreadsheet-nya di sini
-      // Contoh: "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms"
-      // Jika dikosongkan (""), web otomatis beralih ke mode simulasi cerdas
       googleSheetId: "1oVf3MyMoUGIzpnbAuDVn_94aWPq_tYp3", 
       sheetName: "Sheet1",
 
@@ -404,10 +422,10 @@
         },
         {
           id: "rwd-cash",
-          name: "Saldo E-Wallet Rp 50.000",
+          name: "Saldo E-Wallet 50K",
           pointsNeeded: 200,
           icon: "💵",
-          desc: "Transfer langsung DANA / GoPay / Shopee",
+          desc: "Transfer DANA / GoPay / Shopee",
           badge: "TUNAI"
         }
       ]
@@ -416,7 +434,6 @@
     let currentUserPoints = 0;
     let currentNextReward = null;
 
-    // Render Hadiah
     function renderRewards() {
       const grid = document.getElementById("rewardGrid");
       const select = document.getElementById("regTargetReward");
@@ -424,21 +441,21 @@
       grid.innerHTML = MEMBER_CONFIG.rewards.map(rwd => {
         const friendCount = Math.ceil(rwd.pointsNeeded / MEMBER_CONFIG.pointsPerInvite);
         return `
-          <div onclick="triggerQuickCheck(${rwd.pointsNeeded}, '${rwd.name}')" class="cursor-pointer bg-white border border-slate-200 rounded-2xl p-3 flex flex-col justify-between shadow-sm relative group hover:shadow-md hover:border-slate-300 transition duration-200 active:scale-[0.96]">
-            <span class="absolute top-2.5 right-2.5 bg-indigo-50 text-brandPurple font-extrabold text-[9px] px-1.5 py-0.5 rounded-md">${rwd.badge}</span>
-            <div class="text-center mt-1">
-              <div class="w-11 h-11 bg-slate-50 border border-slate-100 rounded-xl mx-auto flex items-center justify-center text-xl mb-1.5 shadow-inner group-hover:scale-105 transition">
+          <div onclick="triggerQuickCheck(${rwd.pointsNeeded}, '${rwd.name}')" class="cursor-pointer bg-white border border-slate-200 rounded-3xl p-4 flex flex-col justify-between shadow-sm relative group hover:shadow-md hover:border-brandPurple/40 transition duration-200 active:scale-[0.97]">
+            <span class="absolute top-3 right-3 bg-indigo-50 text-brandPurple font-extrabold text-[9px] px-2 py-0.5 rounded-full">${rwd.badge}</span>
+            <div class="text-center mt-2">
+              <div class="w-12 h-12 bg-slate-50 border border-slate-100 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-2 shadow-inner group-hover:scale-110 transition duration-300">
                 ${rwd.icon}
               </div>
-              <h3 class="text-xs font-bold text-darkText truncate w-full">${rwd.name}</h3>
-              <p class="text-[10px] text-slate-400 line-clamp-1">${rwd.desc}</p>
+              <h3 class="text-xs sm:text-sm font-bold text-darkText truncate w-full">${rwd.name}</h3>
+              <p class="text-[10px] sm:text-xs text-slate-400 line-clamp-1 mt-0.5">${rwd.desc}</p>
             </div>
-            <div class="pt-2 border-t border-slate-100 mt-2 flex items-center justify-between">
+            <div class="pt-3 border-t border-slate-100 mt-3 flex items-center justify-between">
               <div>
-                <span class="text-xs font-black text-brandPurple block">${rwd.pointsNeeded} Pts</span>
-                <span class="text-[8px] text-slate-400">Ajak ${friendCount} teman</span>
+                <span class="text-xs sm:text-sm font-black text-brandPurple block">${rwd.pointsNeeded} Pts</span>
+                <span class="text-[9px] text-slate-400">Ajak ${friendCount} teman</span>
               </div>
-              <button class="bg-slate-100 group-hover:bg-brandPurple group-hover:text-white text-slate-700 text-[10px] font-bold px-2 py-1 rounded-lg transition">
+              <button class="bg-slate-100 group-hover:bg-brandPurple group-hover:text-white text-slate-700 text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-xl transition">
                 Pilih
               </button>
             </div>
@@ -449,7 +466,6 @@
       select.innerHTML = MEMBER_CONFIG.rewards.map(r => `<option value="${r.name}">${r.name} (${r.pointsNeeded} Pts)</option>`).join('');
     }
 
-    // Logic Cek Poin Real-Time (Google Sheets / Fallback)
     async function checkPointHandler() {
       const val = document.getElementById("pointInput").value.trim();
       if (!val) {
@@ -460,14 +476,12 @@
       const btn = document.getElementById("btnCheckPoint");
       btn.classList.add("opacity-70", "pointer-events-none");
 
-      // 1. Jika terhubung ke Google Sheet ID
       if (MEMBER_CONFIG.googleSheetId) {
         showToast("Menghubungkan ke database...");
         try {
           const res = await fetch(`https://opensheet.elk.sh/${MEMBER_CONFIG.googleSheetId}/${MEMBER_CONFIG.sheetName}`);
           const data = await res.json();
           
-          // Cari baris yang kolom 'kode' atau 'wa' nya cocok
           const member = data.find(m => 
             String(m.kode || '').toLowerCase() === val.toLowerCase() ||
             String(m.wa || '').toLowerCase() === val.toLowerCase()
@@ -481,17 +495,15 @@
           }
         } catch (err) {
           console.error(err);
-          showToast("Gagal mengambil data sheet, coba lagi!");
+          let fallbackPts = parseInt(val);
+          if (isNaN(fallbackPts)) fallbackPts = 50;
+          showPointInteractiveModal(fallbackPts, val);
         } finally {
           btn.classList.remove("opacity-70", "pointer-events-none");
         }
-      } 
-      // 2. Mode Simulasi Cepat (Jika belum punya Google Sheet)
-      else {
+      } else {
         let points = parseInt(val);
-        if (isNaN(points)) {
-          points = 50; // default simulasi jika mengetik teks biasa
-        }
+        if (isNaN(points)) points = 50;
         showPointInteractiveModal(points, val);
         btn.classList.remove("opacity-70", "pointer-events-none");
       }
@@ -543,7 +555,6 @@
       document.getElementById("promoModal").classList.add("hidden");
     }
 
-    // Pendaftaran WhatsApp
     function submitRegistration() {
       const name = document.getElementById("regName").value.trim();
       const phone = document.getElementById("regPhone").value.trim();
@@ -563,7 +574,6 @@
       window.open(`https://wa.me/${MEMBER_CONFIG.adminWA}?text=${text}`, '_blank');
     }
 
-    // Klaim Hadiah ke Admin
     function claimRewardViaWA() {
       const text = `Halo Admin Reztroid, saya mau klaim reward poin member:%0A%0A`
         + `• *Total Poin Saya:* ${currentUserPoints} Pts%0A`
@@ -597,16 +607,9 @@
       }, 2400);
     }
 
-    // Inisialisasi Data
     renderRewards();
 
-    // ==================== INTERSECTION OBSERVER: SCROLL REVEAL VIEWPORT ====================
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.12
-    };
-
+    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -620,7 +623,6 @@
       revealObserver.observe(el);
     });
 
-    // ==================== ANIMASI BINTANG JATUH ====================
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
@@ -632,11 +634,11 @@
     });
 
     const staticStars = [];
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 55; i++) {
       staticStars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * 1.4 + 0.6,
+        size: Math.random() * 1.5 + 0.6,
         alpha: Math.random(),
         speed: Math.random() * 0.02 + 0.005
       });
@@ -647,8 +649,8 @@
     function resetShootingStar() {
       shootingStar.x = Math.random() * width;
       shootingStar.y = Math.random() * (height * 0.45);
-      shootingStar.len = Math.random() * 80 + 40;
-      shootingStar.speed = Math.random() * 7 + 5;
+      shootingStar.len = Math.random() * 90 + 50;
+      shootingStar.speed = Math.random() * 8 + 6;
       shootingStar.size = Math.random() * 1.5 + 1;
       shootingStar.active = true;
     }

@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reztroid Member Hub - Ajak Teman & Dapatkan Reward</title>
-    <meta property="og:title" content="Reztroid Member Hub — Ajak Teman & Panen Hadiah">
-    <meta property="og:description" content="Kumpulkan poin referral dan tukarkan langsung dengan Canva Pro, CapCut, hingga saldo e-Wallet!">
-    <meta property="og:image" content="https://heltskelt.vercel.app/og-image.jpg">
-  
+  <title>Reztroid Member Hub — Ajak Teman & Dapatkan Reward</title>
+
+  <!-- Open Graph Meta Tags (Untuk Preview WhatsApp & Sosmed) -->
+  <meta property="og:title" content="Reztroid Member Hub — Ajak Teman & Panen Hadiah">
+  <meta property="og:description" content="Kumpulkan poin referral dan tukarkan langsung dengan Canva Pro, CapCut, hingga saldo tunai e-Wallet!">
+  <meta property="og:image" content="https://heltskelt.vercel.app/og-image.jpg">
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Font: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
+
   <script>
     tailwind.config = {
       theme: {
@@ -94,7 +96,7 @@
 
   <div class="relative z-10 w-full flex flex-col min-h-screen justify-between">
 
-    <!-- 1. Top Running Marquee -->
+    <!-- Top Running Marquee -->
     <div onclick="openPromoModal()" class="cursor-pointer bg-black text-white text-[11px] sm:text-xs font-bold py-2 overflow-hidden border-b border-black select-none">
       <div class="marquee-track flex items-center space-x-8">
         <div class="flex items-center space-x-8 shrink-0">
@@ -112,7 +114,7 @@
       </div>
     </div>
 
-    <!-- 2. Navbar Header Responsif -->
+    <!-- Header Navbar -->
     <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
         <div class="flex items-center gap-2 cursor-pointer active:scale-95 transition" onclick="showToast('Reztroid Member Hub v2.5')">
@@ -136,13 +138,12 @@
       </div>
     </header>
 
-    <!-- Main Content Area: Otomatis Responsif -->
     <main class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
 
-      <!-- TOP SECTION: GRID 2 KOLOM PADA DESKTOP -->
+      <!-- Top Section -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
         
-        <!-- 3. Hero Card Utama (7 Kolom di Desktop) -->
+        <!-- Hero Card -->
         <div class="lg:col-span-7 reveal-on-scroll bg-gradient-to-br from-[#5338FF] via-[#654AFF] to-[#7B58FF] rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-brandPurple/20 relative overflow-hidden flex flex-col justify-between">
           <div>
             <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm text-[10px] sm:text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-3.5 animate-float">
@@ -166,7 +167,7 @@
           </div>
         </div>
 
-        <!-- 4. Section: Input Cek Poin Real-Time (5 Kolom di Desktop) -->
+        <!-- Section: Cek Poin Real-Time -->
         <section id="checkPointSection" class="lg:col-span-5 reveal-on-scroll bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-7 shadow-sm flex flex-col justify-between space-y-4">
           <div>
             <div class="flex justify-between items-center mb-3">
@@ -187,16 +188,16 @@
           </div>
 
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
-            <span>💡 Coba tes: <strong>25</strong>, <strong>50</strong>, <strong>100</strong></span>
-            <button onclick="document.getElementById('pointInput').value='50'; checkPointHandler()" class="text-brandPurple font-bold underline hover:text-indigo-800">
-              Isi Cepat 50 Pts
+            <span>💡 Coba tes: <strong>RZT01</strong> atau nomor WA</span>
+            <button onclick="document.getElementById('pointInput').value='RZT01'; checkPointHandler()" class="text-brandPurple font-bold underline hover:text-indigo-800">
+              Isi Cepat RZT01
             </button>
           </div>
         </section>
 
       </div>
 
-      <!-- 5. Section: Pilihan Hadiah Reward (2 Kolom Mobile, 3 Kolom Tablet, 5 Kolom Desktop) -->
+      <!-- Section: Katalog Hadiah -->
       <section id="rewardSection" class="reveal-on-scroll space-y-3 pt-2">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
           <div>
@@ -206,15 +207,13 @@
           <span class="self-start sm:self-auto text-xs font-bold text-brandPurple bg-brandPurpleLight px-2.5 py-1 rounded-lg">Real Reward 100% Free</span>
         </div>
 
-        <div id="rewardGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-          <!-- Otomatis di-render dari script -->
-        </div>
+        <div id="rewardGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4"></div>
       </section>
 
-      <!-- MIDDLE SECTION: 2 KOLOM PADA TABLET & DESKTOP -->
+      <!-- Section Informasi -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
         
-        <!-- 6. Section: Tata Cara Pendaftaran -->
+        <!-- Tata Cara Pendaftaran -->
         <section class="reveal-on-scroll bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-6 space-y-3.5 shadow-sm">
           <div class="flex justify-between items-center border-b border-slate-100 pb-2.5">
             <h2 class="font-extrabold text-xs sm:text-sm uppercase tracking-wider text-slate-400">Tata Cara Pendaftaran</h2>
@@ -248,7 +247,7 @@
           </div>
         </section>
 
-        <!-- 7. Section: Syarat & Validasi Order -->
+        <!-- Syarat & Validasi Order -->
         <section class="reveal-on-scroll bg-slate-50 border border-slate-200/80 rounded-3xl p-5 sm:p-6 space-y-3.5 flex flex-col justify-between">
           <div>
             <div class="flex items-center gap-2 border-b border-slate-200/60 pb-2.5 mb-2.5">
@@ -270,7 +269,7 @@
 
       </div>
 
-      <!-- 8. Section: Form Pendaftaran Member -->
+      <!-- Formulir Pendaftaran Member -->
       <section id="registerSection" class="reveal-on-scroll bg-white border-2 border-brandPurple/25 rounded-3xl p-6 sm:p-8 space-y-5 shadow-lg shadow-brandPurple/5 max-w-2xl mx-auto">
         <div class="text-center space-y-1">
           <span class="inline-block bg-brandLime text-black font-extrabold text-[10px] sm:text-xs px-3 py-1 rounded-full mb-1">FREE REGISTRATION</span>
@@ -291,20 +290,18 @@
 
           <div>
             <label class="text-[11px] sm:text-xs font-bold text-slate-600 uppercase">Target Hadiah Pertama Kamu</label>
-            <select id="regTargetReward" class="w-full mt-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold text-slate-700 focus:outline-none transition">
-              <!-- Terisi otomatis -->
-            </select>
+            <select id="regTargetReward" class="w-full mt-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold text-slate-700 focus:outline-none transition"></select>
           </div>
         </div>
 
-        <button onclick="submitRegistration()" class="w-full bg-brandPurple hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm py-3.5 rounded-2xl shadow-lg shadow-brandPurple/30 active:scale-95 transition flex items-center justify-center gap-2">
+        <button onclick="submitRegistration()" class="w-full bg-brandPurple hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm py-3.5 rounded-2xl shadow-lg shadow-brandPurple/30 active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer">
           <span>✨</span> Kirim Pendaftaran via WhatsApp
         </button>
       </section>
 
     </main>
 
-    <!-- 9. Footer -->
+    <!-- Footer -->
     <footer class="mt-8 border-t border-slate-200 p-6 bg-white/80 backdrop-blur-sm text-center space-y-2">
       <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
         <p class="font-medium">
@@ -318,10 +315,54 @@
 
   </div>
 
-  <!-- POPUP INTERAKTIF: PROGRES POIN -->
-  <div id="pointModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-all">
+  <!-- ==================== POP-UP WELCOME / SOSMED ==================== -->
+  <div id="welcomeModal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-[9999] flex items-center justify-center p-4 transition-all duration-300">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 modal-enter shadow-2xl space-y-4 text-center relative border border-slate-100">
+      
+      <!-- Tombol Tutup (Silang) -->
+      <button type="button" onclick="closeWelcomeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-sm font-bold w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition cursor-pointer">
+        ✕
+      </button>
+
+      <!-- Badge Icon Promosi -->
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-brandPurpleLight flex items-center justify-center text-3xl shadow-inner animate-bounce">
+        📢
+      </div>
+
+      <!-- Judul & Teks Pengumuman -->
+      <div class="space-y-1.5">
+        <span class="text-[10px] uppercase tracking-wider font-extrabold text-brandPurple bg-indigo-50 px-2.5 py-0.5 rounded-full">
+          PENGUMUMAN RESMI
+        </span>
+        <h3 class="text-lg font-black text-darkText">Selamat Datang di Reztroid!</h3>
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Dapatkan update promo flash sale, diskon langganan aplikasi, dan info reward referral terbaru lewat media sosial kami.
+        </p>
+      </div>
+
+      <!-- Tombol Sosial Media & Channel -->
+      <div class="space-y-2 pt-1">
+        <a href="https://instagram.com/reztroid" target="_blank" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-95 text-white font-extrabold text-xs py-2.5 rounded-xl shadow flex items-center justify-center gap-2 active:scale-95 transition">
+          <span>📸</span> Follow Instagram Kami
+        </a>
+
+        <a href="https://wa.me/6281299961001" target="_blank" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs py-2.5 rounded-xl shadow flex items-center justify-center gap-2 active:scale-95 transition">
+          <span>💬</span> Chat Admin WhatsApp
+        </a>
+
+        <!-- Tombol Lanjut Masuk Web -->
+        <button type="button" onclick="closeWelcomeModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2.5 rounded-xl active:scale-95 transition mt-2 cursor-pointer">
+          Lanjut ke Member Hub ↗
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- POP-UP INTERAKTIF STATUS POIN -->
+  <div id="pointModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9995] hidden flex items-center justify-center p-4 transition-all">
     <div class="bg-white rounded-3xl max-w-sm w-full p-5 sm:p-6 modal-enter shadow-2xl space-y-4 text-center relative border border-slate-100">
-      <button onclick="closePointModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-sm font-bold w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition">✕</button>
+      <button onclick="closePointModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-sm font-bold w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition cursor-pointer">✕</button>
 
       <div class="w-16 h-16 mx-auto rounded-2xl bg-brandPurpleLight flex items-center justify-center text-3xl shadow-inner animate-float">
         ⭐
@@ -349,28 +390,26 @@
       </div>
 
       <div class="space-y-2 pt-1">
-        <button onclick="claimRewardViaWA()" class="w-full bg-brandLime hover:brightness-95 text-black font-extrabold text-xs sm:text-sm py-3 rounded-xl shadow active:scale-95 transition">
+        <button onclick="claimRewardViaWA()" class="w-full bg-brandLime hover:brightness-95 text-black font-extrabold text-xs sm:text-sm py-3 rounded-xl shadow active:scale-95 transition cursor-pointer">
           🎁 Klaim Hadiah Sekarang
         </button>
-        <button onclick="shareReferralLink()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 rounded-xl active:scale-95 transition">
+        <button onclick="shareReferralLink()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 rounded-xl active:scale-95 transition cursor-pointer">
           Bagikan Format Promo
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Modal Promo Marquee -->
-  <div id="promoModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+  <!-- POP-UP PROMO MARQUEE -->
+  <div id="promoModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9995] hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-5 sm:p-6 modal-enter shadow-2xl space-y-3.5 text-center relative">
-      <button onclick="closePromoModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-sm font-bold w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center">✕</button>
-      <div class="w-14 h-14 bg-yellow-100 text-yellow-700 rounded-2xl flex items-center justify-center text-3xl mx-auto">
-        ✨
-      </div>
+      <button onclick="closePromoModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-sm font-bold w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center cursor-pointer">✕</button>
+      <div class="w-14 h-14 bg-yellow-100 text-yellow-700 rounded-2xl flex items-center justify-center text-3xl mx-auto">✨</div>
       <h3 class="text-base font-black text-slate-900">Program Referral Reztroid</h3>
       <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
         Setiap kali temanmu order menggunakan kodemu, kamu mendapatkan <strong>25 Poin</strong>. Kumpulkan poinnya dan tukarkan langsung dengan berbagai aplikasi premium favoritmu!
       </p>
-      <button onclick="closePromoModal(); scrollToSection('registerSection')" class="w-full bg-brandPurple text-white font-extrabold text-xs sm:text-sm py-3 rounded-xl active:scale-95 transition shadow-md shadow-brandPurple/20">
+      <button onclick="closePromoModal(); scrollToSection('registerSection')" class="w-full bg-brandPurple text-white font-extrabold text-xs sm:text-sm py-3 rounded-xl active:scale-95 transition shadow-md shadow-brandPurple/20 cursor-pointer">
         Daftar Sekarang
       </button>
     </div>
@@ -381,12 +420,80 @@
     Pesan Toast
   </div>
 
-  <!-- ==================== SCRIPT CONFIGURASI & DATA ==================== -->
+  <!-- ==================== MINI LIVE CHAT WIDGET INTERAKTIF (LUCU & IMUT) ==================== -->
+  <div id="miniChatWidget" class="fixed bottom-5 right-5 z-[9998] flex flex-col items-end">
+    
+    <!-- Jendela Chat Mini (Pop-up mungil) -->
+    <div id="miniChatBox" class="hidden mb-3 w-[290px] sm:w-[320px] bg-white rounded-3xl shadow-2xl border border-slate-100 p-4 transition-all duration-300 transform origin-bottom-right space-y-3">
+      
+      <!-- Header Mini Box -->
+      <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+        <div class="flex items-center gap-2">
+          <div class="relative">
+            <div class="w-8 h-8 rounded-full bg-brandPurpleLight flex items-center justify-center text-base shadow-sm">
+              👾
+            </div>
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full animate-ping"></span>
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+          </div>
+          <div>
+            <h4 class="text-xs font-black text-darkText flex items-center gap-1">
+              Admin Reztroid <span class="text-[9px] text-brandPurple font-extrabold bg-indigo-50 px-1.5 py-0.5 rounded-full">Fast Resp</span>
+            </h4>
+            <p class="text-[10px] text-emerald-600 font-bold">Online • Siap bantu kamu ✨</p>
+          </div>
+        </div>
+        <button onclick="toggleMiniChat()" class="text-slate-400 hover:text-slate-600 text-xs w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition cursor-pointer">
+          ✕
+        </button>
+      </div>
+
+      <!-- Bubble Pesan Masuk Lucu -->
+      <div class="space-y-2">
+        <div class="bg-slate-50 rounded-2xl rounded-tl-sm p-3 text-[11px] text-slate-700 leading-relaxed border border-slate-100">
+          Halo kak! Mau tanya stok Canva/CapCut, cek poin referral, atau klaim reward? Boleh tanya langsung di sini yaa 👇🥰
+        </div>
+
+        <!-- Quick Chips / Opsi Cepat Sekali Klik -->
+        <div class="flex flex-wrap gap-1.5">
+          <button onclick="sendQuickChat('Halo admin, cara tukar poin gimana ya?')" class="text-[10px] font-bold bg-indigo-50 hover:bg-indigo-100 text-brandPurple px-2.5 py-1 rounded-full transition active:scale-95 cursor-pointer">
+            🎁 Cara tukar poin?
+          </button>
+          <button onclick="sendQuickChat('Halo admin, mau tanya stok aplikasi yang ready')" class="text-[10px] font-bold bg-indigo-50 hover:bg-indigo-100 text-brandPurple px-2.5 py-1 rounded-full transition active:scale-95 cursor-pointer">
+            ⚡ List stok ready
+          </button>
+          <button onclick="sendQuickChat('Halo admin Reztroid, saya mau tanya orderan saya')" class="text-[10px] font-bold bg-indigo-50 hover:bg-indigo-100 text-brandPurple px-2.5 py-1 rounded-full transition active:scale-95 cursor-pointer">
+            📱 Tanya admin
+          </button>
+        </div>
+      </div>
+
+      <!-- Kolom Ketik Mini & Tombol Kirim -->
+      <div class="flex items-center gap-1.5 pt-1">
+        <input id="chatInputMini" type="text" placeholder="Ketik pesan kamu..." onkeypress="handleChatEnter(event)" class="w-full bg-slate-100 border-none rounded-xl px-3 py-2 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brandPurple/30 transition">
+        <button onclick="submitMiniChat()" class="bg-brandPurple hover:bg-indigo-700 text-white p-2 rounded-xl shrink-0 active:scale-90 transition shadow-md shadow-brandPurple/20 flex items-center justify-center cursor-pointer">
+          <svg class="w-3.5 h-3.5 rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Tombol Bulat Gelembung (Floating Trigger) -->
+    <button onclick="toggleMiniChat()" class="group relative flex items-center gap-2 bg-darkText hover:bg-black text-white p-3 sm:px-4 sm:py-3 rounded-full shadow-2xl border-2 border-white/20 active:scale-90 transition-all duration-300 cursor-pointer">
+      <span class="text-lg group-hover:rotate-12 transition transform">💬</span>
+      <span class="hidden sm:inline text-xs font-extrabold tracking-wide">Tanya Admin</span>
+      <span class="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+    </button>
+
+  </div>
+
+  <!-- ==================== SCRIPT CONFIGURASI & LOGIC ==================== -->
   <script>
     const MEMBER_CONFIG = {
-      adminWA: "6281299961001", // Ganti dengan nomor WhatsApp kamu (awali 62)
+      adminWA: "6281299961001",
       pointsPerInvite: 25,       
-      
       googleSheetId: "1gE2YvlI6P8rpcXzL6eBRrMblr3-IaiD3ybXZljlmk9M", 
       sheetName: "Sheet1",
 
@@ -410,14 +517,6 @@
         {
           id: "rwd-spotify",
           name: "Spotify Premium 1 Bulan",
-          pointsNeeded: 100,
-          icon: "🎵",
-          desc: "Akun Pribadi Anti Hold",
-          badge: "BEST"
-        },
-        {
-          id: "rwd-Prime",
-          name: "Prime Premium 1 Bulan",
           pointsNeeded: 100,
           icon: "🎵",
           desc: "Akun Pribadi Anti Hold",
@@ -490,7 +589,7 @@
       if (MEMBER_CONFIG.googleSheetId) {
         showToast("Menghubungkan ke database...");
         try {
-          const res = await fetch(`https://opensheet.elk.sh/${MEMBER_CONFIG.googleSheetId}/${MEMBER_CONFIG.sheetName}`);
+          const res = await fetch(`https://opensheet.elk.sh/${MEMBER_CONFIG.googleSheetId}/${MEMBER_CONFIG.sheetName}?t=${Date.now()}`);
           const data = await res.json();
           
           const member = data.find(m => 
@@ -558,6 +657,14 @@
       document.getElementById("pointModal").classList.add("hidden");
     }
 
+    /* Penutupan modal pengumuman secara tuntas */
+    function closeWelcomeModal() {
+      const modal = document.getElementById("welcomeModal");
+      if (modal) {
+        modal.style.setProperty("display", "none", "important");
+      }
+    }
+
     function openPromoModal() {
       document.getElementById("promoModal").classList.remove("hidden");
     }
@@ -616,6 +723,41 @@
       setTimeout(() => {
         toast.classList.add("opacity-0", "translate-y-2", "pointer-events-none");
       }, 2400);
+    }
+
+    /* ==================== LOGIKA MINI LIVE CHAT ==================== */
+    function toggleMiniChat() {
+      const box = document.getElementById("miniChatBox");
+      if (box.classList.contains("hidden")) {
+        box.classList.remove("hidden");
+        box.classList.add("modal-enter");
+        document.getElementById("chatInputMini").focus();
+      } else {
+        box.classList.add("hidden");
+      }
+    }
+
+    function submitMiniChat() {
+      const input = document.getElementById("chatInputMini");
+      const msg = input.value.trim();
+      if (!msg) return;
+      
+      const url = `https://wa.me/${MEMBER_CONFIG.adminWA}?text=${encodeURIComponent(msg)}`;
+      window.open(url, "_blank");
+      input.value = "";
+      toggleMiniChat();
+    }
+
+    function sendQuickChat(presetText) {
+      const url = `https://wa.me/${MEMBER_CONFIG.adminWA}?text=${encodeURIComponent(presetText)}`;
+      window.open(url, "_blank");
+      toggleMiniChat();
+    }
+
+    function handleChatEnter(e) {
+      if (e.key === "Enter") {
+        submitMiniChat();
+      }
     }
 
     renderRewards();
@@ -715,157 +857,6 @@
     }
 
     animate();
-  </script>
-<!-- ==================== POP-UP WELCOME / INFO SOSMED ==================== -->
-  <div id="welcomeModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-all duration-300">
-    <div class="bg-white rounded-3xl max-w-sm w-full p-6 modal-enter shadow-2xl space-y-4 text-center relative border border-slate-100">
-      
-      <!-- Tombol Tutup (Silang) -->
-      <button onclick="closeWelcomeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-sm font-bold w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition">
-        ✕
-      </button>
-
-      <!-- Badge Icon / Gambar Promosi -->
-      <div class="w-16 h-16 mx-auto rounded-2xl bg-brandPurpleLight flex items-center justify-center text-3xl shadow-inner animate-float">
-        📢
-      </div>
-
-      <!-- Judul & Teks Pengumuman -->
-      <div class="space-y-1.5">
-        <span class="text-[10px] uppercase tracking-wider font-extrabold text-brandPurple bg-indigo-50 px-2.5 py-0.5 rounded-full">
-          PENGUMUMAN RESMI
-        </span>
-        <h3 class="text-lg font-black text-darkText">Selamat Datang di Reztroid!</h3>
-        <p class="text-xs text-slate-500 leading-relaxed">
-          Dapatkan update promo flash sale, diskon langganan aplikasi, dan info reward referral terbaru lewat media sosial kami.
-        </p>
-      </div>
-
-      <!-- Tombol Sosial Media & Channel -->
-      <div class="space-y-2 pt-1">
-        <!-- Tombol Instagram -->
-        <a href="https://instagram.com/heyreztroid" target="_blank" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-95 text-white font-extrabold text-xs py-2.5 rounded-xl shadow flex items-center justify-center gap-2 active:scale-95 transition">
-          <span>📸</span> Follow Instagram Kami
-        </a>
-
-        <!-- Tombol Saluran / Chat WhatsApp -->
-        <a href="https://wa.me/6281299961001" target="_blank" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs py-2.5 rounded-xl shadow flex items-center justify-center gap-2 active:scale-95 transition">
-          <span>💬</span> Chat Admin WhatsApp
-        </a>
-
-        <!-- Tombol Lanjut Masuk Web -->
-        <button onclick="closeWelcomeModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2.5 rounded-xl active:scale-95 transition mt-2">
-          Lanjut ke Member Hub ↗
-        </button>
-      </div>
-
-    </div>
-  </div>
-<script>
-   function closeWelcomeModal() {
-  const modal = document.getElementById("welcomeModal");
-  if (modal) {
-    modal.style.setProperty("display", "none", "important");
-  }
-}
-  <!-- ==================== MINI LIVE CHAT WIDGET INTERAKTIF ==================== -->
-<div id="miniChatWidget" class="fixed bottom-5 right-5 z-[9997] flex flex-col items-end">
-  
-  <!-- Jendela Chat Mini (Pop-up mungil) -->
-  <div id="miniChatBox" class="hidden mb-3 w-[290px] sm:w-[310px] bg-white rounded-3xl shadow-2xl border border-slate-100 p-4 transition-all duration-300 transform origin-bottom-right space-y-3">
-    
-    <!-- Header Mini Box -->
-    <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
-      <div class="flex items-center gap-2">
-        <div class="relative">
-          <div class="w-8 h-8 rounded-full bg-brandPurpleLight flex items-center justify-center text-base">
-            👾
-          </div>
-          <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full animate-ping"></span>
-          <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
-        </div>
-        <div>
-          <h4 class="text-xs font-black text-darkText flex items-center gap-1">
-            Admin Reztroid <span class="text-[10px] text-brandPurple font-extrabold bg-indigo-50 px-1.5 py-0.2 rounded-full">Fast Resp</span>
-          </h4>
-          <p class="text-[10px] text-emerald-600 font-bold">Online • Siap bantu kamu ✨</p>
-        </div>
-      </div>
-      <button onclick="toggleMiniChat()" class="text-slate-400 hover:text-slate-600 text-xs w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center active:scale-90 transition">
-        ✕
-      </button>
-    </div>
-
-    <!-- Bubble Pesan Masuk Lucu -->
-    <div class="space-y-2">
-      <div class="bg-slate-50 rounded-2xl rounded-tl-sm p-2.5 text-[11px] text-slate-700 leading-relaxed border border-slate-100">
-        Halo kak! Mau tanya stok Canva/CapCut, cek poin referral, atau klaim reward? Boleh tanya di sini yaa 👇🥰
-      </div>
-
-      <!-- Quick Chips / Opsi Cepat Sekali Klik -->
-      <div class="flex flex-wrap gap-1.5">
-        <button onclick="sendQuickChat('Halo admin, cara tukar poin gimana ya?')" class="text-[10px] font-bold bg-indigo-50 hover:bg-indigo-100 text-brandPurple px-2.5 py-1 rounded-full transition active:scale-95">
-          🎁 Cara tukar poin?
-        </button>
-        <button onclick="sendQuickChat('Halo admin, mau tanya stok aplikasi yang ready')" class="text-[10px] font-bold bg-indigo-50 hover:bg-indigo-100 text-brandPurple px-2.5 py-1 rounded-full transition active:scale-95">
-          ⚡ List stok ready
-        </button>
-      </div>
-    </div>
-
-    <!-- Kolom Ketik Mini & Tombol Kirim -->
-    <div class="flex items-center gap-1.5 pt-1">
-      <input id="chatInputMini" type="text" placeholder="Ketik pesan kamu..." class="w-full bg-slate-100 border-none rounded-xl px-3 py-2 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brandPurple/30 transition">
-      <button onclick="submitMiniChat()" class="bg-brandPurple hover:bg-indigo-700 text-white p-2 rounded-xl shrink-0 active:scale-90 transition shadow-md shadow-brandPurple/20 flex items-center justify-center">
-        <svg class="w-3.5 h-3.5 rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-        </svg>
-      </button>
-    </div>
-
-  </div>
-
-  <!-- Tombol Bulat Gelembung (Floating Trigger) -->
-  <button onclick="toggleMiniChat()" class="group relative flex items-center gap-2 bg-darkText hover:bg-black text-white p-3 sm:px-4 sm:py-3 rounded-full shadow-2xl border-2 border-white/20 active:scale-90 transition-all duration-300">
-    <span class="text-lg group-hover:rotate-12 transition transform">💬</span>
-    <span class="hidden sm:inline text-xs font-extrabold tracking-wide">Tanya Admin</span>
-    
-    <!-- Dot Online Hijau -->
-    <span class="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
-  </button>
-
-</div>
-
-<script>
-  function toggleMiniChat() {
-    const box = document.getElementById("miniChatBox");
-    if (box.classList.contains("hidden")) {
-      box.classList.remove("hidden");
-      box.classList.add("modal-enter");
-      document.getElementById("chatInputMini").focus();
-    } else {
-      box.classList.add("hidden");
-    }
-  }
-
-  function submitMiniChat() {
-    const input = document.getElementById("chatInputMini");
-    const msg = input.value.trim();
-    if (!msg) return;
-    
-    const adminWA = "6281299961001";
-    const url = `https://wa.me/${adminWA}?text=${encodeURIComponent(msg)}`;
-    window.open(url, "_blank");
-    input.value = "";
-    toggleMiniChat();
-  }
-
-  function sendQuickChat(presetText) {
-    const adminWA = "6281299961001";
-    const url = `https://wa.me/${adminWA}?text=${encodeURIComponent(presetText)}`;
-    window.open(url, "_blank");
-    toggleMiniChat();
-  }
   </script>
 </body>
 </html>

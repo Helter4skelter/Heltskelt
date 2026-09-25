@@ -177,10 +177,10 @@
               </div>
               <span class="text-2xl animate-bounce">🎯</span>
             </div>
-            <p class="text-xs text-slate-500 mb-4">Cek saldo poin referral kamu dan lihat berapa teman lagi yang perlu diajak untuk klaim reward berikutnya.</p>
+            <p class="text-xs text-slate-500 mb-4">Cek saldo poin referral kamu langsung dari database resmi. Hanya kode atau nomor terdaftar yang akan muncul.</p>
 
             <div class="flex gap-2">
-              <input id="pointInput" type="text" placeholder="Contoh: RZT01 atau 0812..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold focus:outline-none focus:bg-white focus:ring-2 focus:ring-brandPurple/30 transition shadow-inner">
+              <input id="pointInput" type="text" placeholder="Contoh: RZT01 atau 0812..." onkeypress="if(event.key==='Enter') checkPointHandler()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold focus:outline-none focus:bg-white focus:ring-2 focus:ring-brandPurple/30 transition shadow-inner">
               <button id="btnCheckPoint" onclick="checkPointHandler()" class="bg-brandPurple hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl shrink-0 transition active:scale-95 shadow-md shadow-brandPurple/20 flex items-center gap-1.5">
                 <span>Cek</span> <span>🚀</span>
               </button>
@@ -188,10 +188,10 @@
           </div>
 
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
-            <span>💡 Coba tes: <strong>RZT01</strong> atau nomor WA</span>
-            <button onclick="document.getElementById('pointInput').value='RZT01'; checkPointHandler()" class="text-brandPurple font-bold underline hover:text-indigo-800">
-              Isi Cepat RZT01
-            </button>
+            <span>🛡️ Validasi Database Terverifikasi</span>
+            <span class="text-emerald-600 font-bold flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span> Sinkron Aktif
+            </span>
           </div>
         </section>
 
@@ -202,7 +202,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
           <div>
             <h2 class="font-black text-base sm:text-xl text-darkText">Pilihan Hadiah Tukar Poin</h2>
-            <p class="text-xs text-slate-400">Poin cukup? Klik salah satu kartu untuk simulasi progres & klaim reward</p>
+            <p class="text-xs text-slate-400">Kumpulkan poin referralmu dan klaim berbagai aplikasi premium original</p>
           </div>
           <span class="self-start sm:self-auto text-xs font-bold text-brandPurple bg-brandPurpleLight px-2.5 py-1 rounded-lg">Real Reward 100% Free</span>
         </div>
@@ -359,7 +359,7 @@
     </div>
   </div>
 
-  <!-- POP-UP INTERAKTIF STATUS POIN -->
+  <!-- POP-UP STATUS POIN REAL (HANYA TERBUKA JIKA TERVERIFIKASI) -->
   <div id="pointModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9995] hidden flex items-center justify-center p-4 transition-all">
     <div class="bg-white rounded-3xl max-w-sm w-full p-5 sm:p-6 modal-enter shadow-2xl space-y-4 text-center relative border border-slate-100">
       <button onclick="closePointModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-sm font-bold w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition cursor-pointer">✕</button>
@@ -370,14 +370,14 @@
 
       <div>
         <span class="text-[10px] uppercase tracking-wider font-extrabold text-brandPurple bg-indigo-50 px-2.5 py-0.5 rounded-full">STATUS POIN REAL-TIME</span>
-        <h3 id="modalPointsTotal" class="text-3xl font-black text-darkText mt-1.5">50 Poin</h3>
+        <h3 id="modalPointsTotal" class="text-3xl font-black text-darkText mt-1.5">0 Poin</h3>
         <p id="modalReferralId" class="text-xs font-mono text-slate-400 mt-0.5">ID: RZT-MEMBER</p>
       </div>
 
       <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-left space-y-2">
         <div class="flex justify-between items-center text-xs font-bold">
           <span id="modalTargetName" class="text-slate-700">Target: Canva Pro</span>
-          <span id="modalTargetPts" class="text-brandPurple font-extrabold">50 / 100 Pts</span>
+          <span id="modalTargetPts" class="text-brandPurple font-extrabold">0 / 50 Pts</span>
         </div>
         
         <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
@@ -385,7 +385,7 @@
         </div>
 
         <p id="modalNextGoalText" class="text-xs text-slate-500 leading-snug pt-1">
-          Undang <strong>2 orang lagi</strong> untuk klaim Canva Pro 1 Tahun!
+          Undang teman untuk mulai panen reward aplikasi gratis!
         </p>
       </div>
 
@@ -416,12 +416,12 @@
   </div>
 
   <!-- Toast Notification -->
-  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-darkText text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-xl z-50 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2">
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-darkText text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-xl z-[9999] opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2">
     Pesan Toast
   </div>
 
   <!-- ==================== MINI LIVE CHAT WIDGET INTERAKTIF (LUCU & IMUT) ==================== -->
-  <div id="miniChatWidget" class="fixed bottom-5 right-5 z-[9998] flex flex-col items-end">
+  <div id="miniChatWidget" class="fixed bottom-5 right-5 z-[9997] flex flex-col items-end">
     
     <!-- Jendela Chat Mini (Pop-up mungil) -->
     <div id="miniChatBox" class="hidden mb-3 w-[290px] sm:w-[320px] bg-white rounded-3xl shadow-2xl border border-slate-100 p-4 transition-all duration-300 transform origin-bottom-right space-y-3">
@@ -495,7 +495,6 @@
       adminWA: "6281299961001",
       pointsPerInvite: 25,       
       googleSheetId: "1gE2YvlI6P8rpcXzL6eBRrMblr3-IaiD3ybXZljlmk9M", 
-      sheetName: "Sheet1",
 
       rewards: [
         {
@@ -551,7 +550,7 @@
       grid.innerHTML = MEMBER_CONFIG.rewards.map(rwd => {
         const friendCount = Math.ceil(rwd.pointsNeeded / MEMBER_CONFIG.pointsPerInvite);
         return `
-          <div onclick="triggerQuickCheck(${rwd.pointsNeeded}, '${rwd.name}')" class="cursor-pointer bg-white border border-slate-200 rounded-3xl p-4 flex flex-col justify-between shadow-sm relative group hover:shadow-md hover:border-brandPurple/40 transition duration-200 active:scale-[0.97]">
+          <div class="bg-white border border-slate-200 rounded-3xl p-4 flex flex-col justify-between shadow-sm relative group hover:shadow-md hover:border-brandPurple/40 transition duration-200">
             <span class="absolute top-3 right-3 bg-indigo-50 text-brandPurple font-extrabold text-[9px] px-2 py-0.5 rounded-full">${rwd.badge}</span>
             <div class="text-center mt-2">
               <div class="w-12 h-12 bg-slate-50 border border-slate-100 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-2 shadow-inner group-hover:scale-110 transition duration-300">
@@ -565,8 +564,8 @@
                 <span class="text-xs sm:text-sm font-black text-brandPurple block">${rwd.pointsNeeded} Pts</span>
                 <span class="text-[9px] text-slate-400">Ajak ${friendCount} teman</span>
               </div>
-              <button class="bg-slate-100 group-hover:bg-brandPurple group-hover:text-white text-slate-700 text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-xl transition">
-                Pilih
+              <button onclick="scrollToSection('checkPointSection')" class="bg-slate-100 hover:bg-brandPurple hover:text-white text-slate-700 text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-xl transition">
+                Cek
               </button>
             </div>
           </div>
@@ -576,51 +575,66 @@
       select.innerHTML = MEMBER_CONFIG.rewards.map(r => `<option value="${r.name}">${r.name} (${r.pointsNeeded} Pts)</option>`).join('');
     }
 
+    /* VALIDASI KETAT GOOGLE SHEETS — TIDAK ADA FALLBACK RANDOM */
     async function checkPointHandler() {
-      const val = document.getElementById("pointInput").value.trim();
-      if (!val) {
+      const rawVal = document.getElementById("pointInput").value.trim();
+      if (!rawVal) {
         showToast("Masukkan kode referral atau nomor WA kamu!");
         return;
       }
 
+      // Bersihkan karakter spasi, strip, tanda tambah
+      const searchClean = rawVal.toLowerCase().replace(/[\s\-\+\.]/g, '');
+
       const btn = document.getElementById("btnCheckPoint");
       btn.classList.add("opacity-70", "pointer-events-none");
+      btn.innerText = "Mengecek...";
 
-      if (MEMBER_CONFIG.googleSheetId) {
-        showToast("Menghubungkan ke database...");
-        try {
-          const res = await fetch(`https://opensheet.elk.sh/${MEMBER_CONFIG.googleSheetId}/${MEMBER_CONFIG.sheetName}?t=${Date.now()}`);
-          const data = await res.json();
-          
-          const member = data.find(m => 
-            String(m.kode || '').toLowerCase() === val.toLowerCase() ||
-            String(m.wa || '').toLowerCase() === val.toLowerCase()
-          );
-
-          if (member) {
-            const points = parseInt(member.poin || member.points || 0);
-            showPointInteractiveModal(points, member.kode || val);
-          } else {
-            showToast("Kode / No WA belum terdaftar di sistem!");
-          }
-        } catch (err) {
-          console.error(err);
-          let fallbackPts = parseInt(val);
-          if (isNaN(fallbackPts)) fallbackPts = 50;
-          showPointInteractiveModal(fallbackPts, val);
-        } finally {
-          btn.classList.remove("opacity-70", "pointer-events-none");
+      try {
+        // Query sheet pertama dengan cache buster
+        const apiUrl = `https://opensheet.elk.sh/${MEMBER_CONFIG.googleSheetId}/1?t=${Date.now()}`;
+        const res = await fetch(apiUrl);
+        
+        if (!res.ok) {
+          throw new Error("Gagal mengambil data dari Google Sheets");
         }
-      } else {
-        let points = parseInt(val);
-        if (isNaN(points)) points = 50;
-        showPointInteractiveModal(points, val);
-        btn.classList.remove("opacity-70", "pointer-events-none");
-      }
-    }
 
-    function triggerQuickCheck(pts, name) {
-      showPointInteractiveModal(pts, "RZT-PREVIEW");
+        const data = await res.json();
+
+        if (!Array.isArray(data) || data.length === 0) {
+          showToast("Database member masih kosong atau belum terisi!");
+          return;
+        }
+
+        // Cari data member yang valid dan cocok
+        const member = data.find(m => {
+          const mKode = String(m.kode || m.Kode || m.KODE || '').trim().toLowerCase().replace(/[\s\-\+\.]/g, '');
+          const mWa = String(m.wa || m.WA || m.telepon || m.hp || m.whatsapp || '').trim().toLowerCase().replace(/[\s\-\+\.]/g, '');
+
+          const kodeMatch = mKode && (mKode === searchClean);
+          const waMatch = mWa && (mWa === searchClean || mWa.endsWith(searchClean) || searchClean.endsWith(mWa));
+
+          return kodeMatch || waMatch;
+        });
+
+        if (member) {
+          const rawPoin = member.poin || member.Poin || member.POIN || member.points || member.Points || 0;
+          const points = parseInt(rawPoin, 10) || 0;
+          const kodeDisplay = member.kode || member.Kode || rawVal.toUpperCase();
+          
+          showPointInteractiveModal(points, kodeDisplay);
+        } else {
+          // JIKA TIDAK ADA DI DATABASE: TOLAK LANGSUNG DAN JANGAN BUKA MODAL APAPUN
+          showToast("❌ Kode Referral / No WA tidak terdaftar di sistem!");
+        }
+
+      } catch (err) {
+        console.error("Gagal verifikasi Google Sheets:", err);
+        showToast("⚠️ Database sedang offline atau spreadsheet belum diset Public (Viewer)!");
+      } finally {
+        btn.classList.remove("opacity-70", "pointer-events-none");
+        btn.innerHTML = `<span>Cek</span> <span>🚀</span>`;
+      }
     }
 
     function showPointInteractiveModal(pts, idRef) {
@@ -657,7 +671,7 @@
       document.getElementById("pointModal").classList.add("hidden");
     }
 
-    /* Penutupan modal pengumuman secara tuntas */
+    /* Penutupan modal pengumuman secara tuntas tanpa bug */
     function closeWelcomeModal() {
       const modal = document.getElementById("welcomeModal");
       if (modal) {
@@ -708,6 +722,13 @@
           url: window.location.href
         }).catch(() => {});
       } else {
+        const dummyText = `Mau langganan Netflix, Canva Pro, CapCut murah & full garansi? Beli di Reztroid aja: ${window.location.href}`;
+        const inputTemp = document.createElement("textarea");
+        inputTemp.value = dummyText;
+        document.body.appendChild(inputTemp);
+        inputTemp.select();
+        document.execCommand('copy');
+        document.body.removeChild(inputTemp);
         showToast("Teks promo disalin ke clipboard!");
       }
     }
@@ -722,7 +743,7 @@
       toast.classList.remove("opacity-0", "translate-y-2", "pointer-events-none");
       setTimeout(() => {
         toast.classList.add("opacity-0", "translate-y-2", "pointer-events-none");
-      }, 2400);
+      }, 2800);
     }
 
     /* ==================== LOGIKA MINI LIVE CHAT ==================== */

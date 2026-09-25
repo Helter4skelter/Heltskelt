@@ -606,6 +606,7 @@ async function checkPointHandler() {
         const cleanCell = cell => cell ? cell.replace(/^["']|["']$/g, '').trim() : '';
         const headers = rows[0].split(',').map(h => cleanCell(h).toLowerCase());
 
+        const idxNama = headers.findIndex(h => h.includes('nama'));
         const idxKode = headers.findIndex(h => h.includes('kode'));
         const idxWa = headers.findIndex(h => h.includes('wa') || h.includes('hp') || h.includes('telepon'));
         const idxPoin = headers.findIndex(h => h.includes('poin') || h.includes('point'));
@@ -622,6 +623,7 @@ async function checkPointHandler() {
           if ((rawKode && rawKode === cleanInput) || 
               (rawWa && (rawWa === cleanInput || rawWa.endsWith(cleanInput) || cleanInput.endsWith(rawWa)))) {
             memberFound = {
+              nama: (idxNama !== -1 && cols[idxNama]) ? cols[idxNama] : 'Member Setia',
               kode: cols[idxKode] || val.toUpperCase(),
               poin: parseInt(cols[idxPoin]) || 0
             };
@@ -630,7 +632,7 @@ async function checkPointHandler() {
         }
 
         if (memberFound) {
-          showPointInteractiveModal(memberFound.poin, memberFound.kode);
+          showPointInteractiveModal(memberFound.poin, memberFound.kode, memberFound.nama);
         } else {
           showToast("❌ Kode / No WA tidak terdaftar di sistem!");
         }
@@ -643,11 +645,10 @@ async function checkPointHandler() {
         btn.innerHTML = `<span>Cek</span> <span>🚀</span>`;
       }
     }
-
-    function showPointInteractiveModal(pts, idRef) {
+   function showPointInteractiveModal(pts, idRef, userName = "Member Setia") {
       currentUserPoints = pts;
       document.getElementById("modalPointsTotal").innerText = `${pts} Poin`;
-      document.getElementById("modalReferralId").innerText = `ID: ${idRef.toUpperCase()}`;
+      document.getElementById("modalReferralId").innerText = `Halo kak ${userName}! • ID: ${idRef.toUpperCase()}`;
 
       const nextReward = MEMBER_CONFIG.rewards.find(r => r.pointsNeeded > pts) || MEMBER_CONFIG.rewards[MEMBER_CONFIG.rewards.length - 1];
       currentNextReward = nextReward;

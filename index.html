@@ -3,25 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>reztroid® — Official Digital Store</title>
+  <title>reztroid.exe — Y2K Cyber Digital Store</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Font: Plus Jakarta Sans -->
+  <!-- Google Fonts: VT323 (Retro Pixel) & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&family=VT323&display=swap" rel="stylesheet">
   
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            pixel: ['"VT323"', 'monospace']
+          },
           colors: {
-            brandLime: '#D8FF00',    /* Neon Lime Reztroid */
-            brandPurple: '#5338FF',  /* Accent Purple */
-            darkText: '#0F172A',
+            y2kPink: '#FF99C8',
+            y2kHotPink: '#FF4394',
+            y2kLilac: '#D0BCFF',
+            y2kBlue: '#A9DEF9',
+            y2kMint: '#C1FBA4',
+            winGray: '#F5EEF8',
+            winBlue: '#7367F0'
           }
         }
       }
@@ -29,9 +35,62 @@
   </script>
 
   <style>
-    /* Hilangkan scrollbar default */
+    /* Hilangkan scrollbar */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Pola Background Y2K Cyber Grid & Bintang */
+    body {
+      background-color: #f7e6f4;
+      background-image: 
+        radial-gradient(#e0a2d2 1.5px, transparent 1.5px),
+        linear-gradient(to bottom, #ffeef8, #f0e6ff);
+      background-size: 20px 20px, 100% 100%;
+    }
+
+    /* Efek Border Windows 98 Retro Bevel */
+    .win98-box {
+      border: 2px solid;
+      border-color: #ffffff #b59ebb #b59ebb #ffffff;
+      box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);
+    }
+    .win98-inset {
+      border: 2px solid;
+      border-color: #b59ebb #ffffff #ffffff #b59ebb;
+    }
+    .win98-btn {
+      border: 2px solid;
+      border-color: #ffffff #7a6380 #7a6380 #ffffff;
+      box-shadow: 1px 1px 0px #000;
+    }
+    .win98-btn:active {
+      border-color: #7a6380 #ffffff #ffffff #7a6380;
+      box-shadow: none;
+      transform: translate(1px, 1px);
+    }
+
+    /* Holographic gradient bar */
+    .holo-bar {
+      background: linear-gradient(90deg, #ffcbf2, #e2afff, #c0fdff, #ffcbf2);
+      background-size: 200% 200%;
+      animation: holoShift 4s ease infinite;
+    }
+    @keyframes holoShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Checkerboard border pattern */
+    .checker-pattern {
+      background-image: 
+        linear-gradient(45deg, #000 25%, transparent 25%), 
+        linear-gradient(-45deg, #000 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #000 75%), 
+        linear-gradient(-45deg, transparent 75%, #000 75%);
+      background-size: 8px 8px;
+      background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+    }
 
     /* Canvas bintang jatuh di latar belakang */
     #starCanvas {
@@ -43,247 +102,289 @@
       pointer-events: none;
       z-index: 0;
     }
-
-    /* Animasi Pop-up & Drawer */
-    .modal-enter { animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    .drawer-enter { animation: drawerSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    
-    @keyframes modalFadeIn {
-      from { opacity: 0; transform: scale(0.96); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    @keyframes drawerSlideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
   </style>
 </head>
-<body class="bg-[#F6F8FA] text-darkText font-sans antialiased relative min-h-screen">
+<body class="text-slate-800 antialiased relative min-h-screen pb-14">
 
-  <!-- Background Animasi Bintang Jatuh -->
+  <!-- Background Canvas Bintang Jatuh & Sparkles -->
   <canvas id="starCanvas"></canvas>
 
-  <!-- Container Mobile Utama -->
-  <div class="relative z-10 max-w-[430px] mx-auto min-h-screen bg-white/95 backdrop-blur-md border-x border-slate-200/80 shadow-[0_0_50px_rgba(0,0,0,0.04)] flex flex-col justify-between">
+  <!-- Container Mobile Frame Y2K Cyber Window -->
+  <div class="relative z-10 max-w-[430px] mx-auto min-h-screen bg-[#FDF8FC] win98-box border-4 border-[#FFB3D9] flex flex-col justify-between my-0 sm:my-3">
 
     <div>
-      <!-- 1. Running Announcement Bar -->
-      <div onclick="openModal('promo')" class="cursor-pointer bg-black text-white text-[11px] font-semibold py-2 px-3.5 flex items-center justify-between tracking-tight hover:bg-slate-900 transition active:opacity-90">
-        <div class="flex items-center gap-1.5 truncate">
-          <span class="text-brandLime animate-pulse">✦</span>
-          <span class="truncate">MEMBER & AJAK TEMAN DAPATKAN BONUS SALDO</span>
+      <!-- 1. Holographic Retro Ribbon Marquee -->
+      <div onclick="openModal('promo')" class="cursor-pointer holo-bar border-b-2 border-[#b59ebb] py-1 px-3 text-[11px] font-extrabold flex items-center justify-between tracking-wide text-pink-900 select-none">
+        <div class="flex items-center gap-1.5 truncate font-mono text-[10px]">
+          <span>✧💖✧</span>
+          <span class="truncate">NEW DROP: LANGGANAN PREMIUM DISKON UP TO 70%</span>
         </div>
-        <span class="text-slate-400 shrink-0 text-[10px] pl-2 font-mono flex items-center gap-1">
-          Klaim <span class="text-brandLime">→</span>
-        </span>
+        <span class="text-[10px] bg-white/70 px-1.5 py-0.2 rounded border border-pink-300 font-bold shrink-0">JOIN VIP ★</span>
       </div>
 
-      <!-- 2. Header Bersih & Kompak -->
-      <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-100 px-4 py-2.5 flex items-center justify-between">
+      <!-- Checkerboard Accent Line -->
+      <div class="h-1.5 w-full checker-pattern opacity-30"></div>
+
+      <!-- 2. Windows 98 Window Title Bar Header -->
+      <header class="sticky top-0 z-30 bg-[#F5EEF8] border-b-2 border-[#b59ebb] px-2.5 py-2 flex items-center justify-between">
+        <!-- Logo ala Dollhouse Y2K -->
         <div class="flex items-center gap-2 cursor-pointer" onclick="filterCategory('Semua')">
-          <div class="w-7 h-7 bg-black text-brandLime font-black text-xs rounded-lg flex items-center justify-center shadow-sm">R</div>
-          <span class="font-extrabold text-lg tracking-tight">reztroid<span class="text-brandPurple">®</span></span>
+          <div class="w-7 h-7 bg-y2kHotPink text-white font-pixel text-xl flex items-center justify-center rounded shadow-[1px_1px_0px_#000]">
+            ★
+          </div>
+          <div>
+            <span class="font-pixel text-2xl tracking-widest text-y2kHotPink font-black drop-shadow-[1px_1px_0px_#fff]">
+              reztroid<span class="text-y2kLilac">.exe</span>
+            </span>
+          </div>
         </div>
-        <div class="flex items-center gap-2">
-          <button onclick="openModal('member')" class="bg-brandLime hover:brightness-95 text-black font-extrabold text-xs px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm active:scale-95 transition">
-            <span>🎁</span> Member
+
+        <!-- Window Buttons Control -->
+        <div class="flex items-center gap-1.5">
+          <button onclick="openModal('member')" class="win98-btn bg-y2kPink hover:bg-pink-300 text-pink-950 font-bold text-[10px] px-2.5 py-1 rounded-sm flex items-center gap-1">
+            <span>💌</span> Member
           </button>
-          <button onclick="openCartDrawer()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 transition active:scale-95">
+          <button onclick="openCartDrawer()" class="win98-btn bg-white hover:bg-slate-50 text-slate-800 font-bold text-[10px] px-2 py-1 rounded-sm flex items-center gap-1">
             <span>🛍️</span>
-            <span id="cartCountBadge" class="bg-black text-white text-[10px] px-1.5 py-0.2 rounded-full font-mono">0</span>
+            <span id="cartCountBadge" class="bg-y2kHotPink text-white text-[9px] px-1 rounded-sm font-mono">0</span>
           </button>
         </div>
       </header>
 
-      <!-- Main Body -->
-      <div class="p-3.5 space-y-3.5">
+      <!-- Main Body Container -->
+      <div class="p-3 space-y-3.5">
 
-        <!-- 3. Banner Member Referral -->
-        <div onclick="openModal('member')" class="cursor-pointer bg-brandLime border border-black/5 hover:border-black/20 rounded-2xl p-3.5 shadow-sm text-black flex items-center justify-between gap-2 active:scale-[0.99] transition">
-          <div class="flex items-center gap-2.5">
-            <div class="w-10 h-10 bg-white/95 border border-black/10 rounded-xl flex items-center justify-center text-lg shrink-0 shadow-sm">
-              🎁
-            </div>
-            <div>
-              <span class="text-[9px] font-black uppercase tracking-wider text-black/60 block">REZTROID MEMBER</span>
-              <p class="text-xs font-black leading-tight text-slate-900">Harga khusus + hadiah referral</p>
+        <!-- 3. Y2K Aesthetic Window Hero Banner -->
+        <div class="win98-box bg-white p-2 relative overflow-hidden">
+          <!-- Window Title Bar -->
+          <div class="bg-gradient-to-r from-y2kHotPink to-y2kLilac px-2 py-1 flex items-center justify-between text-white text-[11px] font-bold mb-2">
+            <span class="flex items-center gap-1"><span>💿</span> welcome_to_reztroid.exe</span>
+            <div class="flex gap-1">
+              <span class="w-3.5 h-3.5 bg-[#f0e6ff] text-pink-900 border border-black/40 text-[9px] flex items-center justify-center font-mono leading-none">_</span>
+              <span class="w-3.5 h-3.5 bg-[#f0e6ff] text-pink-900 border border-black/40 text-[9px] flex items-center justify-center font-mono leading-none">□</span>
+              <span class="w-3.5 h-3.5 bg-rose-400 text-white border border-black/40 text-[9px] flex items-center justify-center font-mono leading-none">✕</span>
             </div>
           </div>
-          <button class="bg-black text-white text-[11px] font-bold px-3 py-2 rounded-xl shrink-0 flex items-center gap-1">
-            Gabung ↗
-          </button>
+
+          <!-- Banner Content -->
+          <div class="p-2 text-center bg-gradient-to-b from-pink-50/50 to-purple-50/60 rounded border border-pink-100 relative">
+            <span class="inline-block bg-white text-y2kHotPink border border-pink-300 px-2 py-0.5 text-[9px] font-black uppercase rounded-full shadow-sm mb-1 tracking-wider">
+              ♡ digital dreams & apps ♡
+            </span>
+            <h1 class="font-pixel text-3xl text-pink-950 leading-none tracking-wide drop-shadow-sm">
+              MADE 4 THE INTERNET
+            </h1>
+            <p class="text-[11px] text-slate-600 font-medium mt-0.5">
+              Nonton, ngedit, & vibe musik favoritmu tanpa limit dan bergaransi resmi 🦋
+            </p>
+
+            <!-- Retro Stickers Tags -->
+            <div class="flex flex-wrap justify-center gap-1.5 mt-2.5">
+              <span class="bg-pink-100 border border-pink-300 text-pink-700 text-[9px] font-bold px-2 py-0.5 rounded shadow-sm">🌸 100% Aman</span>
+              <span class="bg-purple-100 border border-purple-300 text-purple-700 text-[9px] font-bold px-2 py-0.5 rounded shadow-sm">⚡ Auto Replace</span>
+              <span class="bg-blue-100 border border-blue-300 text-blue-700 text-[9px] font-bold px-2 py-0.5 rounded shadow-sm">💿 QRIS Ready</span>
+            </div>
+          </div>
         </div>
 
-        <!-- 4. Pencarian & Filter Kategori Horizontal -->
-        <div class="space-y-2">
-          <div class="relative">
-            <input id="searchInput" oninput="handleSearch()" type="text" placeholder="Cari aplikasi atau kategori..." class="w-full bg-slate-50 border border-slate-200/90 rounded-xl py-2 pl-9 pr-3 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brandPurple/30 focus:bg-white transition shadow-sm">
-            <span class="absolute left-3 top-2.5 text-slate-400 text-xs">🔍</span>
+        <!-- 4. Retro Search Bar & Category Folder Tabs -->
+        <div class="space-y-1.5">
+          <div class="win98-inset bg-white p-1 flex items-center gap-1.5">
+            <span class="text-xs pl-1.5">🔍</span>
+            <input id="searchInput" oninput="handleSearch()" type="text" placeholder="search apps here... (netflix, capcut, spotify)" class="w-full bg-transparent text-xs font-medium focus:outline-none placeholder:text-pink-300 text-pink-950">
+            <button class="win98-btn bg-y2kLilac text-purple-950 text-[10px] font-extrabold px-2 py-0.5 rounded-sm">FIND</button>
           </div>
-          <div id="categoryContainer" class="flex gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-            <!-- Otomatis diisi oleh Javascript -->
+
+          <!-- Folder Category Tabs -->
+          <div id="categoryContainer" class="flex gap-1 overflow-x-auto no-scrollbar pt-1">
+            <!-- Otomatis diisi oleh JS -->
           </div>
         </div>
 
-        <!-- 5. Grid Katalog Produk -->
+        <!-- 5. Katalog Produk (Windows File Cards) -->
         <section>
-          <div class="flex items-center justify-between mb-2">
-            <div class="flex items-center gap-2">
-              <h2 class="font-extrabold text-sm text-darkText">Katalog Pilihan</h2>
-              <span id="productCounterBadge" class="text-[10px] font-bold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">0 items</span>
+          <div class="flex items-center justify-between mb-2 px-0.5">
+            <div class="flex items-center gap-1.5">
+              <span class="font-pixel text-xl text-pink-950 font-bold">📂 KATALOG_FILES</span>
+              <span id="productCounterBadge" class="text-[9px] font-mono font-bold bg-pink-100 text-pink-800 border border-pink-200 px-1.5 py-0.5 rounded">0 items</span>
             </div>
-            <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md flex items-center gap-1">
-              <span>✓</span> Garansi Resmi
+            <span class="text-[10px] font-extrabold text-y2kHotPink bg-white border border-pink-200 px-2 py-0.5 rounded shadow-sm">
+              ♡ Garansi Penuh
             </span>
           </div>
 
           <div id="productListGrid" class="grid grid-cols-2 gap-2.5">
-            <!-- Kartu produk di-render di sini -->
+            <!-- Kartu Produk di-render dinamis oleh JavaScript -->
           </div>
         </section>
 
-        <!-- 6. Tiga Langkah Order Mudah -->
-        <section class="bg-slate-50 border border-slate-200/80 rounded-2xl p-3">
-          <div class="flex justify-between items-center mb-2">
-            <span class="text-[10px] font-black uppercase text-slate-400 tracking-wider">3 LANGKAH MUDAH</span>
-            <span class="text-[10px] font-bold text-brandPurple">Proses Otomatis</span>
+        <!-- 6. 3 Langkah Order (Y2K Notepad / Post-It Style) -->
+        <section class="win98-box bg-[#FFFDF0] p-2.5 space-y-2">
+          <div class="flex justify-between items-center border-b border-amber-200 pb-1">
+            <span class="font-pixel text-lg text-amber-900 font-bold flex items-center gap-1">
+              📝 HOW_TO_ORDER.TXT
+            </span>
+            <span class="text-[9px] font-mono text-amber-700 bg-amber-100 px-1.5 py-0.2 rounded">easy peasy ♡</span>
           </div>
-          <div class="grid grid-cols-3 gap-2 text-center">
-            <div onclick="showToast('Langkah 1: Klik tombol + pada aplikasi yang kamu mau.')" class="cursor-pointer bg-white hover:bg-slate-100 p-2.5 rounded-xl border border-slate-100 shadow-sm transition active:scale-95">
-              <span class="text-xs font-black text-brandPurple block">01</span>
-              <p class="text-[11px] font-bold mt-0.5 text-slate-800">Pilih App</p>
-              <span class="text-[8px] text-slate-500 block leading-tight">Pilih durasi paket</span>
+
+          <div class="grid grid-cols-3 gap-1.5 text-center">
+            <div onclick="showToast('Step 1: Klik tombol BUY pada aplikasi pilihanmu!')" class="cursor-pointer bg-white p-2 rounded border border-amber-200 shadow-sm active:scale-95 transition">
+              <span class="font-pixel text-base text-y2kHotPink block font-bold">01</span>
+              <p class="text-[10px] font-bold text-slate-800 leading-tight">Pilih App</p>
+              <span class="text-[8px] text-slate-500 block leading-tight mt-0.5">pilih paket</span>
             </div>
-            <div onclick="showToast('Langkah 2: Bayar menggunakan QRIS yang muncul.')" class="cursor-pointer bg-white hover:bg-slate-100 p-2.5 rounded-xl border border-slate-100 shadow-sm transition active:scale-95">
-              <span class="text-xs font-black text-brandPurple block">02</span>
-              <p class="text-[11px] font-bold mt-0.5 text-slate-800">Bayar QRIS</p>
-              <span class="text-[8px] text-slate-500 block leading-tight">Verifikasi instan</span>
+            <div onclick="showToast('Step 2: Scan QRIS otomatis tanpa antre!')" class="cursor-pointer bg-white p-2 rounded border border-amber-200 shadow-sm active:scale-95 transition">
+              <span class="font-pixel text-base text-y2kHotPink block font-bold">02</span>
+              <p class="text-[10px] font-bold text-slate-800 leading-tight">Bayar QRIS</p>
+              <span class="text-[8px] text-slate-500 block leading-tight mt-0.5">auto verified</span>
             </div>
-            <div onclick="showToast('Langkah 3: Akun login langsung dikirim ke WhatsApp.')" class="cursor-pointer bg-white hover:bg-slate-100 p-2.5 rounded-xl border border-slate-100 shadow-sm transition active:scale-95">
-              <span class="text-xs font-black text-brandPurple block">03</span>
-              <p class="text-[11px] font-bold mt-0.5 text-slate-800">Akun Dikirim</p>
-              <span class="text-[8px] text-slate-500 block leading-tight">Langsung aktif via WA</span>
+            <div onclick="showToast('Step 3: Detail akun masuk ke WhatsApp dalam hitungan menit!')" class="cursor-pointer bg-white p-2 rounded border border-amber-200 shadow-sm active:scale-95 transition">
+              <span class="font-pixel text-base text-y2kHotPink block font-bold">03</span>
+              <p class="text-[10px] font-bold text-slate-800 leading-tight">Akun Sent</p>
+              <span class="text-[8px] text-slate-500 block leading-tight mt-0.5">via WhatsApp</span>
             </div>
           </div>
         </section>
 
-        <!-- 7. Ulasan Pelanggan -->
+        <!-- 7. Ulasan Pelanggan (Y2K Chat Messenger Style) -->
         <section>
-          <div class="flex items-center justify-between mb-2">
-            <h2 class="font-extrabold text-sm text-darkText">Ulasan Pelanggan</h2>
-            <span class="text-[10px] text-amber-500 font-extrabold">★ 4.9 (1.5k+ Terjual)</span>
+          <div class="flex items-center justify-between mb-1.5 px-0.5">
+            <span class="font-pixel text-xl text-pink-950 font-bold">💌 INBOX_REVIEWS</span>
+            <span class="text-[10px] text-amber-500 font-extrabold bg-white px-2 py-0.5 rounded border border-pink-200 shadow-sm">★ 4.9 (1.5k+ Happy Girls & Boys)</span>
           </div>
-          <div id="testimonialContainer" class="flex gap-2.5 overflow-x-auto no-scrollbar py-0.5">
-            <!-- Di-generate otomatis -->
+          <div id="testimonialContainer" class="flex gap-2 overflow-x-auto no-scrollbar py-0.5">
+            <!-- Di-generate otomatis dari CONFIG -->
           </div>
         </section>
 
-        <!-- 8. FAQ Mini Accordion -->
-        <section class="bg-white border border-slate-200 rounded-2xl p-3 divide-y divide-slate-100 shadow-sm">
-          <div class="flex justify-between items-center pb-2">
-            <h2 class="font-extrabold text-xs uppercase tracking-wider text-slate-400">Pertanyaan Populer</h2>
-            <span class="text-[10px] text-brandPurple font-bold">FAQ</span>
+        <!-- 8. FAQ Mini Retro Accordion -->
+        <section class="win98-box bg-white p-2.5 divide-y divide-pink-100">
+          <div class="flex justify-between items-center pb-1.5">
+            <span class="font-pixel text-lg text-pink-950 font-bold">❓ FAQ_HELP.CHM</span>
+            <span class="text-[9px] font-mono text-pink-500">click to read ♡</span>
           </div>
-          <details class="py-2 group cursor-pointer">
+          <details class="py-1.5 group cursor-pointer">
             <summary class="text-xs font-bold text-slate-700 list-none flex justify-between items-center">
-              <span>Berapa lama akun dikirim setelah bayar?</span>
-              <span class="text-slate-400 group-open:rotate-180 transition text-[10px]">▼</span>
+              <span>Berapa lama akun masuk?</span>
+              <span class="text-y2kHotPink group-open:rotate-180 transition text-[10px] font-mono">▼</span>
             </summary>
-            <p class="text-[11px] text-slate-500 mt-1 pl-1">Sistem kami terhubung langsung dengan verifikasi QRIS. Akun dikirim dalam 1–3 menit ke WhatsApp kamu.</p>
+            <p class="text-[11px] text-slate-500 mt-1 pl-1">Sistem otomatis 1-3 menit langsung ke WhatsApp setelah scan QRIS terverifikasi!</p>
           </details>
-          <details class="py-2 group cursor-pointer">
+          <details class="py-1.5 group cursor-pointer">
             <summary class="text-xs font-bold text-slate-700 list-none flex justify-between items-center">
-              <span>Apakah ada garansi jika akun terkena kendala?</span>
-              <span class="text-slate-400 group-open:rotate-180 transition text-[10px]">▼</span>
+              <span>Gimana kalau akun eror / kena back?</span>
+              <span class="text-y2kHotPink group-open:rotate-180 transition text-[10px] font-mono">▼</span>
             </summary>
-            <p class="text-[11px] text-slate-500 mt-1 pl-1">Semua produk bergaransi resmi penuh (100% Free Replace). Kamu cukup chat WhatsApp jika ada kendala.</p>
+            <p class="text-[11px] text-slate-500 mt-1 pl-1">Tinggal klik tombol WhatsApp admin di bawah, garansi replace akun baru 100% free!</p>
           </details>
         </section>
 
-        <!-- 9. Tombol Quick Links -->
-        <section class="space-y-2 pt-1">
-          <button onclick="contactWhatsApp('Halo admin, saya butuh bantuan order di Reztroid')" class="w-full flex items-center justify-between bg-slate-50 hover:bg-slate-100 border border-slate-200/90 rounded-2xl px-3.5 py-2.5 text-xs font-bold text-slate-800 transition active:scale-[0.99]">
+        <!-- 9. Quick Link Buttons ala Retro Widgets -->
+        <section class="space-y-1.5 pt-1">
+          <button onclick="contactWhatsApp('Halo admin, mau tanya produk di Reztroid')" class="win98-btn w-full flex items-center justify-between bg-white hover:bg-pink-50 p-2 text-xs font-extrabold text-pink-950 transition">
             <span class="flex items-center gap-2"><span>💬</span> WhatsApp Admin Support</span>
-            <span class="text-slate-400">→</span>
+            <span class="text-pink-400 font-mono">→</span>
           </button>
-          <button onclick="openModal('member')" class="w-full flex items-center justify-between bg-slate-50 hover:bg-slate-100 border border-slate-200/90 rounded-2xl px-3.5 py-2.5 text-xs font-bold text-slate-800 transition active:scale-[0.99]">
-            <span class="flex items-center gap-2"><span>🤝</span> Gabung Reseller & VIP</span>
-            <span class="text-slate-400">→</span>
+          <button onclick="openModal('member')" class="win98-btn w-full flex items-center justify-between bg-white hover:bg-pink-50 p-2 text-xs font-extrabold text-pink-950 transition">
+            <span class="flex items-center gap-2"><span>👑</span> VIP Dollhouse Membership</span>
+            <span class="text-pink-400 font-mono">→</span>
           </button>
-          <button onclick="openModal('terms')" class="w-full flex items-center justify-between bg-slate-50 hover:bg-slate-100 border border-slate-200/90 rounded-2xl px-3.5 py-2.5 text-xs font-bold text-slate-800 transition active:scale-[0.99]">
-            <span class="flex items-center gap-2"><span>🛡️</span> Syarat, Ketentuan & Garansi</span>
-            <span class="text-slate-400">→</span>
+          <button onclick="openModal('terms')" class="win98-btn w-full flex items-center justify-between bg-white hover:bg-pink-50 p-2 text-xs font-extrabold text-pink-950 transition">
+            <span class="flex items-center gap-2"><span>📜</span> Syarat & Kebijakan Garansi</span>
+            <span class="text-pink-400 font-mono">→</span>
           </button>
         </section>
 
       </div>
     </div>
 
-    <!-- 10. Footer -->
-    <footer class="mt-4 border-t border-slate-200 p-4 bg-slate-50 text-center space-y-2.5">
-      <div class="flex flex-wrap justify-center gap-1.5 text-[9px] font-bold text-slate-500">
-        <span class="bg-white border border-slate-200 px-2 py-0.5 rounded">QRIS 24/7</span>
-        <span class="bg-white border border-slate-200 px-2 py-0.5 rounded">DANA</span>
-        <span class="bg-white border border-slate-200 px-2 py-0.5 rounded">GoPay</span>
-        <span class="bg-white border border-slate-200 px-2 py-0.5 rounded">ShopeePay</span>
-        <span class="bg-white border border-slate-200 px-2 py-0.5 rounded">BCA/Mandiri</span>
+    <!-- 10. Footer Retro -->
+    <footer class="mt-4 border-t-2 border-[#b59ebb] p-3 bg-[#F5EEF8] text-center space-y-2">
+      <!-- Supported Payments Chips -->
+      <div class="flex flex-wrap justify-center gap-1 text-[8px] font-mono font-bold">
+        <span class="bg-white border border-pink-200 px-1.5 py-0.5 rounded text-pink-700">QRIS</span>
+        <span class="bg-white border border-pink-200 px-1.5 py-0.5 rounded text-pink-700">DANA</span>
+        <span class="bg-white border border-pink-200 px-1.5 py-0.5 rounded text-pink-700">GOPAY</span>
+        <span class="bg-white border border-pink-200 px-1.5 py-0.5 rounded text-pink-700">SHOPEEPAY</span>
+        <span class="bg-white border border-pink-200 px-1.5 py-0.5 rounded text-pink-700">BCA</span>
       </div>
 
-      <p class="text-[11px] text-slate-500 font-medium">
-        Made with <span class="text-rose-500 animate-pulse">❤️</span> by <span class="font-bold text-darkText">reztroid</span>
+      <p class="text-[11px] text-pink-900 font-medium">
+        made with <span class="text-y2kHotPink animate-pulse">💖</span> by <span class="font-extrabold text-pink-950 font-pixel text-base">reztroid.exe</span>
       </p>
 
-      <span class="text-[10px] text-slate-400 block font-mono">
-        © 2026 reztroid. Official Digital Solutions.
+      <span class="text-[9px] text-slate-400 block font-mono">
+        © 2000-2026 DOLLHOUSE CYBERSTORE. ALL RIGHTS RESERVED.
       </span>
     </footer>
 
   </div>
 
+  <!-- 11. Windows 98 Retro Taskbar di Bawah Layar -->
+  <div class="fixed bottom-0 inset-x-0 bg-[#E8DAEC] border-t-2 border-white shadow-[0_-2px_4px_rgba(0,0,0,0.1)] py-1 px-2 flex items-center justify-between z-40 max-w-[430px] mx-auto">
+    <div class="flex items-center gap-1.5">
+      <button onclick="filterCategory('Semua')" class="win98-btn bg-y2kHotPink text-white font-pixel text-base px-2.5 py-0.5 font-bold flex items-center gap-1">
+        <span>★</span> Start
+      </button>
+      <div class="win98-inset bg-white/60 px-2 py-0.5 text-[10px] font-mono text-pink-950 truncate max-w-[130px]">
+        reztroid_store
+      </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <button onclick="openCartDrawer()" class="win98-btn bg-white px-2 py-0.5 text-[10px] font-bold flex items-center gap-1">
+        <span>🛍️</span> <span id="taskbarCartCount">0</span>
+      </button>
+      <div class="win98-inset bg-white/70 px-2 py-0.5 text-[10px] font-mono text-slate-700" id="clockWidget">
+        12:00 PM
+      </div>
+    </div>
+  </div>
+
   <!-- ==================== MODAL / DRAWER SYSTEM ==================== -->
 
   <!-- Drawer Keranjang Belanja -->
-  <div id="cartDrawer" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden transition-opacity">
-    <div class="absolute bottom-0 inset-x-0 max-w-[430px] mx-auto bg-white rounded-t-3xl p-4 drawer-enter shadow-2xl space-y-3">
-      <div class="w-10 h-1 bg-slate-200 rounded-full mx-auto mb-1 cursor-pointer" onclick="closeCartDrawer()"></div>
-      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
-        <div class="flex items-center gap-2">
-          <span class="text-lg">🛍️</span>
-          <h3 class="font-extrabold text-sm text-slate-900">Keranjang Kamu</h3>
-        </div>
-        <button onclick="closeCartDrawer()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+  <div id="cartDrawer" class="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 hidden transition-opacity">
+    <div class="absolute bottom-10 inset-x-0 max-w-[420px] mx-auto bg-[#FDF8FC] win98-box border-3 border-y2kHotPink rounded-t-2xl p-3.5 space-y-3 shadow-2xl">
+      <!-- Header Window Cart -->
+      <div class="bg-gradient-to-r from-y2kHotPink to-y2kLilac px-2.5 py-1 flex items-center justify-between text-white text-xs font-bold rounded-t">
+        <span class="flex items-center gap-1"><span>🛍️</span> shopping_cart.exe</span>
+        <button onclick="closeCartDrawer()" class="win98-btn bg-white text-pink-900 font-bold px-1.5 py-0.2 text-[10px] leading-none">✕</button>
       </div>
 
-      <div id="cartItemsList" class="max-h-60 overflow-y-auto space-y-2 py-1"></div>
+      <div id="cartItemsList" class="max-h-56 overflow-y-auto space-y-1.5 py-1"></div>
 
-      <div class="pt-2 border-t border-slate-100 space-y-2.5">
+      <div class="pt-2 border-t-2 border-dashed border-pink-200 space-y-2">
         <div class="flex justify-between items-center text-xs font-bold">
-          <span class="text-slate-500">Total Pembayaran:</span>
-          <span id="cartTotalPrice" class="text-base text-brandPurple font-black">Rp 0</span>
+          <span class="text-slate-600">Total Belanjaan:</span>
+          <span id="cartTotalPrice" class="text-base text-y2kHotPink font-black font-mono">Rp 0</span>
         </div>
-        <button onclick="checkoutToWhatsApp()" class="w-full bg-brandLime hover:brightness-95 text-black font-extrabold text-xs py-3 rounded-xl shadow-md active:scale-95 transition flex items-center justify-center gap-1.5">
-          <span>⚡</span> Lanjut Checkout via WhatsApp
+        <button onclick="checkoutToWhatsApp()" class="win98-btn w-full bg-y2kHotPink hover:bg-pink-600 text-white font-black text-xs py-2.5 rounded shadow active:scale-95 transition flex items-center justify-center gap-1.5">
+          <span>💖</span> CHECKOUT VIA WHATSAPP NOW
         </button>
       </div>
     </div>
   </div>
 
   <!-- Modal Detail Produk -->
-  <div id="productModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-xs w-full p-4 modal-enter shadow-2xl space-y-3 text-center relative">
-      <button onclick="closeProductModal()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-700 text-sm font-bold w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center">✕</button>
+  <div id="productModal" class="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3">
+    <div class="bg-[#FDF8FC] win98-box max-w-xs w-full p-3 shadow-2xl space-y-2.5 relative">
+      <!-- Window Title -->
+      <div class="bg-gradient-to-r from-y2kHotPink to-y2kLilac px-2 py-1 flex items-center justify-between text-white text-[11px] font-bold">
+        <span class="flex items-center gap-1"><span>💿</span> item_details.exe</span>
+        <button onclick="closeProductModal()" class="win98-btn bg-white text-pink-900 font-bold px-1 py-0.2 text-[9px] leading-none">✕</button>
+      </div>
       
-      <div id="modalLogoWrapper" class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center shadow-md overflow-hidden mt-1"></div>
+      <div id="modalLogoWrapper" class="w-16 h-16 mx-auto win98-box rounded-xl flex items-center justify-center overflow-hidden bg-white shadow-inner"></div>
 
-      <div>
-        <span id="modalCategory" class="text-[9px] uppercase tracking-wider font-extrabold text-brandPurple bg-indigo-50 px-2 py-0.5 rounded-full">KATEGORI</span>
-        <h3 id="modalTitle" class="text-sm font-black text-slate-900 mt-1">Nama Aplikasi</h3>
+      <div class="text-center">
+        <span id="modalCategory" class="text-[9px] uppercase tracking-wider font-extrabold text-y2kHotPink bg-pink-100 border border-pink-200 px-2 py-0.5 rounded-full">KATEGORI</span>
+        <h3 id="modalTitle" class="text-sm font-black text-slate-900 mt-1 font-pixel text-xl">Nama Aplikasi</h3>
         <p id="modalDesc" class="text-[11px] text-slate-500 mt-0.5">Deskripsi singkat</p>
       </div>
 
-      <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-left space-y-1">
-        <label class="text-[10px] font-bold text-slate-400 uppercase">Pilih Durasi:</label>
-        <select id="modalDurationSelect" class="w-full bg-white border border-slate-200 rounded-lg p-1.5 text-xs font-bold text-slate-800 focus:outline-none">
+      <div class="win98-inset bg-white p-2 text-left space-y-1">
+        <label class="text-[9px] font-bold text-slate-400 uppercase font-mono">Pilih Durasi Paket:</label>
+        <select id="modalDurationSelect" class="w-full bg-pink-50/50 border border-pink-200 rounded p-1 text-xs font-bold text-pink-950 focus:outline-none">
           <option>1 Bulan — Regular</option>
           <option>3 Bulan — Hemat</option>
           <option>1 Tahun — Full Garansi</option>
@@ -291,26 +392,28 @@
       </div>
 
       <div class="flex items-center justify-between pt-1">
-        <span id="modalPrice" class="text-base font-black text-brandPurple">Rp 0</span>
-        <button onclick="confirmAddToCart()" class="bg-brandLime hover:brightness-95 text-black font-extrabold text-xs px-4 py-2 rounded-xl shadow-sm active:scale-95 transition">
-          + Keranjang
+        <span id="modalPrice" class="text-base font-black text-y2kHotPink font-mono">Rp 0</span>
+        <button onclick="confirmAddToCart()" class="win98-btn bg-y2kPink hover:bg-pink-300 text-pink-950 font-black text-xs px-3.5 py-1.5 rounded active:scale-95 transition">
+          + Add to Cart ♡
         </button>
       </div>
     </div>
   </div>
 
   <!-- Modal Universal (Member / S&K / Info) -->
-  <div id="infoModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-xs w-full p-4 modal-enter shadow-2xl space-y-3 relative text-left">
-      <button onclick="closeInfoModal()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-700 text-sm font-bold w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center">✕</button>
-      <h3 id="infoModalTitle" class="text-sm font-black text-slate-900">Judul</h3>
-      <div id="infoModalBody" class="text-xs text-slate-600 space-y-2 max-h-60 overflow-y-auto leading-relaxed"></div>
-      <button onclick="closeInfoModal()" class="w-full bg-black text-white font-bold text-xs py-2 rounded-xl">Tutup</button>
+  <div id="infoModal" class="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 hidden flex items-center justify-center p-3">
+    <div class="bg-[#FDF8FC] win98-box max-w-xs w-full p-3 shadow-2xl space-y-2 relative text-left">
+      <div class="bg-gradient-to-r from-y2kHotPink to-y2kLilac px-2 py-1 flex items-center justify-between text-white text-[11px] font-bold">
+        <span id="infoModalTitle">System Message</span>
+        <button onclick="closeInfoModal()" class="win98-btn bg-white text-pink-900 font-bold px-1 py-0.2 text-[9px] leading-none">✕</button>
+      </div>
+      <div id="infoModalBody" class="text-xs text-slate-600 space-y-2 max-h-60 overflow-y-auto leading-relaxed win98-inset bg-white p-2.5"></div>
+      <button onclick="closeInfoModal()" class="win98-btn w-full bg-slate-100 text-slate-800 font-bold text-xs py-1.5">OK</button>
     </div>
   </div>
 
   <!-- Toast Notification -->
-  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-darkText text-white text-[11px] font-bold px-4 py-2 rounded-full shadow-lg z-50 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2">
+  <div id="toast" class="fixed bottom-14 left-1/2 -translate-x-1/2 win98-box bg-white text-pink-950 text-[11px] font-bold px-3 py-1.5 rounded shadow-lg z-50 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2 border-2 border-y2kHotPink">
     Pesan
   </div>
 
@@ -320,8 +423,8 @@
       =======================================================
       DATA APLIKASI (BISA KAMU EDIT & TAMBAH DENGAN MUDAH)
       =======================================================
-      - Jika ingin pakai LOGO GAMBAR: Isi `image: "https://link-gambar.png"`
-      - Jika ingin pakai LOGO INISIAL: Set `image: null`, lalu tentukan `iconText` dan `bgColor`.
+      - Jika ingin LOGO GAMBAR: Isi `image: "https://link-gambar.png"`
+      - Jika ingin LOGO INISIAL: Set `image: null`, lalu isi `iconText` dan `bgColor`.
     */
     const STORE_CONFIG = {
       storeName: "reztroid",
@@ -334,116 +437,116 @@
           name: "Alight Motion",
           category: "Desain & Edit",
           badge: "HOT",
-          badgeColor: "rose",
+          badgeColor: "pink",
           desc: "Full Fitur Preset 5MB XML",
           price: 15000,
-          image: null, // Masukkan URL gambar bila ada (contoh: "https://...png")
+          image: null,
           iconText: "AM",
-          bgColor: "#00D39B"
+          bgColor: "#FF99C8"
         },
         {
           id: "cc-01",
           name: "CapCut Pro",
           category: "Desain & Edit",
           badge: "AUTO",
-          badgeColor: "emerald",
+          badgeColor: "purple",
           desc: "Sharing Privat & Anti Limit",
           price: 18000,
           image: null,
           iconText: "CC",
-          bgColor: "#000000"
+          bgColor: "#D0BCFF"
         },
         {
           id: "canva-01",
           name: "Canva Pro Edu",
           category: "Desain & Edit",
-          badge: "POPULER",
-          badgeColor: "indigo",
+          badge: "BEST",
+          badgeColor: "blue",
           desc: "Full Garansi Lifetime / 1 Thn",
           price: 12000,
           image: null,
           iconText: "CV",
-          bgColor: "#00C4CC"
+          bgColor: "#A9DEF9"
         },
         {
           id: "nf-01",
           name: "Netflix Premium",
           category: "Streaming",
-          badge: "UHD 4K",
-          badgeColor: "rose",
+          badge: "4K UHD",
+          badgeColor: "pink",
           desc: "1 Profil 1 User Anti Screen Limit",
           price: 28000,
           image: null,
           iconText: "N",
-          bgColor: "#E50914"
+          bgColor: "#FF4394"
         },
         {
           id: "sp-01",
           name: "Spotify Individual",
           category: "Musik",
-          badge: "BEST",
-          badgeColor: "emerald",
+          badge: "VIBES",
+          badgeColor: "purple",
           desc: "Akun Pribadi Bebas Iklan",
           price: 19000,
           image: null,
           iconText: "SP",
-          bgColor: "#1DB954"
+          bgColor: "#C1FBA4"
         },
         {
           id: "yt-01",
           name: "YouTube Premium",
           category: "Musik",
-          badge: "MURAH",
-          badgeColor: "rose",
+          badge: "POPULAR",
+          badgeColor: "pink",
           desc: "Bebas Iklan + YT Music",
           price: 10000,
           image: null,
           iconText: "YT",
-          bgColor: "#FF0000"
+          bgColor: "#FF99C8"
         },
         {
           id: "chatgpt-01",
           name: "ChatGPT Plus 4o",
           category: "AI Tools",
           badge: "SMART",
-          badgeColor: "indigo",
+          badgeColor: "blue",
           desc: "Akses GPT-4o, DALL-E & Canvas",
           price: 35000,
           image: null,
           iconText: "AI",
-          bgColor: "#10A37F"
+          bgColor: "#D0BCFF"
         },
         {
           id: "disney-01",
           name: "Disney+ Hotstar",
           category: "Streaming",
-          badge: "HEMAT",
-          badgeColor: "indigo",
-          desc: "Streaming Film Marvel & Lokal",
+          badge: "CUTE",
+          badgeColor: "purple",
+          desc: "Streaming Film Marvel & Animasi",
           price: 25000,
           image: null,
           iconText: "D+",
-          bgColor: "#113CCF"
+          bgColor: "#A9DEF9"
         }
       ],
 
       testimonials: [
         {
-          name: "Rian D.",
+          name: "angel_baby99",
           rating: 5,
-          text: "CapCut Pro langsung aktif ga nyampe 2 menit setelah bayar QRIS. Mantul!",
+          text: "CapCut Pro langsung aktif 2 menit setelah scan QRIS! so cute & trusted 💖",
           product: "CapCut Pro"
         },
         {
-          name: "Nadia F.",
+          name: "chuu_cherry",
           rating: 5,
-          text: "Alight Motion nya beneran premium full garansi, admin fast respon bgt.",
+          text: "Alight Motion nya aman bgt preset 5MB work semua. adminnya ramah pol! 🌸",
           product: "Alight Motion"
         },
         {
-          name: "Bima Arya",
+          name: "cyber_doll",
           rating: 5,
-          text: "Netflix lancar jaya no screen limit! Udah order ke-4 kalinya di sini.",
+          text: "Netflix no limit screen beneran! bakal langganan terus di reztroid ♡",
           product: "Netflix Premium"
         }
       ]
@@ -454,19 +557,19 @@
     let cart = [];
     let activeProductForModal = null;
 
-    // Render Tombol Kategori
+    // Render Tab Kategori
     function renderCategories() {
       const container = document.getElementById("categoryContainer");
       container.innerHTML = STORE_CONFIG.categories.map(cat => {
         const isActive = cat === currentCategory;
         const activeClass = isActive 
-          ? "bg-black text-brandLime font-bold" 
-          : "bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium";
-        return `<button onclick="filterCategory('${cat}')" class="${activeClass} text-[11px] px-3 py-1 rounded-lg shrink-0 transition active:scale-95">${cat}</button>`;
+          ? "bg-y2kHotPink text-white font-extrabold border-b-0 translate-y-[1px]" 
+          : "bg-[#F5EEF8] hover:bg-pink-100 text-pink-900 font-bold";
+        return `<button onclick="filterCategory('${cat}')" class="${activeClass} win98-btn text-[10px] px-2.5 py-1 rounded-t shrink-0 transition">${cat}</button>`;
       }).join('');
     }
 
-    // Render Daftar Produk
+    // Render Produk
     function renderProducts(query = "") {
       const grid = document.getElementById("productListGrid");
       const filtered = STORE_CONFIG.products.filter(item => {
@@ -475,36 +578,39 @@
         return matchCategory && matchSearch;
       });
 
-      document.getElementById("productCounterBadge").innerText = `${filtered.length} items`;
+      document.getElementById("productCounterBadge").innerText = `${filtered.length} files`;
 
       if (filtered.length === 0) {
-        grid.innerHTML = `<div class="col-span-2 py-8 text-center text-xs text-slate-400">Tidak ada aplikasi yang cocok :(</div>`;
+        grid.innerHTML = `<div class="col-span-2 py-8 text-center text-xs text-pink-400 font-mono">file not found :( coba kata kunci lain</div>`;
         return;
       }
 
       grid.innerHTML = filtered.map(item => {
         const logoContent = item.image 
           ? `<img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">`
-          : `<div style="background-color: ${item.bgColor};" class="w-full h-full flex items-center justify-center text-white font-extrabold text-base">${item.iconText}</div>`;
-
-        const badgeColorClass = item.badgeColor === "rose" 
-          ? "bg-rose-50 text-rose-500" 
-          : (item.badgeColor === "emerald" ? "bg-emerald-50 text-emerald-600" : "bg-indigo-50 text-brandPurple");
+          : `<div style="background-color: ${item.bgColor};" class="w-full h-full flex items-center justify-center text-pink-950 font-pixel text-xl font-bold">${item.iconText}</div>`;
 
         return `
-          <div onclick="openProductModal('${item.id}')" class="cursor-pointer bg-white border border-slate-200 rounded-2xl p-3 flex flex-col justify-between shadow-sm relative group hover:shadow-md hover:border-slate-300 transition active:scale-[0.98]">
-            <span class="absolute top-2.5 right-2.5 ${badgeColorClass} font-extrabold text-[9px] px-1.5 py-0.5 rounded-md">${item.badge}</span>
-            <div class="flex flex-col items-center text-center mt-1">
-              <div class="w-12 h-12 rounded-2xl overflow-hidden shadow-sm mb-2 flex items-center justify-center">
+          <div onclick="openProductModal('${item.id}')" class="cursor-pointer win98-box bg-white p-2 flex flex-col justify-between relative group hover:shadow-md transition active:scale-[0.98]">
+            <div class="flex justify-between items-center mb-1">
+              <span class="bg-pink-100 text-y2kHotPink font-mono text-[8px] font-extrabold px-1 py-0.2 rounded border border-pink-200">${item.badge}</span>
+              <span class="text-[9px] text-pink-400">♡</span>
+            </div>
+            
+            <div class="flex flex-col items-center text-center my-0.5">
+              <div class="w-12 h-12 win98-box rounded-xl overflow-hidden mb-1 flex items-center justify-center">
                 ${logoContent}
               </div>
-              <span class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">${item.category}</span>
-              <h3 class="text-xs font-bold text-darkText truncate w-full">${item.name}</h3>
-              <span class="text-[10px] text-slate-500 line-clamp-1 mb-2">${item.desc}</span>
+              <span class="text-[8px] text-slate-400 font-bold uppercase tracking-wider font-mono">${item.category}</span>
+              <h3 class="text-xs font-black text-pink-950 truncate w-full font-pixel text-base">${item.name}</h3>
+              <span class="text-[9px] text-slate-500 line-clamp-1 mb-1.5">${item.desc}</span>
             </div>
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-xs font-extrabold text-brandPurple">Rp ${item.price.toLocaleString('id-ID')}</span>
-              <button onclick="event.stopPropagation(); quickAddToCart('${item.id}')" class="bg-brandLime hover:brightness-95 text-black font-extrabold text-[12px] w-6 h-6 rounded-lg flex items-center justify-center active:scale-90 transition shadow-sm">+</button>
+
+            <div class="pt-1.5 border-t border-dashed border-pink-200 flex items-center justify-between">
+              <span class="text-xs font-black text-y2kHotPink font-mono">Rp ${item.price.toLocaleString('id-ID')}</span>
+              <button onclick="event.stopPropagation(); quickAddToCart('${item.id}')" class="win98-btn bg-y2kPink hover:bg-pink-300 text-pink-950 font-black text-[10px] px-2 py-0.5 rounded transition">
+                + BUY
+              </button>
             </div>
           </div>
         `;
@@ -515,13 +621,13 @@
     function renderTestimonials() {
       const container = document.getElementById("testimonialContainer");
       container.innerHTML = STORE_CONFIG.testimonials.map(testi => `
-        <div class="min-w-[210px] bg-white border border-slate-200 rounded-2xl p-3 shadow-sm shrink-0">
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-[11px] font-bold text-darkText">${testi.name}</span>
+        <div class="min-w-[200px] win98-box bg-white p-2 shadow-sm shrink-0">
+          <div class="flex items-center justify-between mb-1 border-b border-pink-100 pb-0.5">
+            <span class="text-[10px] font-bold text-pink-950 font-mono">@${testi.name}</span>
             <span class="text-[9px] text-amber-400 font-bold">★★★★★</span>
           </div>
-          <p class="text-[10px] text-slate-600 line-clamp-2 leading-relaxed">"${testi.text}"</p>
-          <span class="text-[9px] font-bold text-brandPurple mt-1.5 block">✓ Beli ${testi.product}</span>
+          <p class="text-[10px] text-slate-600 line-clamp-2 leading-relaxed italic">"${testi.text}"</p>
+          <span class="text-[8px] font-bold text-y2kHotPink mt-1 block font-mono">♡ beli ${testi.product}</span>
         </div>
       `).join('');
     }
@@ -543,18 +649,19 @@
       const product = STORE_CONFIG.products.find(p => p.id === id);
       cart.push({ ...product, selectedDuration: "1 Bulan" });
       updateCartUI();
-      showToast(`Berhasil menambahkan ${product.name} ke keranjang!`);
+      showToast(`Added ${product.name} to cart! 💖`);
     }
 
     function updateCartUI() {
       document.getElementById("cartCountBadge").innerText = cart.length;
+      document.getElementById("taskbarCartCount").innerText = cart.length;
       renderCartDrawerItems();
     }
 
     function renderCartDrawerItems() {
       const list = document.getElementById("cartItemsList");
       if (cart.length === 0) {
-        list.innerHTML = `<div class="py-8 text-center text-xs text-slate-400">Keranjang masih kosong nih 🛒</div>`;
+        list.innerHTML = `<div class="py-6 text-center text-xs text-pink-400 font-mono">your cart is empty babe 🛍️</div>`;
         document.getElementById("cartTotalPrice").innerText = "Rp 0";
         return;
       }
@@ -563,12 +670,12 @@
       list.innerHTML = cart.map((item, idx) => {
         total += item.price;
         return `
-          <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+          <div class="flex items-center justify-between win98-inset bg-white p-2">
             <div>
-              <h4 class="text-xs font-bold text-slate-800">${item.name}</h4>
-              <span class="text-[10px] text-slate-400">${item.selectedDuration} • Rp ${item.price.toLocaleString('id-ID')}</span>
+              <h4 class="text-xs font-bold text-pink-950 font-pixel text-base">${item.name}</h4>
+              <span class="text-[9px] text-slate-400 font-mono">${item.selectedDuration} • Rp ${item.price.toLocaleString('id-ID')}</span>
             </div>
-            <button onclick="removeFromCart(${idx})" class="text-rose-500 font-bold text-xs p-1">Hapus</button>
+            <button onclick="removeFromCart(${idx})" class="win98-btn bg-rose-100 text-rose-700 font-bold text-[9px] px-1.5 py-0.5">remove</button>
           </div>
         `;
       }).join('');
@@ -599,7 +706,7 @@
       if (product.image) {
         logoWrapper.innerHTML = `<img src="${product.image}" class="w-full h-full object-cover">`;
       } else {
-        logoWrapper.innerHTML = `<div style="background-color:${product.bgColor}" class="w-full h-full flex items-center justify-center text-white font-extrabold text-xl">${product.iconText}</div>`;
+        logoWrapper.innerHTML = `<div style="background-color:${product.bgColor}" class="w-full h-full flex items-center justify-center text-pink-950 font-pixel text-2xl font-bold">${product.iconText}</div>`;
       }
 
       document.getElementById("modalCategory").innerText = product.category;
@@ -621,22 +728,22 @@
       cart.push({ ...activeProductForModal, selectedDuration: duration });
       updateCartUI();
       closeProductModal();
-      showToast(`${activeProductForModal.name} dimasukkan ke keranjang!`);
+      showToast(`${activeProductForModal.name} added! 💖`);
     }
 
     // Checkout Langsung ke WhatsApp
     function checkoutToWhatsApp() {
       if (cart.length === 0) {
-        showToast("Keranjangmu masih kosong!");
+        showToast("Cart masih kosong babe!");
         return;
       }
-      let text = `Halo Admin ${STORE_CONFIG.storeName}, saya mau order akun digital berikut:%0A%0A`;
+      let text = `Halo Admin ${STORE_CONFIG.storeName} ♡, saya mau order paket digital berikut:%0A%0A`;
       let total = 0;
       cart.forEach((item, i) => {
         text += `${i+1}. ${item.name} (${item.selectedDuration}) - Rp ${item.price.toLocaleString('id-ID')}%0A`;
         total += item.price;
       });
-      text += `%0ATotal: *Rp ${total.toLocaleString('id-ID')}*%0AMohon info metode bayar QRIS-nya ya, terima kasih!`;
+      text += `%0ATotal: *Rp ${total.toLocaleString('id-ID')}*%0AMohon kirimkan QRIS-nya ya admin, thank you! 💖`;
       window.open(`https://wa.me/${STORE_CONFIG.adminWA}?text=${text}`, '_blank');
     }
 
@@ -651,28 +758,28 @@
       const body = document.getElementById("infoModalBody");
 
       if (type === 'member') {
-        title.innerText = "Program VIP & Member";
+        title.innerText = "VIP_MEMBER_INFO.EXE";
         body.innerHTML = `
-          <p>Dapatkan keuntungan eksklusif dengan menjadi member Reztroid:</p>
-          <ul class="list-disc list-inside space-y-1 text-slate-700">
-            <li>Diskon 10% setiap pembelian aplikasi apapun.</li>
-            <li>Komisi saldo hingga Rp 5.000 per teman yang kamu ajak.</li>
-            <li>Prioritas jalur antrean chat CS WhatsApp.</li>
+          <p class="font-bold text-pink-900">🌸 Keuntungan VIP Dollhouse Member:</p>
+          <ul class="list-disc list-inside space-y-1 text-slate-700 mt-1">
+            <li>Diskon 10% setiap belanja aplikasi.</li>
+            <li>Bonus saldo referral Rp 5.000 per teman.</li>
+            <li>Fast track customer service via WhatsApp.</li>
           </ul>
-          <p class="font-bold text-darkText pt-1">Mau gabung? Hubungi admin via WhatsApp untuk aktivasi akun VIP-mu!</p>
+          <p class="font-bold text-y2kHotPink pt-1">Chat admin via WhatsApp untuk klaim badge VIP kamu!</p>
         `;
       } else if (type === 'terms') {
-        title.innerText = "Syarat, Ketentuan & Garansi";
+        title.innerText = "TERMS_AND_WARRANTY.TXT";
         body.innerHTML = `
-          <p><strong>1. Garansi Penuh:</strong> Kami memberikan garansi ganti baru (*free replace*) jika terjadi kendala pada akun selama masa aktif langganan.</p>
-          <p><strong>2. Waktu Proses:</strong> Akun dikirim otomatis melalui chat WhatsApp 1-5 menit setelah pembayaran QRIS diverifikasi.</p>
-          <p><strong>3. Penggunaan Legal:</strong> Akun digunakan secara wajar sesuai ketentuan masing-masing aplikasi.</p>
+          <p><strong>1. Full Replacement:</strong> Garansi ganti baru 100% jika terjadi masalah selama masa aktif.</p>
+          <p><strong>2. Instant Processing:</strong> Akun dikirim 1-5 menit via WhatsApp setelah scan QRIS berhasil.</p>
+          <p><strong>3. Usage Policy:</strong> Gunakan akun sesuai kapasitas masing-masing layanan.</p>
         `;
       } else if (type === 'promo') {
-        title.innerText = "Bonus Saldo Referral";
+        title.innerText = "SPECIAL_PROMO.EXE";
         body.innerHTML = `
-          <p>Dapatkan saldo gratis setiap kali kamu mereferensikan teman untuk langganan di Reztroid!</p>
-          <p class="bg-yellow-50 p-2 rounded-lg border border-yellow-200 text-yellow-900 font-bold">Klaim bonusmu dengan screenshot bukti transaksi temanmu ke admin WhatsApp.</p>
+          <p class="text-pink-900 font-bold">✨ Referral Saldo Gratis!</p>
+          <p class="mt-1">Ajak bestie kamu langganan di Reztroid dan klaim saldo gratis langsung ke e-Wallet kamu via chat WhatsApp!</p>
         `;
       }
       modal.classList.remove("hidden");
@@ -692,12 +799,24 @@
       }, 2400);
     }
 
-    // Inisialisasi Tampilan
+    // Jam Windows Taskbar
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12 || 12;
+      document.getElementById("clockWidget").innerText = `${hours}:${minutes} ${ampm}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Inisialisasi awal
     renderCategories();
     renderProducts();
     renderTestimonials();
 
-    // ==================== ANIMASI BINTANG JATUH ====================
+    // ==================== ANIMASI BINTANG JATUH (PASTEL CYBER STYLE) ====================
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -710,11 +829,11 @@
     });
 
     const staticStars = [];
-    for (let i = 0; i < 45; i++) {
+    for (let i = 0; i < 50; i++) {
       staticStars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * 1.4 + 0.6,
+        size: Math.random() * 1.6 + 0.6,
         alpha: Math.random(),
         speed: Math.random() * 0.02 + 0.005
       });
@@ -733,29 +852,29 @@
 
     setInterval(() => {
       if (!shootingStar.active) resetShootingStar();
-    }, 2600);
+    }, 2400);
 
     function animate() {
       ctx.clearRect(0, 0, width, height);
 
-      // Gambar partikel berkelap-kelip halus
+      // Gambar kerlipan bintang pastel pink/ungu
       staticStars.forEach(star => {
         star.alpha += star.speed;
-        const currentAlpha = (Math.sin(star.alpha) + 1) / 2 * 0.4;
-        ctx.fillStyle = `rgba(100, 116, 139, ${currentAlpha})`;
+        const currentAlpha = (Math.sin(star.alpha) + 1) / 2 * 0.6;
+        ctx.fillStyle = `rgba(255, 105, 180, ${currentAlpha})`;
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      // Gambar garis lintasan bintang jatuh
+      // Bintang jatuh berekor gradasi pink ke ungu
       if (shootingStar.active) {
         const tailX = shootingStar.x - shootingStar.len;
         const tailY = shootingStar.y - shootingStar.len * 0.5;
 
         const grad = ctx.createLinearGradient(shootingStar.x, shootingStar.y, tailX, tailY);
-        grad.addColorStop(0, 'rgba(83, 56, 255, 0.7)');
-        grad.addColorStop(1, 'rgba(83, 56, 255, 0)');
+        grad.addColorStop(0, 'rgba(255, 67, 148, 0.9)');
+        grad.addColorStop(1, 'rgba(208, 188, 255, 0)');
 
         ctx.strokeStyle = grad;
         ctx.lineWidth = shootingStar.size;
@@ -765,7 +884,7 @@
         ctx.lineTo(tailX, tailY);
         ctx.stroke();
 
-        ctx.fillStyle = '#D8FF00';
+        ctx.fillStyle = '#FFFFFF';
         ctx.beginPath();
         ctx.arc(shootingStar.x, shootingStar.y, shootingStar.size + 0.5, 0, Math.PI * 2);
         ctx.fill();

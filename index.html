@@ -762,15 +762,12 @@
     </div>
   </div>
 <script>
-    function closeWelcomeModal() {
-      const modal = document.getElementById("welcomeModal");
-      if (modal) {
-        modal.classList.add("opacity-0", "pointer-events-none");
-        setTimeout(() => {
-          modal.classList.add("hidden");
-        }, 300);
-      }
-    }
+   function closeWelcomeModal() {
+  const modal = document.getElementById("welcomeModal");
+  if (modal) {
+    modal.style.setProperty("display", "none", "important");
+  }
+}
   <!-- ==================== MINI LIVE CHAT WIDGET INTERAKTIF ==================== -->
 <div id="miniChatWidget" class="fixed bottom-5 right-5 z-[9997] flex flex-col items-end">
   

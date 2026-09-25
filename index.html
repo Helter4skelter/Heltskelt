@@ -3,35 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>reztroid® — Retro Digital Store</title>
+  <title>reztroid® — Official Digital Store</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Pixelify Sans, Plus Jakarta Sans, Caveat (tulisan tangan) -->
+  <!-- Google Font: Plus Jakarta Sans & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Pixelify+Sans:wght@700&family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            pixel: ['"Pixelify Sans"', 'cursive'],
-            hand: ['"Caveat"', 'cursive']
-          },
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
           colors: {
-            nbYellow: '#FFE600',
-            nbPink: '#FF6B97',
-            nbGreen: '#00E599',
-            nbBlue: '#2D68FF',
-            nbCream: '#FAF8F5'
-          },
-          boxShadow: {
-            'brutal': '3px 3px 0px #000',
-            'brutal-sm': '2px 2px 0px #000',
-            'brutal-lg': '4px 4px 0px #000',
-            'brutal-press': '1px 1px 0px #000',
+            brandLime: '#CCFF00',    /* Lime neon khas Reztroid */
+            brandPurple: '#5338FF',  /* Ungu terang Reztroid */
+            darkText: '#0F172A',
           }
         }
       }
@@ -39,303 +27,341 @@
   </script>
 
   <style>
-    /* Background Lined Notebook Paper Effect */
-    .bg-notebook {
-      background-color: #fbfbf9;
-      background-image: 
-        linear-gradient(#0000000d 1px, transparent 1px),
-        linear-gradient(90deg, #ff005510 1px, transparent 1px);
-      background-size: 100% 24px, 40px 100%;
-    }
-    
-    /* Grid background di pinggir (seperti referensi) */
-    body {
-      background-color: #6B7280;
-      background-image: radial-gradient(#9CA3AF 1px, transparent 1px);
-      background-size: 14px 14px;
-    }
-
-    /* Efek Selotip / Tape Kertas */
-    .tape {
-      background: rgba(255, 255, 255, 0.7);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      backdrop-filter: blur(1px);
-      border-left: 2px dashed rgba(0,0,0,0.15);
-      border-right: 2px dashed rgba(0,0,0,0.15);
-    }
-
+    /* Hilangkan scrollbar bawaan */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Canvas bintang jatuh di latar belakang */
+    #starCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
   </style>
 </head>
-<body class="font-sans antialiased text-slate-900 py-3 sm:py-6">
+<body class="bg-[#F6F8FA] text-darkText font-sans antialiased relative min-h-screen">
 
-  <!-- Container Lembar Kertas Utama (Mobile Frame) -->
-  <div class="max-w-[440px] mx-auto bg-notebook border-2 border-black shadow-[6px_6px_0px_#000] rounded-lg overflow-hidden min-h-screen relative flex flex-col justify-between">
+  <!-- Canvas Animasi Bintang Jatuh & Kerlip Bintang (Clean Style) -->
+  <canvas id="starCanvas"></canvas>
+
+  <!-- Container Mobile Responsive Padat -->
+  <div class="relative z-10 max-w-[430px] mx-auto min-h-screen bg-white/95 backdrop-blur-sm border-x border-slate-200/80 shadow-[0_0_40px_rgba(0,0,0,0.04)] flex flex-col justify-between">
 
     <div>
-      <!-- 1. Top Ribbon Marquee -->
-      <div class="bg-nbYellow border-b-2 border-black py-1 px-3 text-[11px] font-black tracking-wide flex justify-between items-center">
-        <span class="flex items-center gap-1">⚡ INSTANT DELIVERY 24/7</span>
-        <span class="bg-black text-white text-[9px] px-1.5 py-0.2 rounded font-mono">100% GUARANTEE</span>
+      <!-- 1. Top Announcement Marquee -->
+      <div class="bg-black text-white text-[11px] font-semibold py-1.5 px-3 flex items-center justify-between tracking-tight">
+        <div class="flex items-center gap-1.5 truncate">
+          <span class="text-brandLime animate-pulse">✦</span>
+          <span class="truncate">MEMBER & AJAK TEMAN DAPATKAN BONUS SALDO</span>
+        </div>
+        <span class="text-slate-400 shrink-0 text-[10px] pl-2 font-mono">24/7 ONLINE</span>
       </div>
 
-      <!-- 2. Header Bar -->
-      <header class="p-3 border-b-2 border-black flex items-center justify-between bg-white">
+      <!-- 2. Clean Header -->
+      <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-100 px-4 py-2.5 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <!-- Pixel Badge Icon -->
-          <div class="w-8 h-8 bg-nbPink border-2 border-black font-pixel text-lg flex items-center justify-center shadow-brutal-sm font-bold">
-            R
-          </div>
-          <span class="font-pixel text-2xl tracking-wider uppercase font-bold text-black">reztroid</span>
+          <div class="w-6 h-6 bg-black text-brandLime font-black text-xs rounded-md flex items-center justify-center">R</div>
+          <span class="font-extrabold text-lg tracking-tight">reztroid<span class="text-brandPurple">®</span></span>
         </div>
-        <div class="flex items-center gap-1.5">
-          <button class="bg-nbGreen border-2 border-black text-[11px] font-extrabold px-2.5 py-1 rounded shadow-brutal-sm active:translate-x-0.5 active:translate-y-0.5 transition">
-            ✦ VIP Member
+        <div class="flex items-center gap-2">
+          <button class="bg-brandLime text-black font-extrabold text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm active:scale-95 transition">
+            <span>🎁</span> Member
           </button>
-          <button class="bg-nbYellow border-2 border-black text-[11px] font-bold px-2 py-1 rounded shadow-brutal-sm">
-            🛒 0
+          <button class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 transition">
+            <span>🛍️</span> <span>0</span>
           </button>
         </div>
       </header>
 
-      <!-- Main Content Container -->
-      <div class="p-3 space-y-4">
+      <!-- Main Body: Padat & Terstruktur -->
+      <div class="p-3.5 space-y-3.5">
 
-        <!-- 3. Retro Hero Header -->
-        <div class="relative pt-2 text-center">
-          <!-- Hiasan Selotip Kiri & Kanan -->
-          <div class="absolute -top-1 left-4 w-12 h-4 tape rotate-[-8deg] z-10"></div>
-          <div class="absolute -top-1 right-4 w-12 h-4 tape rotate-[6deg] z-10"></div>
-
-          <div class="inline-block bg-white border-2 border-black px-3 py-0.5 text-[10px] font-bold uppercase shadow-brutal-sm mb-1.5">
-            ★ YOUR EVERYDAY DIGITAL STORE ★
+        <!-- 3. Banner Utama (Ungu Vibrant) -->
+        <div class="bg-gradient-to-br from-[#4F39F6] via-[#6344F5] to-[#7B53F7] rounded-2xl p-4 text-white shadow-md shadow-brandPurple/15 relative overflow-hidden">
+          <div class="inline-block bg-white/20 backdrop-blur-sm text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-2">
+            OFFICIAL PARTNER DIGITAL
           </div>
-          
-          <h1 class="font-pixel text-3xl sm:text-4xl text-black leading-none uppercase tracking-wide">
-            UPGRADE YOUR APPS
+          <h1 class="text-base font-black leading-snug mb-1">
+            Langganan Aplikasi Premium Murah & Cepat
           </h1>
-          <p class="font-hand text-lg text-slate-700 font-bold -rotate-1 mt-0.5">
-            nonton, ngedit, denger musik tanpa ribet & murah pol! ✍️
+          <p class="text-[11px] text-white/80 leading-normal">
+            Solusi hemat kebutuhan streaming, desain, kerja & hiburan harianmu tanpa ribet.
           </p>
-
-          <!-- Badges Floating Tags -->
-          <div class="flex flex-wrap justify-center gap-1.5 mt-2">
-            <span class="bg-nbPink border border-black text-[9px] font-bold px-2 py-0.5 rounded shadow-brutal-sm rotate-[-2deg]">Stream</span>
-            <span class="bg-nbGreen border border-black text-[9px] font-bold px-2 py-0.5 rounded shadow-brutal-sm rotate-[1deg]">Editing</span>
-            <span class="bg-nbYellow border border-black text-[9px] font-bold px-2 py-0.5 rounded shadow-brutal-sm rotate-[-1deg]">Music Pro</span>
-            <span class="bg-nbBlue text-white border border-black text-[9px] font-bold px-2 py-0.5 rounded shadow-brutal-sm rotate-[2deg]">AI Tools</span>
-          </div>
         </div>
 
-        <!-- 4. Search Bar Brutalism -->
-        <div class="relative">
-          <input type="text" placeholder="Ketik nama aplikasi..." class="w-full bg-white border-2 border-black rounded p-2 text-xs font-bold placeholder:font-normal placeholder:text-slate-400 shadow-brutal-sm focus:outline-none focus:bg-yellow-50">
-          <button class="absolute right-1.5 top-1.5 bg-black text-white px-2 py-1 text-[10px] font-bold rounded">
-            Cari ↵
+        <!-- 4. Banner Card Member Hijau Neon (Dari Pict 3) -->
+        <div class="bg-brandLime border border-black/10 rounded-2xl p-3.5 shadow-sm text-black flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 bg-white/90 border border-black/10 rounded-xl flex items-center justify-center text-base shrink-0 shadow-sm">
+              🎁
+            </div>
+            <div>
+              <span class="text-[9px] font-black uppercase tracking-wider text-black/60 block">REZTROID MEMBER</span>
+              <p class="text-xs font-black leading-tight text-slate-900">Harga khusus + hadiah referral</p>
+            </div>
+          </div>
+          <button class="bg-black text-white text-[11px] font-bold px-3 py-2 rounded-xl shrink-0 active:scale-95 transition">
+            Gabung ↗
           </button>
         </div>
 
-        <!-- 5. Compact Product Grid (2 Kolom Padat & Bergaya) -->
+        <!-- 5. Search Bar & Horizontal Chips -->
+        <div class="space-y-2">
+          <div class="relative">
+            <input type="text" placeholder="Cari aplikasi atau kategori..." class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 pl-9 pr-3 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brandPurple/30 focus:bg-white transition shadow-inner">
+            <span class="absolute left-3 top-2.5 text-slate-400 text-xs">🔍</span>
+          </div>
+
+          <!-- Kategori Geser (Kompak) -->
+          <div class="flex gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+            <button class="bg-black text-brandLime text-[11px] font-bold px-3 py-1 rounded-lg shrink-0">Semua</button>
+            <button class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-medium px-3 py-1 rounded-lg shrink-0">Streaming</button>
+            <button class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-medium px-3 py-1 rounded-lg shrink-0">Desain & Edit</button>
+            <button class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-medium px-3 py-1 rounded-lg shrink-0">Musik</button>
+            <button class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-medium px-3 py-1 rounded-lg shrink-0">Produktivitas</button>
+          </div>
+        </div>
+
+        <!-- 6. Compact Product Grid (2 Kolom Bersih) -->
         <section>
           <div class="flex items-center justify-between mb-2">
-            <span class="font-pixel text-base font-bold uppercase tracking-wider bg-black text-white px-2 py-0.5">
-              📦 KATALOG FAVORIT
-            </span>
-            <span class="font-hand text-sm font-bold text-slate-600">stok ready terus! ✨</span>
+            <h2 class="font-extrabold text-sm text-darkText">Katalog Pilihan</h2>
+            <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">✓ Garansi Resmi</span>
           </div>
 
           <div class="grid grid-cols-2 gap-2.5">
-            <!-- Product Card 1 -->
-            <div class="bg-white border-2 border-black rounded-lg p-2.5 shadow-brutal flex flex-col justify-between relative group hover:-translate-y-0.5 transition">
-              <!-- Tape Accent -->
-              <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-3 tape"></div>
-              
-              <div class="flex justify-between items-start mb-2 mt-1">
-                <span class="bg-nbPink text-black text-[8px] font-black px-1.5 py-0.5 border border-black">HOT</span>
-                <span class="text-[9px] font-bold text-slate-500 font-mono">#01</span>
+            <!-- Item 1: Alight Motion -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-3 flex flex-col justify-between shadow-sm relative group hover:shadow-md transition">
+              <span class="absolute top-2.5 right-2.5 bg-rose-50 text-rose-500 font-extrabold text-[9px] px-1.5 py-0.5 rounded-md">HOT</span>
+              <div class="flex flex-col items-center text-center mt-1">
+                <div class="w-12 h-12 bg-[#00D39B] rounded-2xl flex items-center justify-center text-white font-extrabold text-base shadow-sm mb-2">AM</div>
+                <span class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">DESAIN</span>
+                <h3 class="text-xs font-bold text-darkText truncate w-full">Alight Motion</h3>
+                <span class="text-[10px] text-slate-500 mb-2">Premium Editing</span>
               </div>
-              
-              <div class="text-center my-1">
-                <div class="w-12 h-12 bg-emerald-400 border-2 border-black rounded-lg mx-auto flex items-center justify-center font-pixel text-xl text-black font-bold shadow-brutal-sm mb-1.5">
-                  AM
-                </div>
-                <span class="text-[9px] uppercase font-bold text-slate-400 block tracking-tight">Desain & Video</span>
-                <h3 class="font-extrabold text-xs text-black truncate">Alight Motion</h3>
-                <span class="text-[10px] text-slate-500 font-medium">1 Tahun Garansi</span>
-              </div>
-
-              <div class="pt-2 border-t-2 border-dashed border-slate-300 flex items-center justify-between mt-2">
-                <span class="font-mono text-xs font-black text-black">15K</span>
-                <button class="bg-nbYellow hover:bg-nbGreen border-2 border-black text-[10px] font-black px-2 py-0.5 rounded shadow-brutal-sm active:translate-x-0.5 active:translate-y-0.5 transition">
-                  + BELI
-                </button>
+              <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-extrabold text-brandPurple">Rp 15.000</span>
+                <button class="bg-brandLime hover:bg-lime-300 text-black font-extrabold text-[11px] w-6 h-6 rounded-lg flex items-center justify-center active:scale-90 transition">+</button>
               </div>
             </div>
 
-            <!-- Product Card 2 -->
-            <div class="bg-white border-2 border-black rounded-lg p-2.5 shadow-brutal flex flex-col justify-between relative group hover:-translate-y-0.5 transition">
-              <!-- Tape Accent -->
-              <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-3 tape"></div>
-
-              <div class="flex justify-between items-start mb-2 mt-1">
-                <span class="bg-nbGreen text-black text-[8px] font-black px-1.5 py-0.5 border border-black">AUTO</span>
-                <span class="text-[9px] font-bold text-slate-500 font-mono">#02</span>
+            <!-- Item 2: CapCut Pro -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-3 flex flex-col justify-between shadow-sm relative group hover:shadow-md transition">
+              <span class="absolute top-2.5 right-2.5 bg-emerald-50 text-emerald-600 font-extrabold text-[9px] px-1.5 py-0.5 rounded-md">AUTO</span>
+              <div class="flex flex-col items-center text-center mt-1">
+                <div class="w-12 h-12 bg-black rounded-2xl flex items-center justify-center text-white font-extrabold text-base shadow-sm mb-2">CC</div>
+                <span class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">DESAIN</span>
+                <h3 class="text-xs font-bold text-darkText truncate w-full">CapCut Pro</h3>
+                <span class="text-[10px] text-slate-500 mb-2">Harga Termurah</span>
               </div>
-              
-              <div class="text-center my-1">
-                <div class="w-12 h-12 bg-black border-2 border-black rounded-lg mx-auto flex items-center justify-center font-pixel text-xl text-white font-bold shadow-brutal-sm mb-1.5">
-                  CC
-                </div>
-                <span class="text-[9px] uppercase font-bold text-slate-400 block tracking-tight">Desain & Video</span>
-                <h3 class="font-extrabold text-xs text-black truncate">CapCut Pro</h3>
-                <span class="text-[10px] text-slate-500 font-medium">Sharing Privat</span>
-              </div>
-
-              <div class="pt-2 border-t-2 border-dashed border-slate-300 flex items-center justify-between mt-2">
-                <span class="font-mono text-xs font-black text-black">18K</span>
-                <button class="bg-nbYellow hover:bg-nbGreen border-2 border-black text-[10px] font-black px-2 py-0.5 rounded shadow-brutal-sm active:translate-x-0.5 active:translate-y-0.5 transition">
-                  + BELI
-                </button>
+              <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-extrabold text-brandPurple">Rp 18.000</span>
+                <button class="bg-brandLime hover:bg-lime-300 text-black font-extrabold text-[11px] w-6 h-6 rounded-lg flex items-center justify-center active:scale-90 transition">+</button>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- 6. Cara Order (Retro Step Tags) -->
-        <section class="bg-white border-2 border-black rounded-lg p-3 shadow-brutal">
-          <div class="flex items-center gap-1.5 mb-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-red-500 border border-black inline-block"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-yellow-400 border border-black inline-block"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-green-500 border border-black inline-block"></span>
-            <span class="font-pixel text-xs font-bold uppercase ml-1">CARA ORDER CEPAT</span>
+        <!-- 7. Cara Order Ringkas (3 Kolom Mini) -->
+        <section class="bg-slate-50 border border-slate-200/80 rounded-2xl p-3">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-[10px] font-black uppercase text-slate-400 tracking-wider">3 Langkah Mudah</span>
+            <span class="text-[10px] font-bold text-brandPurple">Proses Otomatis</span>
           </div>
-
-          <div class="grid grid-cols-3 gap-2 text-center text-slate-800">
-            <div class="bg-yellow-50 border border-black rounded p-1.5">
-              <span class="font-pixel text-sm text-black">01</span>
-              <p class="text-[10px] font-black leading-tight mt-0.5">Pilih App</p>
-              <span class="text-[8px] text-slate-500 block leading-tight mt-0.5">Pilih durasi paket</span>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-white p-2 rounded-xl border border-slate-100 shadow-sm">
+              <span class="text-xs font-black text-brandPurple block">01</span>
+              <p class="text-[10px] font-bold mt-0.5">Pilih App</p>
+              <span class="text-[8px] text-slate-500 block leading-tight">Pilih durasi paket</span>
             </div>
-            <div class="bg-pink-50 border border-black rounded p-1.5">
-              <span class="font-pixel text-sm text-black">02</span>
-              <p class="text-[10px] font-black leading-tight mt-0.5">Bayar QRIS</p>
-              <span class="text-[8px] text-slate-500 block leading-tight mt-0.5">Otomatis verified</span>
+            <div class="bg-white p-2 rounded-xl border border-slate-100 shadow-sm">
+              <span class="text-xs font-black text-brandPurple block">02</span>
+              <p class="text-[10px] font-bold mt-0.5">Bayar QRIS</p>
+              <span class="text-[8px] text-slate-500 block leading-tight">Verifikasi instan</span>
             </div>
-            <div class="bg-green-50 border border-black rounded p-1.5">
-              <span class="font-pixel text-sm text-black">03</span>
-              <p class="text-[10px] font-black leading-tight mt-0.5">Akun Aktif</p>
-              <span class="text-[8px] text-slate-500 block leading-tight mt-0.5">Sent via WhatsApp</span>
+            <div class="bg-white p-2 rounded-xl border border-slate-100 shadow-sm">
+              <span class="text-xs font-black text-brandPurple block">03</span>
+              <p class="text-[10px] font-bold mt-0.5">Akun Dikirim</p>
+              <span class="text-[8px] text-slate-500 block leading-tight">Langsung aktif via WA</span>
             </div>
           </div>
         </section>
 
-        <!-- 7. Testimoni (Polaroid & Sticky Note Aesthetic) -->
+        <!-- 8. Testimoni Pembeli (Carousel Kartu Bersih) -->
         <section>
-          <div class="flex justify-between items-center mb-1.5">
-            <span class="font-pixel text-base font-bold uppercase tracking-wide">
-              💬 REAL TESTI
-            </span>
-            <span class="bg-nbYellow border border-black px-1.5 text-[9px] font-bold">★ 4.9 / 5.0</span>
+          <div class="flex items-center justify-between mb-2">
+            <h2 class="font-extrabold text-sm text-darkText">Ulasan Pelanggan</h2>
+            <span class="text-[10px] text-amber-500 font-extrabold">★ 4.9 (1.5k+ Terjual)</span>
           </div>
-
-          <div class="flex gap-2.5 overflow-x-auto no-scrollbar py-1">
-            <!-- Sticky Note 1 -->
-            <div class="min-w-[195px] bg-[#FFF9C4] border-2 border-black p-2 rounded shadow-brutal-sm rotate-[-1deg] shrink-0 relative">
-              <div class="w-8 h-3 tape absolute -top-1.5 left-6"></div>
-              <div class="flex justify-between items-center text-[10px] font-mono font-bold text-slate-600 mb-1">
-                <span>@angga_k</span>
-                <span class="text-amber-600">★★★★★</span>
+          <div class="flex gap-2.5 overflow-x-auto no-scrollbar py-0.5">
+            <!-- Review 1 -->
+            <div class="min-w-[210px] bg-white border border-slate-200 rounded-xl p-2.5 shadow-sm shrink-0">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[11px] font-bold text-darkText">Rian D.</span>
+                <span class="text-[9px] text-amber-400 font-bold">★★★★★</span>
               </div>
-              <p class="font-hand text-sm font-bold text-slate-800 leading-snug">
-                "Baru beres bayar QRIS langsung dikirim detil loginnya. Top parah!"
-              </p>
-              <span class="text-[8px] font-mono bg-black text-white px-1 py-0.2 rounded mt-1.5 inline-block">CapCut Pro</span>
+              <p class="text-[10px] text-slate-600 line-clamp-2">"CapCut Pro langsung aktif ga nyampe 2 menit setelah bayar QRIS. Mantul!"</p>
+              <span class="text-[9px] font-bold text-brandPurple mt-1.5 block">✓ Verified Buyer</span>
             </div>
-
-            <!-- Sticky Note 2 -->
-            <div class="min-w-[195px] bg-[#E1F5FE] border-2 border-black p-2 rounded shadow-brutal-sm rotate-[1.5deg] shrink-0 relative">
-              <div class="w-8 h-3 tape absolute -top-1.5 left-6"></div>
-              <div class="flex justify-between items-center text-[10px] font-mono font-bold text-slate-600 mb-1">
-                <span>@dindas</span>
-                <span class="text-amber-600">★★★★★</span>
+            <!-- Review 2 -->
+            <div class="min-w-[210px] bg-white border border-slate-200 rounded-xl p-2.5 shadow-sm shrink-0">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[11px] font-bold text-darkText">Nadia F.</span>
+                <span class="text-[9px] text-amber-400 font-bold">★★★★★</span>
               </div>
-              <p class="font-hand text-sm font-bold text-slate-800 leading-snug">
-                "Udah 3 kali langganan di sini, garansi beneran aman anti back."
-              </p>
-              <span class="text-[8px] font-mono bg-black text-white px-1 py-0.2 rounded mt-1.5 inline-block">Alight Motion</span>
+              <p class="text-[10px] text-slate-600 line-clamp-2">"Alight Motion nya beneran premium full garansi, admin fast respon bgt."</p>
+              <span class="text-[9px] font-bold text-brandPurple mt-1.5 block">✓ Verified Buyer</span>
             </div>
           </div>
         </section>
 
-        <!-- 8. FAQ Mini Accordion (File Folder Style) -->
-        <section class="bg-white border-2 border-black rounded-lg p-2.5 shadow-brutal divide-y-2 border-black">
-          <div class="flex justify-between items-center pb-1.5">
-            <span class="font-pixel text-xs font-bold uppercase">📂 FAQ / BANTUAN</span>
-            <span class="text-[9px] font-mono text-slate-500">Tap to expand</span>
-          </div>
-
-          <details class="py-1.5 group cursor-pointer">
-            <summary class="text-[11px] font-bold list-none flex justify-between items-center">
-              <span>Berapa lama prosesnya?</span>
-              <span class="font-pixel font-bold text-xs group-open:rotate-90 transition">▶</span>
-            </summary>
-            <p class="text-[10px] text-slate-600 font-medium mt-1 pl-2 border-l-2 border-nbYellow">
-              Proses serba instan 1–5 menit otomatis begitu bayar via QRIS.
-            </p>
-          </details>
-
-          <details class="py-1.5 group cursor-pointer">
-            <summary class="text-[11px] font-bold list-none flex justify-between items-center">
-              <span>Gimana kalau akun kena limit/eror?</span>
-              <span class="font-pixel font-bold text-xs group-open:rotate-90 transition">▶</span>
-            </summary>
-            <p class="text-[10px] text-slate-600 font-medium mt-1 pl-2 border-l-2 border-nbPink">
-              Ada full replace! Chat admin WhatsApp dengan invoice kamu, langsung diganti baru.
-            </p>
-          </details>
+        <!-- 9. Quick Link Buttons (Gaya Tombol Rounded Seperti Pict 1) -->
+        <section class="space-y-2 pt-1">
+          <a href="#" class="flex items-center justify-between bg-slate-50 hover:bg-slate-100 border border-slate-200/90 rounded-2xl px-3.5 py-2.5 text-xs font-bold text-slate-800 transition active:scale-[0.99]">
+            <span class="flex items-center gap-2"><span>💬</span> WhatsApp Admin Support</span>
+            <span class="text-slate-400">→</span>
+          </a>
+          <a href="#" class="flex items-center justify-between bg-slate-50 hover:bg-slate-100 border border-slate-200/90 rounded-2xl px-3.5 py-2.5 text-xs font-bold text-slate-800 transition active:scale-[0.99]">
+            <span class="flex items-center gap-2"><span>🤝</span> Gabung Reseller & VIP</span>
+            <span class="text-slate-400">→</span>
+          </a>
+          <a href="#" class="flex items-center justify-between bg-slate-50 hover:bg-slate-100 border border-slate-200/90 rounded-2xl px-3.5 py-2.5 text-xs font-bold text-slate-800 transition active:scale-[0.99]">
+            <span class="flex items-center gap-2"><span>🛡️</span> Syarat, Ketentuan & Garansi</span>
+            <span class="text-slate-400">→</span>
+          </a>
         </section>
 
       </div>
     </div>
 
-    <!-- 9. Footer (Cyber / Neo-Brutalist Folder Tab) -->
-    <footer class="mt-4 bg-black text-white border-t-2 border-black p-3.5 space-y-3">
-      <div class="flex justify-between items-center">
-        <div>
-          <span class="font-pixel text-xl tracking-wider text-nbYellow">REZTROID®</span>
-          <p class="text-[9px] text-slate-400 font-mono">Digital app solutions since 2024</p>
-        </div>
-        <a href="#" class="bg-nbGreen text-black font-extrabold text-[10px] px-2.5 py-1 rounded border-2 border-white shadow-[2px_2px_0px_#fff] active:translate-x-0.5 active:translate-y-0.5 transition flex items-center gap-1">
-          <span>💬</span> CS WHATSAPP
-        </a>
+    <!-- 10. Clean Footer dengan "Made With ❤️" -->
+    <footer class="mt-4 border-t border-slate-200 p-4 bg-slate-50 text-center space-y-2.5">
+      <div class="flex justify-center gap-1.5 text-[9px] font-bold text-slate-500">
+        <span class="bg-white border border-slate-200 px-2 py-0.5 rounded">QRIS</span>
+        <span class="bg-white border border-slate-200 px-2 py-0.5 rounded">DANA</span>
+        <span class="bg-white border border-slate-200 px-2 py-0.5 rounded">GoPay</span>
+        <span class="bg-white border border-slate-200 px-2 py-0.5 rounded">ShopeePay</span>
+        <span class="bg-white border border-slate-200 px-2 py-0.5 rounded">BCA</span>
       </div>
 
-      <!-- Payment Chips -->
-      <div class="border-t border-dashed border-slate-700 pt-2.5">
-        <span class="text-[8px] font-mono uppercase text-slate-400 block mb-1">SUPPORTED PAYMENTS:</span>
-        <div class="flex flex-wrap gap-1 text-[9px] font-mono font-bold">
-          <span class="bg-slate-800 border border-slate-600 px-1.5 py-0.5 rounded text-white">QRIS</span>
-          <span class="bg-slate-800 border border-slate-600 px-1.5 py-0.5 rounded text-white">DANA</span>
-          <span class="bg-slate-800 border border-slate-600 px-1.5 py-0.5 rounded text-white">GOPAY</span>
-          <span class="bg-slate-800 border border-slate-600 px-1.5 py-0.5 rounded text-white">SHOPEEPAY</span>
-          <span class="bg-slate-800 border border-slate-600 px-1.5 py-0.5 rounded text-white">BCA</span>
-        </div>
-      </div>
+      <p class="text-[11px] text-slate-500 font-medium">
+        Made with <span class="text-rose-500">❤️</span> by <span class="font-bold text-darkText">reztroid</span>
+      </p>
 
-      <div class="border-t border-dashed border-slate-700 pt-2 flex justify-between text-[9px] font-mono text-slate-400">
-        <div class="space-x-2">
-          <a href="#" class="hover:text-nbYellow">TERMS</a>
-          <span>/</span>
-          <a href="#" class="hover:text-nbYellow">GARANSI</a>
-          <span>/</span>
-          <a href="#" class="hover:text-nbYellow">CEK RESI</a>
-        </div>
-        <span>© 2026 REZTROID</span>
-      </div>
+      <span class="text-[10px] text-slate-400 block font-mono">
+        © 2026 reztroid. All rights reserved.
+      </span>
     </footer>
 
   </div>
+
+  <!-- Script Animasi Canvas Bintang Jatuh (Clean & Ringan) -->
+  <script>
+    const canvas = document.getElementById('starCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    // Buat partikel bintang diam yang berkedip lembut
+    const staticStars = [];
+    for (let i = 0; i < 40; i++) {
+      staticStars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() * 1.5 + 0.5,
+        alpha: Math.random(),
+        speed: Math.random() * 0.02 + 0.005
+      });
+    }
+
+    // Objek Bintang Jatuh (Shooting Star)
+    let shootingStar = {
+      x: 0,
+      y: 0,
+      len: 0,
+      speed: 0,
+      size: 0,
+      active: false
+    };
+
+    function resetShootingStar() {
+      shootingStar.x = Math.random() * width;
+      shootingStar.y = Math.random() * (height * 0.4);
+      shootingStar.len = Math.random() * 80 + 40;
+      shootingStar.speed = Math.random() * 7 + 5;
+      shootingStar.size = Math.random() * 1.5 + 1;
+      shootingStar.active = true;
+    }
+
+    // Panggil bintang jatuh tiap beberapa detik
+    setInterval(() => {
+      if (!shootingStar.active) resetShootingStar();
+    }, 2800);
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Gambar bintang berkedip (abu-abu halus agar serasi dengan clean white theme)
+      staticStars.forEach(star => {
+        star.alpha += star.speed;
+        const currentAlpha = (Math.sin(star.alpha) + 1) / 2 * 0.45; // opacity halus
+        ctx.fillStyle = `rgba(100, 116, 139, ${currentAlpha})`;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Gambar shooting star
+      if (shootingStar.active) {
+        const tailX = shootingStar.x - shootingStar.len;
+        const tailY = shootingStar.y - shootingStar.len * 0.5;
+
+        const grad = ctx.createLinearGradient(
+          shootingStar.x, shootingStar.y,
+          tailX, tailY
+        );
+        grad.addColorStop(0, 'rgba(83, 56, 255, 0.7)'); // Jejak ungu
+        grad.addColorStop(1, 'rgba(83, 56, 255, 0)');
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = shootingStar.size;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(shootingStar.x, shootingStar.y);
+        ctx.lineTo(tailX, tailY);
+        ctx.stroke();
+
+        // Titik kepala bintang
+        ctx.fillStyle = '#CCFF00'; // Kepala neon lime
+        ctx.beginPath();
+        ctx.arc(shootingStar.x, shootingStar.y, shootingStar.size + 0.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Gerakkan bintang
+        shootingStar.x += shootingStar.speed;
+        shootingStar.y += shootingStar.speed * 0.5;
+
+        // Reset jika keluar layar
+        if (shootingStar.x > width + 100 || shootingStar.y > height + 100) {
+          shootingStar.active = false;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
 
 </body>
 </html>

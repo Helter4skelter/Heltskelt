@@ -131,7 +131,12 @@
         <a href="#testimoni" class="hover:text-black transition">Testimoni</a>
       </nav>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3">        <!-- Tombol Buka Fitur Member -->
+        <button id="openMemberModalBtn" class="flex items-center gap-2 px-3 py-2 rounded-2xl border-2 border-black bg-neon text-black font-extrabold text-xs shadow-sm transition active:scale-95">
+          <i data-lucide="gift" class="w-4 h-4"></i>
+          <span>Member & Reward</span>
+        </button>
+
         <button id="openCartBtn" class="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border-2 border-black bg-white hover:bg-slate-50 text-black font-bold text-sm shadow-sm transition active:scale-95">
           <i data-lucide="shopping-bag" class="w-4 h-4"></i>
           <span>Keranjang</span>
@@ -564,7 +569,7 @@
           <input 
             type="text" 
             id="adminWaInput" 
-            placeholder="6281234567890" 
+            placeholder="6281299961001" 
             class="flex-1 bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold focus:border-black outline-none"
           >
           <button id="adminSaveWaBtn" class="bg-black text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-800 transition">
@@ -745,7 +750,7 @@
     }
 
     function loadAdminWa() {
-      return localStorage.getItem('reztroid_admin_wa') || "6281234567890";
+      return localStorage.getItem('reztroid_admin_wa') || "6281299961001";
     }
 
     function saveAdminWa(number) {
@@ -1260,6 +1265,169 @@ Mohon info instruksi pembayaran (QRIS / Bank) ya. Terima kasih!`;
         }, 16000);
       }, 3000);
     });
+        // LOGIKA MEMBER & REFERRAL
+    let myMemberName = localStorage.getItem('reztroid_member_name') || '';
+    let myReferralCode = localStorage.getItem('reztroid_member_code') || '';
+    let myInvitedCount = parseInt(localStorage.getItem('reztroid_invited_count') || '0', 10);
+
+    const openMemberModalBtn = document.getElementById('openMemberModalBtn');
+    const memberModal = document.getElementById('memberModal');
+    const closeMemberModalBtn = document.getElementById('closeMemberModalBtn');
+    const tabCreateBtn = document.getElementById('tabCreateBtn');
+    const tabTrackBtn = document.getElementById('tabTrackBtn');
+    const viewCreateReferral = document.getElementById('viewCreateReferral');
+    const viewTrackReferral = document.getElementById('viewTrackReferral');
+    const memberNameInput = document.getElementById('memberNameInput');
+    const generateRefBtn = document.getElementById('generateRefBtn');
+    const referralResultBox = document.getElementById('referralResultBox');
+    const myReferralCodeEl = document.getElementById('myReferralCode');
+    const shareLinkInput = document.getElementById('shareLinkInput');
+    const copyShareLinkBtn = document.getElementById('copyShareLinkBtn');
+    const invitedCountDisplay = document.getElementById('invitedCountDisplay');
+    const rewardTotalDisplay = document.getElementById('rewardTotalDisplay');
+    const claimRewardBtn = document.getElementById('claimRewardBtn');
+
+    function updateMemberUI() {
+      if (myReferralCode) {
+        referralResultBox.classList.remove('hidden');
+        myReferralCodeEl.textContent = myReferralCode;
+        shareLinkInput.value = `${window.location.origin + window.location.pathname}?ref=${myReferralCode}`;
+        memberNameInput.value = myMemberName;
+      }
+      invitedCountDisplay.textContent = `${myInvitedCount} Orang`;
+      rewardTotalDisplay.textContent = `Rp ${(myInvitedCount * 5000).toLocaleString('id-ID')}`;
+    }
+
+    tabCreateBtn.addEventListener('click', () => {
+      tabCreateBtn.className = "py-2 rounded-xl bg-white border border-slate-300 text-black shadow-sm";
+      tabTrackBtn.className = "py-2 rounded-xl text-slate-500 hover:text-black border border-transparent";
+      viewCreateReferral.classList.remove('hidden');
+      viewTrackReferral.classList.add('hidden');
+    });
+
+    tabTrackBtn.addEventListener('click', () => {
+      tabTrackBtn.className = "py-2 rounded-xl bg-white border border-slate-300 text-black shadow-sm";
+      tabCreateBtn.className = "py-2 rounded-xl text-slate-500 hover:text-black border border-transparent";
+      viewTrackReferral.classList.remove('hidden');
+      viewCreateReferral.classList.add('hidden');
+      updateMemberUI();
+    });
+
+    generateRefBtn.addEventListener('click', () => {
+      const name = memberNameInput.value.trim().toUpperCase();
+      if (!name) return alert('Ketik nama kamu dulu ya!');
+      
+      const clean = name.replace(/[^A-Z0-9]/g, '').slice(0, 5);
+      const code = `REZT-${clean}-${Math.floor(10 + Math.random() * 90)}`;
+      myMemberName = name;
+      myReferralCode = code;
+
+      localStorage.setItem('reztroid_member_name', myMemberName);
+      localStorage.setItem('reztroid_member_code', myReferralCode);
+      updateMemberUI();
+      alert(`Kode berhasil dibuat: ${code}`);
+    });
+
+    copyShareLinkBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(shareLinkInput.value).then(() => {
+        copyShareLinkBtn.textContent = 'Tersalin!';
+        setTimeout(() => { copyShareLinkBtn.textContent = 'Salin'; }, 2000);
+      });
+    });
+
+    claimRewardBtn.addEventListener('click', () => {
+      const waNumber = localStorage.getItem('reztroid_admin_wa') || "6281299961001";
+      const msg = encodeURIComponent(`Halo Admin, saya mau klaim reward referral untuk kode: ${myReferralCode} (${myMemberName})`);
+      window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
+    });
+
+    openMemberModalBtn.addEventListener('click', () => {
+      updateMemberUI();
+      memberModal.classList.remove('hidden');
+      memberModal.classList.add('flex');
+
+      lucide.createIcons();
+    });
+
+    closeMemberModalBtn.addEventListener('click', () => {
+      memberModal.classList.add('hidden');
+      memberModal.classList.remove('flex');
+    });
+
   </script>
+    <!-- MODAL FITUR MEMBER (2 TAB TAMPILAN) -->
+  <div id="memberModal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl border-2 border-black max-w-md w-full overflow-hidden shadow-2xl flex flex-col">
+      <div class="p-5 bg-slate-950 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-neon text-black flex items-center justify-center font-extrabold">
+            <i data-lucide="award" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-sm sm:text-base leading-tight">Member & Referral Hub</h3>
+            <p class="text-[11px] text-slate-400">Ajak teman langganan, dapatkan saldo gratis</p>
+          </div>
+        </div>
+        <button id="closeMemberModalBtn" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-300 flex items-center justify-center">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Dua Tab Navigasi -->
+      <div class="grid grid-cols-2 border-b-2 border-slate-100 bg-slate-50 p-1.5 gap-1.5 text-xs font-extrabold">
+        <button id="tabCreateBtn" class="py-2 rounded-xl bg-white border border-slate-300 text-black shadow-sm">
+          1. Buat Kode
+        </button>
+        <button id="tabTrackBtn" class="py-2 rounded-xl text-slate-500 hover:text-black border border-transparent">
+          2. Cek Undangan
+        </button>
+      </div>
+
+      <!-- TAMPILAN 1: Buat Kode -->
+      <div id="viewCreateReferral" class="p-5 space-y-4">
+        <p class="text-xs text-purple-900 bg-purple-50 p-3 rounded-xl border border-purple-200 font-semibold">
+          Dapatkan bonus <b>Rp 5.000 saldo</b> setiap temanmu checkout pakai kode referral kamu!
+        </p>
+
+        <div class="space-y-2">
+          <label class="block text-xs font-bold text-slate-700">Nama Panggilan:</label>
+          <div class="flex gap-2">
+            <input type="text" id="memberNameInput" placeholder="Contoh: Rian" class="flex-1 bg-slate-50 border-2 border-slate-200 rounded-xl px-3 py-2 text-xs font-bold uppercase outline-none">
+            <button id="generateRefBtn" class="bg-black text-white px-4 py-2 rounded-xl text-xs font-extrabold">Buat Kode</button>
+          </div>
+        </div>
+
+        <div id="referralResultBox" class="hidden space-y-3 pt-1">
+          <div class="p-3 rounded-2xl border-2 border-dashed border-black bg-neon/20 text-center">
+            <span class="text-[10px] font-bold text-slate-500 uppercase">Kode Kamu:</span>
+            <div id="myReferralCode" class="text-xl font-black font-mono">REZT-XXXX</div>
+          </div>
+          <div class="flex gap-2">
+            <input type="text" id="shareLinkInput" readonly class="flex-1 bg-slate-100 border border-slate-200 text-slate-600 rounded-xl px-3 py-1.5 text-xs font-mono select-all">
+            <button id="copyShareLinkBtn" class="bg-black text-white px-3 py-1.5 rounded-xl text-xs font-bold">Salin</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAMPILAN 2: Cek Teman Diundang -->
+      <div id="viewTrackReferral" class="p-5 space-y-4 hidden">
+        <div class="grid grid-cols-2 gap-3 text-center">
+          <div class="p-3 rounded-xl border-2 border-slate-200 bg-slate-50">
+            <span class="text-[10px] font-bold text-slate-500 uppercase">Teman Terdaftar</span>
+            <p id="invitedCountDisplay" class="text-xl font-black mt-1">0 Orang</p>
+          </div>
+          <div class="p-3 rounded-xl border-2 border-black bg-neon">
+            <span class="text-[10px] font-bold text-black uppercase">Total Saldo</span>
+            <p id="rewardTotalDisplay" class="text-xl font-black mt-1">Rp 0</p>
+          </div>
+        </div>
+
+        <button id="claimRewardBtn" class="w-full bg-black text-white py-2.5 rounded-xl font-extrabold text-xs">
+          Klaim Saldo Reward via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
